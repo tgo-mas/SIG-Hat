@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-main(){
+int main(){
   
   printf("SIG-Hat")
+  return 0;
   
 }
