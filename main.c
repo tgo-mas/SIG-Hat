@@ -12,13 +12,6 @@
 ///
 //////////////////
 
-int main(int argc, char *argv[]) {
-	
-	infos();
-	menu();
-	
-	return 0;
-}
 
 void infos(void){
 	
@@ -60,3 +53,21 @@ void menu(void){
     printf("\n");
 	
 }
+
+int main(int argc, char *argv[]) {
+	
+	menu();
+	
+	int opcao;
+	printf("Escolha uma opcao: ");
+	scanf("%d", &opcao);
+	
+	switch(opcao){
+		case 9:
+			infos();
+			break;
+	}
+	
+	return 0;
+}
+
