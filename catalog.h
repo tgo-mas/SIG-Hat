@@ -8,10 +8,6 @@
 
 #endif
 
-typedef struct prod{
-	
-}
-
 void clrScrn(void){
 	#ifdef __linux__
 		system("clear");	
@@ -27,7 +23,28 @@ void listProd(void){
 }
 
 void cadastrarProd(void){
-  
+	int id;
+	char modelo, marca, cor[5], tamanho[4];
+	float preco;
+	
+	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##    = C A D A S T R O   D E   P R O D U T O =    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+
+	printf("	ID: ");
+  	scanf("%d", &id);
+  	printf("	Modelo: ");
+  	scanf("%d", &modelo);
+  	printf("	Marca: ");
+  	scanf("%d", &marca);
+  	printf("	Preco: ");
+  	scanf("%d", &preco);
 }
 
 void findProd(void){
