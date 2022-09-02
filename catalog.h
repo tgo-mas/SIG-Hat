@@ -8,6 +8,10 @@
 
 #endif
 
+typedef struct prod{
+	
+}
+
 void clrScrn(void){
 	#ifdef __linux__
 		system("clear");	
