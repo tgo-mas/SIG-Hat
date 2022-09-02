@@ -8,6 +8,8 @@
 
 #endif
 
+int catalog(void);
+
 void clrScrn(void){
 	#ifdef __linux__
 		system("clear");	
@@ -45,10 +47,30 @@ void cadastrarProd(void){
   	scanf("%d", &marca);
   	printf("	Preco: ");
   	scanf("%d", &preco);
+  	
+  	catalog();
 }
 
 void findProd(void){
-  
+  	int opcao;
+	
+	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = B U S C A   P O R   P R O D U T O =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+
+	printf("	1 - Busca por ID");
+	printf("	2 - Busca por modelo");
+	
+	printf("\n    Selecione o tipo de busca: ");
+	scanf("%d", opcao);
+	
+	catalog();
 }
 
 void deleteProd(void){
