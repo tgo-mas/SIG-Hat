@@ -1,4 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
+#ifdef __linux__
+	#include <unistd.h>
+#elif _WIN32
+	#include <windows.h>
+#else
+
+#endif
+
+void clrScrn(void){
+	#ifdef __linux__
+		system("clear");	
+	#elif _WIN32
+		system("cls");
+	#else
+	
+	#endif	
+}
 
 void listProd(void){
   
@@ -18,6 +36,7 @@ void deleteProd(void){
 
 int catalog(void){
   int opcao;
+  clrScrn();
   printf("\n");
   printf("#####################################################\n");
   printf("##                                                 ##\n");
@@ -35,7 +54,8 @@ int catalog(void){
   printf("\n");
 
   scanf("%d", &opcao);
-
+  clrScrn();
+	
   switch(opcao){
     case 1:
       listProd();

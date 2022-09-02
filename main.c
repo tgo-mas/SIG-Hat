@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "catalog.h"
 
 //////////////////
@@ -24,9 +25,9 @@ void infos(void){
   printf("##   Redes sociais: @tgomas.asf                    ##\n");
   printf("##   Git: https://github.com/tgo-mas/SIG-Hat.git   ##\n");
   printf("##                                                 ##\n");
-	printf("##   Projeto da disciplina de Programacao          ##\n");
-	printf("##   Docente: Flavius Gorgonio                     ##\n");
-	printf("##   Universidade Federal do Rio Grande do Norte   ##\n");
+  printf("##   Projeto da disciplina de Programacao          ##\n");
+  printf("##   Docente: Flavius Gorgonio                     ##\n");
+  printf("##   Universidade Federal do Rio Grande do Norte   ##\n");
   printf("##                                                 ##\n");
   printf("#####################################################\n");
   printf("\n");
@@ -53,6 +54,7 @@ void menu(void){
 	printf("Escolha uma opcao: ");
 	scanf("%d", &opcao);
   
+	clrScrn();  
   switch(opcao){
     case 1:
       opcao = catalog();
