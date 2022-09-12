@@ -18,8 +18,11 @@ float precos[10];
 void clrScrn(void);
 int findIndex(int ids[10]);
 void listProd(void);
+void exibProd(int index);
 void cadastrarProd(void);
 void findProd(void);
+void exibirID(int id);
+void buscaModelo(char modelo[15]);
 int catalog(void);
 
 //// Funções
@@ -54,15 +57,18 @@ void listProd(void){
 	printf("##      = L I S T A   D E   P R O D U T O s =      ##\n");
 	printf("##                                                 ##\n");
 	printf("#####################################################\n");
-	printf("\n");
 	int i;
 	for(i = 0; i < index; i++){
-		printf("\n    ID: %d", ids[i]);
-		printf("\n    Modelo: %s", modelos[i]);
-		printf("\n    Marca: %s", marcas[i]);
-		printf("\n    Preco: %f\n", precos[i]);
-		printf("\n#####################################################\n");
+		exibProd(i);
 	}
+}
+
+void exibProd(int index){
+	printf("\n    ID: %d", ids[index]);
+	printf("\n    Modelo: %s", modelos[index]);
+	printf("\n    Marca: %s", marcas[index]);
+	printf("\n    Preco: %f\n", precos[index]);
+	printf("\n#####################################################\n");
 }
 
 void cadastrarProd(void){
@@ -111,7 +117,47 @@ void findProd(void){
 	printf("\n    Selecione o tipo de busca: ");
 	scanf("%d", &opcao);
 	
-	catalog();
+	int id;
+	char modelo[15];
+
+	switch(opcao){
+		case 1:
+			printf("    Digite o ID do produto: ");
+			scanf("%d", &id);
+			exibirID(id);
+			break;
+		case 2:
+			printf("   Informe o modelo do produto: ");
+			
+			scanf("%s", &modelo);
+			buscaModelo(modelo);
+			break;
+		default:
+			printf("\n    Selecione uma opção válida!\n    Aperte enter para continuar...");
+			scanf("%d", &id);
+			break;
+	}
+	
+}
+
+void exibirID(int id){
+	int index, i;
+	index = findIndex(ids);
+	for(i = 0; i < index; i++){
+		if(ids[i] == id){
+			exibProd(i);
+		}
+	}
+}
+
+void buscaModelo(char modelo[15]){
+	int index, i;
+	index = findIndex(ids);
+	for(i = 0; i < index; i++){
+		if(modelos[i] == modelo){
+			exibProd(i);
+		}
+	}
 }
 
 void deleteProd(void){
