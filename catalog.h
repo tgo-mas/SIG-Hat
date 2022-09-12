@@ -8,12 +8,21 @@
 
 #endif
 
-int catalog(void);
+//// Dados dos produtos
 int ids[10];
 char modelos[10][15];
 char marcas[10][15];
 float precos[10];
 
+//// Assinatura das funções
+void clrScrn(void);
+int findIndex(int ids[10]);
+void listProd(void);
+void cadastrarProd(void);
+void findProd(void);
+int catalog(void);
+
+//// Funções
 void clrScrn(void){
 	#ifdef __linux__
 		system("clear");	
@@ -35,7 +44,25 @@ int findIndex(int ids[10]){
 }
 
 void listProd(void){
-  
+	int index;
+	index = findIndex(ids);
+  	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = L I S T A   D E   P R O D U T O s =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+	int i;
+	for(i = 0; i < index; i++){
+		printf("\n    ID: %d", ids[i]);
+		printf("\n    Modelo: %s", modelos[i]);
+		printf("\n    Marca: %s", marcas[i]);
+		printf("\n    Preco: %f\n", precos[i]);
+		printf("\n#####################################################\n");
+	}
 }
 
 void cadastrarProd(void){
