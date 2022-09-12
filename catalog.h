@@ -9,6 +9,10 @@
 #endif
 
 int catalog(void);
+int ids[10];
+char modelos[10][15];
+char marcas[10][15];
+float precos[10];
 
 void clrScrn(void){
 	#ifdef __linux__
@@ -20,14 +24,24 @@ void clrScrn(void){
 	#endif	
 }
 
+int findIndex(int ids[10]){
+	int i;
+	
+	for(i = 0; i < 10; i++){
+		if(ids[i] == 0){
+			return i;
+		}
+	}
+}
+
 void listProd(void){
   
 }
 
 void cadastrarProd(void){
-	int id;
-	char modelo, marca, cor[5], tamanho[4];
-	float preco;
+	int index;
+	index = findIndex(ids);
+	printf("%d", index);
 	
 	printf("\n");
 	printf("#####################################################\n");
@@ -40,13 +54,13 @@ void cadastrarProd(void){
 	printf("\n");
 
 	printf("	ID: ");
-  	scanf("%d", &id);
+  	scanf("%d", &ids[index]);
   	printf("	Modelo: ");
-  	scanf("%d", &modelo);
+  	scanf("%s", &modelos[index]);
   	printf("	Marca: ");
-  	scanf("%d", &marca);
+  	scanf("%s", &marcas[index]);
   	printf("	Preco: ");
-  	scanf("%d", &preco);
+  	scanf("%f", &precos[index]);
   	
   	catalog();
 }
@@ -68,7 +82,7 @@ void findProd(void){
 	printf("	2 - Busca por modelo");
 	
 	printf("\n    Selecione o tipo de busca: ");
-	scanf("%d", opcao);
+	scanf("%d", &opcao);
 	
 	catalog();
 }
