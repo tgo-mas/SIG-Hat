@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #ifdef __linux__
 	#include <unistd.h>
 #elif _WIN32
@@ -23,6 +24,7 @@ void cadastrarProd(void);
 void findProd(void);
 void exibirID(int id);
 void buscaModelo(char modelo[15]);
+void remover(int id);
 int catalog(void);
 
 //// Funções
@@ -36,6 +38,7 @@ void clrScrn(void){
 	#endif	
 }
 
+//// findIndex(ids) -> Encontra o proximo item vazio na lista de produtos
 int findIndex(int ids[10]){
 	int i;
 	
@@ -46,6 +49,7 @@ int findIndex(int ids[10]){
 	}
 }
 
+//// listProd() -> Lista todos os produtos, chamando exibProd para cada
 void listProd(void){
 	int index;
 	index = findIndex(ids);
@@ -61,8 +65,12 @@ void listProd(void){
 	for(i = 0; i < index; i++){
 		exibProd(i);
 	}
+	printf("    Aperte enter para continuar...");
+	scanf("%d",&index);
+	catalog();
 }
 
+//// exibProd(indice) -> Exibe as infos do produto no indice indicado
 void exibProd(int index){
 	printf("\n    ID: %d", ids[index]);
 	printf("\n    Modelo: %s", modelos[index]);
@@ -71,6 +79,18 @@ void exibProd(int index){
 	printf("\n#####################################################\n");
 }
 
+//// exibirID(id) -> Mesmo que exibProd() mas usa o id do produto em vez do indice
+void exibirID(int id){
+	int index, i;
+	index = findIndex(ids);
+	for(i = 0; i < index; i++){
+		if(ids[i] == id){
+			exibProd(i);
+		}
+	}
+}
+
+//// cadastrarProd() -> Cadastra as infos do produto nas listas
 void cadastrarProd(void){
 	int index;
 	index = findIndex(ids);
@@ -98,6 +118,7 @@ void cadastrarProd(void){
   	catalog();
 }
 
+//// findProd() -> Abre o menu de busca de produto
 void findProd(void){
   	int opcao;
 	
@@ -128,7 +149,6 @@ void findProd(void){
 			break;
 		case 2:
 			printf("   Informe o modelo do produto: ");
-			
 			scanf("%s", &modelo);
 			buscaModelo(modelo);
 			break;
@@ -140,16 +160,7 @@ void findProd(void){
 	
 }
 
-void exibirID(int id){
-	int index, i;
-	index = findIndex(ids);
-	for(i = 0; i < index; i++){
-		if(ids[i] == id){
-			exibProd(i);
-		}
-	}
-}
-
+//// buscaModelo(modelo) -> Busca o produto pelo modelo dele
 void buscaModelo(char modelo[15]){
 	int index, i;
 	index = findIndex(ids);
@@ -160,8 +171,55 @@ void buscaModelo(char modelo[15]){
 	}
 }
 
+//// deleteProd() -> Abre o menu para remover produto, chama remove()
 void deleteProd(void){
-  
+	
+	int id;
+  	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##        = R E M O V E R   P R O D U T O =        ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+
+	printf("	Remocao por ID: ");
+	scanf("%d", &id);
+	
+	remover(id);
+	
+	catalog();
+}
+
+//// remove(id) ->  Remove o produto com o id indicado
+void remover(int id){
+	int index, i, newIds[10];
+	char newModelos[10][15], newMarcas[10][15];
+	float newPrecos[10];
+	index = findIndex(ids);
+	
+	for(i = 0; i < index; i++){
+		if(ids[i] != id){
+			newIds[i] = ids[i];
+			strcpy(newModelos[i], modelos[i]);
+			strcpy(newMarcas[i], marcas[i]);
+			newPrecos[i] = precos[i];
+		}else{
+			for(int j = i; j < index; j++){
+				newIds[j] = ids[j+1];	
+				strcpy(newModelos[j], modelos[j+1]);
+				strcpy(newMarcas[j], marcas[j+1]);
+				newPrecos[j] = precos[j+1];
+			}
+			ids = newIds;
+			modelos = newModelos;
+			marcas = newMarcas;
+			precos = newPrecos;
+			break;
+		}
+	}
 }
 
 int catalog(void){
