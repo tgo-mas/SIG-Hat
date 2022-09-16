@@ -213,10 +213,6 @@ void remover(int id){
 				strcpy(newMarcas[j], marcas[j+1]);
 				newPrecos[j] = precos[j+1];
 			}
-			ids = newIds;
-			modelos = newModelos;
-			marcas = newMarcas;
-			precos = newPrecos;
 			break;
 		}
 	}

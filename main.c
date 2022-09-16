@@ -66,6 +66,12 @@ void menu(void){
 		case 9:
 			infos();
 			break;
+	case 2:
+	  opcao = menuEstoque();
+	  if(opcao == 0){
+	  	menu();
+	  }
+	  break;
     case 0:
       return;
     default:
