@@ -146,7 +146,10 @@ void findProd(void){
 			scanf("%d", &id);
 			break;
 	}
-	
+	int no;
+	printf("\n    Digite 0 para continuar...");
+	scanf("%d", no);
+	catalog();
 }
 
 //// buscaModelo(modelo) -> Busca o produto pelo modelo dele
@@ -154,7 +157,7 @@ void buscaModelo(char modelo[15]){
 	int index, i;
 	index = findIndex(ids);
 	for(i = 0; i < index; i++){
-		if(modelos[i] == modelo){
+		if(strcmp(modelos[i], modelo) == 0){
 			exibProd(i);
 		}
 	}
