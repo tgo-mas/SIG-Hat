@@ -10,7 +10,7 @@
 #endif
 
 //// Dados dos produtos
-int ids[10];
+int ids[10], estoq[10];
 char modelos[10][15];
 char marcas[10][15];
 float precos[10];
@@ -18,7 +18,7 @@ float precos[10];
 //// Assinatura das funções
 void clrScrn(void);
 int findIndex(int ids[10]);
-void listProd(void);
+void listProds(void);
 void exibProd(int index);
 void cadastrarProd(void);
 void findProd(void);
@@ -49,25 +49,14 @@ int findIndex(int ids[10]){
 	}
 }
 
-//// listProd() -> Lista todos os produtos, chamando exibProd para cada
-void listProd(void){
+//// listProds() -> Lista todos os produtos, chamando exibProd para cada
+void listProds(void){
 	int index;
 	index = findIndex(ids);
-  	printf("\n");
-	printf("#####################################################\n");
-	printf("##                                                 ##\n");
-	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
-	printf("##                                                 ##\n");
-	printf("##      = L I S T A   D E   P R O D U T O s =      ##\n");
-	printf("##                                                 ##\n");
-	printf("#####################################################\n");
 	int i;
 	for(i = 0; i < index; i++){
 		exibProd(i);
 	}
-	printf("    Aperte enter para continuar...");
-	scanf("%d",&index);
-	catalog();
 }
 
 //// exibProd(indice) -> Exibe as infos do produto no indice indicado
@@ -75,8 +64,8 @@ void exibProd(int index){
 	printf("\n    ID: %d", ids[index]);
 	printf("\n    Modelo: %s", modelos[index]);
 	printf("\n    Marca: %s", marcas[index]);
-	printf("\n    Preco: %f\n", precos[index]);
-	printf("\n#####################################################\n");
+	printf("\n    Preco: %f\n\n", precos[index]);
+	printf("#####################################################\n");
 }
 
 //// exibirID(id) -> Mesmo que exibProd() mas usa o id do produto em vez do indice
@@ -105,7 +94,7 @@ void cadastrarProd(void){
 	printf("##                                                 ##\n");
 	printf("#####################################################\n");
 	printf("\n");
-
+	
 	printf("	ID: ");
   	scanf("%d", &ids[index]);
   	printf("	Modelo: ");
@@ -228,10 +217,13 @@ int catalog(void){
   printf("##                                                 ##\n");
   printf("##       = = = = = C A T A L O G O = = = = =       ##\n");
   printf("##                                                 ##\n");
-  printf("##              1 - Listar produtos                ##\n");
-  printf("##             2 - Cadastrar produto               ##\n");
-  printf("##             3 - Pesquisar produto               ##\n");
-  printf("##              4 - Excluir produto                ##\n");
+  printf("#####################################################\n");
+  listProds();
+  printf("##                                                 ##\n");
+  printf("##             1 - Cadastrar produto               ##\n");
+  printf("##             2 - Pesquisar produto               ##\n");
+  printf("##              3 - Excluir produto                ##\n");
+  printf("##                                                 ##\n");
   printf("##                    0 - Sair                     ##\n");
   printf("##                                                 ##\n");
   printf("#####################################################\n");
@@ -242,15 +234,12 @@ int catalog(void){
 	
   switch(opcao){
     case 1:
-      listProd();
-      break;
-    case 2:
       cadastrarProd();
       break;
-    case 3:
+    case 2:
       findProd();
       break;
-    case 4:
+    case 3:
       deleteProd();
       break;
     case 0:

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "catalog.h"
 
 int idProds[10];
 int qtds[10];
