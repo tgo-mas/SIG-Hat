@@ -10,10 +10,11 @@
 #endif
 
 //// Dados dos produtos
-int ids[10], estoq[10];
-char modelos[10][15];
-char marcas[10][15];
-float precos[10];
+int ids[10] = {1, 2, 3};
+int estoq[10] = {4, 5, 0};
+char modelos[10][15] = {"bone", "chapeu", "viseira"};
+char marcas[10][15] = {"Nike", "artesanal", "adidas"};
+float precos[10] = {40.00, 15.0, 120.0};
 
 //// Assinatura das funções
 void clrScrn(void);
@@ -64,7 +65,8 @@ void exibProd(int index){
 	printf("\n    ID: %d", ids[index]);
 	printf("\n    Modelo: %s", modelos[index]);
 	printf("\n    Marca: %s", marcas[index]);
-	printf("\n    Preco: %f\n\n", precos[index]);
+	printf("\n    Preco: %f", precos[index]);
+	printf("\n    Em estoque: %d\n\n", estoq[index]);
 	printf("#####################################################\n");
 }
 
@@ -103,6 +105,8 @@ void cadastrarProd(void){
   	scanf("%s", &marcas[index]);
   	printf("	Preco: ");
   	scanf("%f", &precos[index]);
+	printf("\n    Qtd em estoque: ");
+  	scanf("%d", &estoq[index]);
   	
   	catalog();
 }
@@ -246,7 +250,7 @@ int catalog(void){
       deleteProd();
       break;
     case 0:
-      return 0;
+    	break;
     default:
       printf("Escolha uma opção válida! Tente novamente. \n");
       catalog();
