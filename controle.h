@@ -1,7 +1,9 @@
 #include <stdio.h>
 
+//// Assinatura das funções
 int painelControle(void);
 
+//// painelControle() -> Exibe o menu do módulo de Controle.
 int painelControle(void){
 	clrScrn();
 	printf("\n");
