@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "catalog.h"
 #include "estoque.h"
+#include "controle.h"
 
 //////////////////
 ///
