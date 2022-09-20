@@ -1,9 +1,14 @@
 #include <stdio.h>
+#include <string.h>
 
-long cpfs[10];
-char nomes[10][20];
+char cpfs[10];
+char nomes[10];
 float totalCompras[10];
 int numCompras[10];
+
+int getIndexCliente(void);
+void addCliente(char cpf[9], char nome[20]);
+int verifCliente(void);
 
 int getIndexCliente(void){
 	for(int i = 0; i < 10; i++){
@@ -14,9 +19,18 @@ int getIndexCliente(void){
 	return 10;
 }
 
-void addCliente(int cpf, char nome[20]){
+void addCliente(char cpf[9], char nome[20]){
 	int index;
 	index = getIndexCliente();
-	cpfs[index] = cpf;
-	nomes[index] = nome;
+	cpfs[index] = *cpf;
+	nomes[index] = *nome;
+}
+
+int verifCliente(char cpf[9]){
+	for(int i = 0; i < 10; i++){
+		if(strcmp(cpfs[i], cpf) == 0){
+			return i;
+		}
+	}
+	return getIndexCliente();
 }

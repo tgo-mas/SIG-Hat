@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "produtos.h"
+#include "cliente.h"
 #include "catalog.h"
 #include "estoque.h"
 #include "controle.h"

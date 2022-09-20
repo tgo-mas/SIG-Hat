@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #ifdef __linux__
 	#include <unistd.h>
 #elif _WIN32
@@ -14,6 +13,14 @@ void initVenda(void);
 int catalog(void);
 
 //// Funções
+
+void initVenda(void){
+	char cpf[9];
+	printf("\n    Informe o CPF do cliente: ");
+	scanf("%s", &cpf);
+	verifCliente(cpf);
+	
+}
 
 int catalog(void){
   int opcao;
@@ -47,8 +54,4 @@ int catalog(void){
         break;
   }
   return opcao;
-}
-
-void initVenda(void){
-	
 }
