@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include "produtos.h"
 #include "catalog.h"
 #include "estoque.h"
 #include "controle.h"
@@ -15,6 +16,12 @@
 ///  Universidade Federal do Rio Grande do Norte
 ///
 //////////////////
+
+//// Assinatura das funções
+void infos(void);
+void menu(void);
+
+//// Funções
 
 void infos(void){
   printf("\n");
@@ -52,26 +59,25 @@ void menu(void){
   printf("##                                                 ##\n");
   printf("#####################################################\n");
   printf("\n");
-  
-	printf("Escolha uma opcao: ");
-	scanf("%d", &opcao);
-  
-	clrScrn();  
+  printf("Escolha uma opcao: ");
+  scanf("%d", &opcao);
+
+  clrScrn();  
   switch(opcao){
-    case 1:
+    case 1:	
       opcao = catalog();
       if(opcao == 0){
         menu();
       }
       break;
-		case 9:
-			infos();
-			break;
 	case 2:
 	  opcao = menuEstoque();
 	  if(opcao == 0){
 	  	menu();
 	  }
+	  break;
+	case 9:
+	  infos();
 	  break;
     case 0:
       return;

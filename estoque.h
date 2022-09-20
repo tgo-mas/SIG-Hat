@@ -19,7 +19,10 @@ int menuEstoque(void){
 	printf("##     = C O N T R O L E  D E  E S T O Q U E =     ##\n");
 	printf("##                                                 ##\n");
 	printf("##              1 - Conferir estoque               ##\n");
-	printf("##             2 - Registrar entradas              ##\n");
+  	printf("##             2 - Cadastrar produto               ##\n");
+  	printf("##             3 - Pesquisar produto               ##\n");
+  	printf("##              4 - Excluir produto                ##\n");
+	printf("##             5 - Registrar entradas              ##\n");
 	printf("##                                                 ##\n");
 	printf("##                   0 - Voltar                    ##\n");
 	printf("##                                                 ##\n");
@@ -35,14 +38,23 @@ int menuEstoque(void){
 			exibEstoque();
 			break;
 		case 2:
+      		cadastrarProd();
+      		break;
+	    case 3:
+	      	findProd();
+	      	break;
+	    case 4:
+	      	deleteProd();
+	      	break;
+		case 5:
 			entrada();
 			break;	
 	    case 0:
 	    	break;
 	    default:
-	      printf("Escolha uma opção válida! Tente novamente. \n");
-	      catalog();
-	      break;
+	      	printf("Escolha uma opção válida! Tente novamente. \n");
+	      	catalog();
+	      	break;
 	}
 	
 	return opcao;
