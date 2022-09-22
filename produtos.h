@@ -21,7 +21,7 @@ int menuEstoque(void);
 
 //// Funções
 
-
+//// clrScrn() -> Limpa a tela do console
 void clrScrn(void){
 	#ifdef __linux__
 		system("clear");	

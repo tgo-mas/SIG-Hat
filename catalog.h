@@ -15,11 +15,18 @@ int catalog(void);
 //// Funções
 
 void initVenda(void){
-	char cpf[9];
+	char cpf[11], nome[20];
+	int indexCliente, indexProd;
 	printf("\n    Informe o CPF do cliente: ");
 	scanf("%s", &cpf);
-	verifCliente(cpf);
-	
+	if(verifCliente(cpf) == 0){
+		printf("\n    Novo cliente! \n    Nome: ");
+		scanf("%s", &nome);
+		addCliente(cpf, nome);
+	} else {
+		indexCliente = verifCliente(cpf);
+		printf("\n    Cliente encontrado! Nome: %s", nomes[indexCliente]);
+	}
 }
 
 int catalog(void){
