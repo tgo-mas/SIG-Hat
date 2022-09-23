@@ -6,6 +6,13 @@
 #include "catalog.h"
 #include "estoque.h"
 #include "controle.h"
+#ifdef __linux__
+	#include <unistd.h>
+#elif _WIN32
+	#include <windows.h>
+#else
+
+#endif
 
 //////////////////
 ///
