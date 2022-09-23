@@ -1,21 +1,21 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "cliente.h"
+#include "produtos.h"
 
 //// Funções
 
 //// initVenda() -> Dá início ao processo de realizar uma venda com o sistema.
 
 void initVenda(void){
-	char cpf[11], nome[20];
-	int indexCliente;
+	char cpf, nome;
 	printf("\n    Informe o CPF do cliente: ");
 	scanf("%s", &cpf);
-	if(verifCliente(cpf) == 0){
+	if(verifCliente(*cpf) == 0){
 		printf("\n    Novo cliente! \n    Nome: ");
 		scanf("%s", &nome);
-		addCliente(cpf, nome);
-	} else {
-		indexCliente = verifCliente(cpf);
+		addCliente(&cpf, &nome);
+	} else {	
+		int indexCliente = getIndexCliente();
 		printf("\n    Cliente encontrado! Nome: %s", nomes[indexCliente]);
 	}
 }

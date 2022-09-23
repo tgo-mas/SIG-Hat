@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
+//// Varíáveis referentes a Clientes
+
+char cpfs[10][11] = {"10616486460", "12345678910"};
+char nomes[10][20] = {"Bruno", "Roberto"};
+float totalCompras[10] = {45.0, 30.0};
+int numCompras[10] = {3, 2};
+
 //// Funções
 
 //// getIndexCliente() -> Retorna índice do primeiro item vazio na lista de clientes (onde ID == 0).
@@ -16,17 +23,17 @@ int getIndexCliente(void){
 
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
-void addCliente(char cpf[11], char nome[20]){
+void addCliente(char* cpf[], char* nome[]){
 	int index;
 	index = getIndexCliente();
-	strcpy(cpfs[index],cpf);
-	strcpy(nomes[index],nome);
+	strcpy(cpfs[index],*cpf);
+	strcpy(nomes[index],*nome);
 }
 
 //// verifCliente() -> Verifica se o cliente existe. Se existir, retorna o índice + 1, se não, retorna 0.
 
-int verifCliente(char cpf[11]){
-	for(int i = 0; i < 10; i++){
+int verifCliente(char* cpf[]){
+	for(int i = 0; i < 11; i++){
 		if(strcmp(cpfs[i], cpf) == 0){
 			return i + 1;
 		}

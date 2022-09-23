@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
+#include <string.h>
 #include "produtos.h"
 #include "cliente.h"
 #include "catalog.h"

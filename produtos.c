@@ -1,4 +1,21 @@
 #include <stdio.h>
+#include <string.h>
+#ifdef __linux__
+	#include <unistd.h>
+#elif _WIN32
+	#include <windows.h>
+#else
+
+#endif
+#include <stdio.h>
+#include "produtos.h"
+
+//// Dados dos produtos
+int ids[10] = {1, 2, 3};
+int estoq[10] = {4, 5, 0};
+char modelos[10][15] = {"bone", "chapeu", "viseira"};
+char marcas[10][15] = {"Nike", "artesanal", "adidas"};
+float precos[10] = {40.00, 15.0, 120.0};
 
 //// Funções
 

@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include "estoque.h"
+#include "catalog.h"
+#include "produtos.h"
 
 //// menuEstoque() -> Exibe a tela principal do módulo de estoque
 
