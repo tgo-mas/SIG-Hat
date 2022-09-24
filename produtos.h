@@ -11,3 +11,5 @@ void buscaModelo(char modelo[15]);
 void deleteProd(void);
 void remover(int id);
 int menuEstoque(void);
+int* getIds(void);
+

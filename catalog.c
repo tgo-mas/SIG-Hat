@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "catalog.h"
 #include "cliente.h"
 #include "produtos.h"
 
@@ -8,14 +9,15 @@
 
 void initVenda(void){
 	char cpf, nome;
+  char nomes[10][20] = {"Bruno", "Roberto"};
 	printf("\n    Informe o CPF do cliente: ");
 	scanf("%s", &cpf);
-	if(verifCliente(*cpf) == 0){
+	if(verifCliente(&cpf) == 0){
 		printf("\n    Novo cliente! \n    Nome: ");
 		scanf("%s", &nome);
 		addCliente(&cpf, &nome);
 	} else {	
-		int indexCliente = getIndexCliente();
+		int indexCliente = verifCliente(&cpf);
 		printf("\n    Cliente encontrado! Nome: %s", nomes[indexCliente]);
 	}
 }

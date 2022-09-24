@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "controle.h"
+#include "produtos.h"
 
 //// painelControle() -> Exibe o menu do módulo de Controle.
 int painelControle(void){

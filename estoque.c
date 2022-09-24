@@ -28,10 +28,13 @@ int menuEstoque(void){
 	
 	printf("    Selecione uma opcao: ");
 	scanf("%d", &opcao);
+
+	int* ids;
+	ids = getIds();
 	
 	switch(opcao){
 		case 1:
-			exibEstoque();
+			exibEstoque(ids);
 			break;
 		case 2:
       		cadastrarProd();
@@ -58,7 +61,7 @@ int menuEstoque(void){
 
 //// exibEstoque() -> Lista os produtos mostrando as informações de estoque
 
-void exibEstoque(void){
+void exibEstoque(int ids[10]){
 	clrScrn();
 	printf("\n");
 	printf("#####################################################\n");

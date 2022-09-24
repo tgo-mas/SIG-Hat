@@ -88,12 +88,16 @@ void cadastrarProd(void){
 	printf("#####################################################\n");
 	printf("\n");
 	
+	char modelo, marca;
+
 	printf("	ID: ");
   	scanf("%d", &ids[index]);
   	printf("	Modelo: ");
-  	scanf("%s", &modelos[index]);
+  	scanf("%s", &modelo);
   	printf("	Marca: ");
-  	scanf("%s", &marcas[index]);
+  	scanf("%s", &marca);
+	*modelos[index] = modelo;
+	*marcas[index] = marca;
   	printf("	Preco: ");
   	scanf("%f", &precos[index]);
 	printf("\n    Qtd em estoque: ");
@@ -123,7 +127,7 @@ void findProd(void){
 	scanf("%d", &opcao);
 	
 	int id;
-	char modelo[15];
+	char modelo;
 
 	switch(opcao){
 		case 1:
@@ -134,7 +138,7 @@ void findProd(void){
 		case 2:
 			printf("   Informe o modelo do produto: ");
 			scanf("%s", &modelo);
-			buscaModelo(modelo);
+			buscaModelo(&modelo);
 			break;
 		default:
 			printf("\n    Selecione uma opção válida!\n    Aperte enter para continuar...");
@@ -195,3 +199,6 @@ void remover(int id){
 	}
 }
 
+int* getIds(void){
+	return ids;
+}

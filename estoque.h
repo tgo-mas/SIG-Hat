@@ -5,5 +5,5 @@ int qtds[10];
 
 //// Assinatura das funções
 int menuEstoque(void);
-void exibEstoque(void);
+void exibEstoque(int ids[10]);
 void entrada(void);

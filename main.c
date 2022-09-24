@@ -1,11 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "produtos.h"
 #include "cliente.h"
 #include "catalog.h"
 #include "estoque.h"
 #include "controle.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #ifdef __linux__
 	#include <unistd.h>
 #elif _WIN32
@@ -78,15 +78,15 @@ void menu(void){
         menu();
       }
       break;
-	case 2:
-	  opcao = menuEstoque();
-	  if(opcao == 0){
-	  	menu();
-	  }
-	  break;
-	case 9:
-	  infos();
-	  break;
+    case 2:
+      opcao = menuEstoque();
+      if(opcao == 0){
+        menu();
+      }
+      break;
+    case 9:
+      infos();
+      break;
     case 0:
       return;
     default:
