@@ -199,6 +199,12 @@ void remover(int id){
 	}
 }
 
-int* getIds(void){
-	return ids;
+//// getIndexById(id) -> Retorna o indice do item de Id correspondente na lista de produtos.
+int getIndexById(int id){
+	for(int i = 0; i < 10; i++){
+		if(ids[i] == id){
+			return i;
+		}
+	}
+	return -1;
 }

@@ -42,6 +42,8 @@ int verifCliente(char cpf[12]){
 	return 0;
 }
 
+//// getNomes() -> Retorna um ponteiro para o local onde os nomes dos clientes estão armazenados.
+
 char* getNomes(void){
 	return *nomes;
 }

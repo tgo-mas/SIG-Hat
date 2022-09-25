@@ -10,16 +10,24 @@
 void initVenda(void){
 	char cpf, nome;
   char nomes[10][20] = {"Bruno", "Roberto"};
-	printf("\n    Informe o CPF do cliente: ");
+	printf("    Informe o CPF do cliente: ");
 	scanf("%s", &cpf);
 	if(verifCliente(&cpf) == 0){
 		printf("\n    Novo cliente! \n    Nome: ");
 		scanf("%s", &nome);
 		addCliente(&cpf, &nome);
 	} else {	
-		int indexCliente = verifCliente(&cpf);
-		printf("\n    Cliente encontrado! Nome: %s", nomes[indexCliente]);
+		int indexCliente = verifCliente(&cpf) - 1;
+		printf("    Cliente encontrado! Nome: %s \n", nomes[indexCliente]);
 	}
+  int qtd, idsVenda[10];
+  printf("\n    Informe a quantidade de itens a serem comprados (max. 10 itens diferentes): ");
+  scanf("%d", &qtd);
+  for(int i = 0; i < qtd; i++){
+    printf("    Informe o %d Id: ", i + 1);
+    scanf("%d", &idsVenda[i]);
+    printf("    Quantas unidades do %s %s serao vendidas? ");
+  }
 }
 
 //// catalog() -> Exibe a tela principal do módulo de catálogo.
@@ -44,7 +52,6 @@ int catalog(void){
   printf("\n");
 
   scanf("%d", &opcao);
-  clrScrn();
   switch(opcao){
     case 1:
     	initVenda();
