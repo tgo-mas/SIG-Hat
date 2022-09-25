@@ -11,7 +11,3 @@ Centro de Ensino Superior do Seridó<br/>
 Aluno: Thomas Almeida<br/>
 Docente: Flavius Gorgônio<br/>
 Disciplina: Programação<br/></p>
-
-### Documentação
-
-[Modelagem conceitual](docs/mod_conceitual.pdf)
