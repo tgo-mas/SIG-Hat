@@ -26,12 +26,12 @@
 //////////////////
 
 //// Assinatura das funções
-void infos(void);
+int infos(void);
 void menu(void);
 
 //// Funções
 
-void infos(void){
+int infos(void){
   printf("\n");
   printf("#####################################################\n");
   printf("##                                                 ##\n");
@@ -48,6 +48,10 @@ void infos(void){
   printf("##                                                 ##\n");
   printf("#####################################################\n");
   printf("\n");
+  int opcao;
+  printf("    Digite 0 e aperte enter para continuar... ");
+  scanf("%d", &opcao);
+  return opcao;
 }
 
 void menu(void){
@@ -85,7 +89,10 @@ void menu(void){
       }
       break;
     case 9:
-      infos();
+      opcao = infos();
+      if(opcao == 0){
+        menu();
+      }
       break;
     case 0:
       return;
