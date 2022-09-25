@@ -208,3 +208,20 @@ int getIndexById(int id){
 	}
 	return -1;
 }
+
+//// getIds() -> Retorna ponteiro para a lista de Ids dos produtos.
+int* getIds(void){
+	return ids;
+}
+
+//// getMarca(id) -> Retorna a marca do item de Id informado
+char* getMarca(int id){
+	int index = getIndexById(id);
+	return marcas[index];
+}
+
+//// getModelo(id) -> Retorna o modelo do item de Id informado
+char* getModelo(int id){
+	int index = getIndexById(id);
+	return modelos[index];
+}

@@ -26,7 +26,10 @@ void initVenda(void){
   for(int i = 0; i < qtd; i++){
     printf("    Informe o %d Id: ", i + 1);
     scanf("%d", &idsVenda[i]);
-    printf("    Quantas unidades do %s %s serao vendidas? ");
+    char* marca, * modelo;
+    marca = getMarca(idsVenda[i]);
+    modelo = getModelo(idsVenda[i]);
+    printf("    Quantas unidades do %s %s serao vendidas? ", modelo, marca);
   }
 }
 
