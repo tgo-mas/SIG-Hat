@@ -68,6 +68,26 @@ void findCliente(void){
 	exibCliente(&cpf);
 }
 
+//// exibCliente() -> Exibe as informações do cliente com o CPF passado por parâmetro.
+
+void exibCliente(char* cpf){
+	int index = verifCliente(*cpf);
+	if(index == 0){
+		printf("\n    Cliente inexistente! Digite 0 e aperte enter para continuar... ");
+		scanf("%d", index);
+		menuCliente();
+	}else{
+		index -= 1;
+		printf("\n    Cliente encontrado! \n");
+		printf("    Nome: %s\n", nomes[index]);
+		printf("    CPF: %s\n", cpfs[index]);
+		printf("    Num. de compras: %d\n", numCompras[index]);
+		printf("    R$ comprados: %.2f\n\n", totalCompras[index]);
+		printf("#####################################################\n");
+		printf("    Digite 0 e aperte enter para continuar... ");
+	}
+}
+
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
 void addCliente(char cpf[12], char nome[20]){
