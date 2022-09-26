@@ -47,3 +47,51 @@ int verifCliente(char cpf[12]){
 char* getNomes(void){
 	return *nomes;
 }
+
+//// menuCliente() -> Exibe a tela de menu para controle e gerenciamento dos clientes da loja.
+int menuCliente(void){
+	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##   = C O N T R O L E   D E   C L I E N T E S =   ##\n");
+	printf("##                                                 ##\n");
+	printf("##         1 - Listar clientes cadastrados         ##\n");
+	printf("##              2 - Pesquisar cliente              ##\n");
+	printf("##               3 - Remover cliente               ##\n");
+	printf("##          4 - Gerar relatório de vendas          ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+	int opcao;
+	printf("     Selecione uma opcao: ");
+	scanf("%d", &opcao);
+	switch(opcao){
+		case 1:
+			listClientes();
+			break;
+		case 2:
+			findCliente();
+			break;
+		case 3:
+			deleteCliente();
+			break;
+		case 4:
+			relatVendas();
+		case 0: 
+			break;
+		default:
+			printf("    Digite uma opcao valida! Tente novamente.");
+			menuCliente();
+			break;
+	}
+	if(opcao == 0){
+		return opcao;
+	}else{
+		menuCliente();
+	}
+	return 0;
+}

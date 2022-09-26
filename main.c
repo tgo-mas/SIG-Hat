@@ -78,29 +78,22 @@ void menu(void){
   switch(opcao){
     case 1:	
       opcao = catalog();
-      if(opcao == 0){
-        menu();
-      }
       break;
     case 2:
       opcao = menuEstoque();
-      if(opcao == 0){
-        menu();
-      }
+      break;
+    case 3:
+      opcao = painelControle();
       break;
     case 9:
       opcao = infos();
-      if(opcao == 0){
-        menu();
-      }
       break;
-    case 0:
-      return;
     default:
+      opcao = 0;
       printf("Escolha uma opção válida! Tente novamente. \n");
-      menu();
       break;
 	}
+  if(opcao == 0) menu();
 }
 
 int main(int argc, char *argv[]) {
