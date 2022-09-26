@@ -24,7 +24,7 @@ int getIndexCliente(void){
 
 //// listClientes() -> Lista as informações dos clientes.
 
-int listClientes(void){
+void listClientes(void){
 	clrScrn();
 	printf("\n");
 	printf("#####################################################\n");
@@ -35,19 +35,37 @@ int listClientes(void){
 	printf("##                                                 ##\n");
 	printf("#####################################################\n");
 	printf("\n");
-	for(int i = 0; i < 10; i++){
-		if(*cpfs[i] != 0){
-			printf("    CPF: $s", *cpfs[i]);
-			printf("    Nome: $s", *nomes[i]);
-			printf("    Número de compras: %d", numCompras[i]);
-			printf("    R$ comprados: $.2f\n", totalCompras[i]);
-			printf("\n#####################################################\n\n");
-		}
+	int opcao, index;
+	index = getIndexCliente();	
+	for(int i = 0; i < index; i++){
+		printf("    CPF: $s", *cpfs[i]);
+		printf("    Nome: $s", *nomes[i]);
+		printf("    Número de compras: %d", numCompras[i]);
+		printf("    R$ comprados: $.2f\n", totalCompras[i]);
+		printf("\n#####################################################\n\n");
 	}
-	int opcao;	
 	printf("    Digite 0 e aperte enter para continuar... ");
 	scanf("%d", opcao);
 	menuCliente();
+}
+
+//// findCliente() -> Mostra a tela de pesquisa de cliente e chama exibCliente().
+
+void findCliente(void){
+	clrScrn();
+	char cpf;
+	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = P E S Q U I S A   C L I E N T E S =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+	printf("    Informe o CPF do cliente que deseja consultar: ");
+	scanf("%s", &cpf);
+	exibCliente(&cpf);
 }
 
 //// addCliente() -> Adiciona as informações na lista de clientes.

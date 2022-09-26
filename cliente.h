@@ -4,6 +4,7 @@
 int getIndexCliente(void);
 void listClientes(void);
 void findCliente(void);
+void exibCliente(char* cpf);
 void deleteCliente(void);
 void relatVendas(void);
 void addCliente(char cpf[12], char nome[20]);
