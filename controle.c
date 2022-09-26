@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "controle.h"
 #include "produtos.h"
+#include "cliente.h"
 
 //// painelControle() -> Exibe o menu do módulo de Controle.
 int painelControle(void){
@@ -25,5 +26,10 @@ int painelControle(void){
 	int opcao;
 	printf("    Escolha uma opcao: ");
 	scanf("%d", &opcao);
+	switch(opcao){
+		case 1:
+			menuCliente();
+			break;
+	}
 	return opcao;
 }

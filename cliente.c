@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "cliente.h"
+#include "produtos.h"
 #include <string.h>
 
 //// Varíáveis referentes a Clientes
@@ -15,7 +16,7 @@ int numCompras[10] = {3, 2};
 
 int getIndexCliente(void){
 	for(int i = 0; i < 10; i++){
-		if(cpfs[i] == 0){
+		if(strcmp("", cpfs[i]) == 0){
 			return i;
 		}
 	}
@@ -38,14 +39,14 @@ void listClientes(void){
 	int opcao, index;
 	index = getIndexCliente();	
 	for(int i = 0; i < index; i++){
-		printf("    CPF: $s", *cpfs[i]);
-		printf("    Nome: $s", *nomes[i]);
-		printf("    Número de compras: %d", numCompras[i]);
-		printf("    R$ comprados: $.2f\n", totalCompras[i]);
+		printf("\n    CPF: %s", cpfs[i]);
+		printf("\n    Nome: %s", nomes[i]);
+		printf("\n    Numero de compras: %d", numCompras[i]);
+		printf("\n    R$ comprados: %.2f\n", totalCompras[i]);
 		printf("\n#####################################################\n\n");
 	}
 	printf("    Digite 0 e aperte enter para continuar... ");
-	scanf("%d", opcao);
+	scanf("%d", &opcao);
 	menuCliente();
 }
 
@@ -71,10 +72,10 @@ void findCliente(void){
 //// exibCliente() -> Exibe as informações do cliente com o CPF passado por parâmetro.
 
 void exibCliente(char* cpf){
-	int index = verifCliente(*cpf);
+	int index = verifCliente(cpf);
 	if(index == 0){
 		printf("\n    Cliente inexistente! Digite 0 e aperte enter para continuar... ");
-		scanf("%d", index);
+		scanf("%d", &index);
 		menuCliente();
 	}else{
 		index -= 1;
@@ -86,6 +87,19 @@ void exibCliente(char* cpf){
 		printf("#####################################################\n");
 		printf("    Digite 0 e aperte enter para continuar... ");
 	}
+}
+
+//// deleteCliente() -> Deleta as informações do cliente de cpf informado.
+
+void deleteCliente(void){
+
+
+}
+
+//// relatVendas() -> Mostra um relatório das vendas por mês, dia ou ano.
+
+void relatVendas(int type){
+
 }
 
 //// addCliente() -> Adiciona as informações na lista de clientes.
@@ -146,7 +160,7 @@ int menuCliente(void){
 			deleteCliente();
 			break;
 		case 4:
-			relatVendas();
+			relatVendas(0);
 		case 0: 
 			break;
 		default:
