@@ -22,6 +22,34 @@ int getIndexCliente(void){
 	return 10;
 }
 
+//// listClientes() -> Lista as informações dos clientes.
+
+int listClientes(void){
+	clrScrn();
+	printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = L I S T A   D E   C L I E N T E S =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+	for(int i = 0; i < 10; i++){
+		if(*cpfs[i] != 0){
+			printf("    CPF: $s", *cpfs[i]);
+			printf("    Nome: $s", *nomes[i]);
+			printf("    Número de compras: %d", numCompras[i]);
+			printf("    R$ comprados: $.2f\n", totalCompras[i]);
+			printf("\n#####################################################\n\n");
+		}
+	}
+	int opcao;	
+	printf("    Digite 0 e aperte enter para continuar... ");
+	scanf("%d", opcao);
+	menuCliente();
+}
+
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
 void addCliente(char cpf[12], char nome[20]){
