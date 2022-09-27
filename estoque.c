@@ -94,6 +94,18 @@ void exibEstoque(int ids[10]){
 	menuEstoque();
 }
 
+//// verifEstoque() -> Verifica a disponibilidade do item em estoque, retornando a quantidade do mesmo
+
+int verifEstoque(int id){
+	attEstoque();
+	for(int i = 0; i < 10; i++){
+		if(idProds[i] == id){
+			return qtds[i];
+		}
+	}
+	return -1; // Id não encontrado.
+}
+
 void entrada(void){
 	
 }
