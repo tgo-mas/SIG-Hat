@@ -226,3 +226,19 @@ char* getModelo(int id){
 	return modelos[index];
 }
 
+//// getEstoq() -> Retorna o vetor de quantidades dos itens em estoque.
+int* getEstoq(){
+	return estoq;
+}
+
+//// setEstoq(id, qtd) -> Atualiza a informação de estoque do produto informado.
+
+void setEstoq(int id, int qtd){
+	for(int i = 0; i < 10; i++){
+		if(ids[i] == id){
+			estoq[i] = qtd;
+
+		}
+	}
+}
+
