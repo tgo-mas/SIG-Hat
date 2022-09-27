@@ -78,15 +78,19 @@ void menu(void){
   switch(opcao){
     case 1:	
       opcao = catalog();
+      if(opcao == 0) menu();
       break;
     case 2:
       opcao = menuEstoque();
+      if(opcao == 0) menu();
       break;
     case 3:
       opcao = painelControle();
+      if(opcao == 0) menu();
       break;
     case 9:
       opcao = infos();
+      if(opcao == 0) menu();
       break;
     default:
       opcao = 0;

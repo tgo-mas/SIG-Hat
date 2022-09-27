@@ -2,6 +2,7 @@
 #include "catalog.h"
 #include "cliente.h"
 #include "produtos.h"
+#include "estoque.h"
 
 //// Funções
 
@@ -34,11 +35,13 @@ void initVenda(void){
     if(verifEstoque(idsVenda[i]) <= unids){
       setEstoq(idsVenda[i], unids);
       printf("\n     Venda realizada com sucesso!");
-      catalog();
     }else{
-
+      printf("\n     Falta de item em estoque!");
     }
   }
+  printf("\n    Digite 0 e aperte enter para continuar...");
+  scanf("%d", &unids);
+  catalog();
 }
 
 //// catalog() -> Exibe a tela principal do módulo de catálogo.

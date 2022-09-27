@@ -15,3 +15,4 @@ int* getIds(void);
 char* getMarca(int id);
 char* getModelo(int id);
 int* getEstoq(void);
+void setEstoq(int id, int qtd);
