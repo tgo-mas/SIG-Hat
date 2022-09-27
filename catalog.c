@@ -20,7 +20,7 @@ void initVenda(void){
 		int indexCliente = verifCliente(&cpf) - 1;
 		printf("    Cliente encontrado! Nome: %s \n", nomes[indexCliente]);
 	}
-  int qtd, idsVenda[10];
+  int qtd, idsVenda[10], unids;
   printf("\n    Informe a quantidade de itens a serem comprados (max. 10 itens diferentes): ");
   scanf("%d", &qtd);
   for(int i = 0; i < qtd; i++){
@@ -30,6 +30,14 @@ void initVenda(void){
     marca = getMarca(idsVenda[i]);
     modelo = getModelo(idsVenda[i]);
     printf("    Quantas unidades do %s %s serao vendidas? ", modelo, marca);
+    scanf("%d", &unids);
+    if(verifEstoque(idsVenda[i]) <= unids){
+      setEstoq(idsVenda[i], unids);
+      printf("\n     Venda realizada com sucesso!");
+      catalog();
+    }else{
+
+    }
   }
 }
 

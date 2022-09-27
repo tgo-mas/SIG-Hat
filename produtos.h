@@ -14,3 +14,4 @@ int menuEstoque(void);
 int* getIds(void);
 char* getMarca(int id);
 char* getModelo(int id);
+int* getEstoq(void);

@@ -225,3 +225,4 @@ char* getModelo(int id){
 	int index = getIndexById(id);
 	return modelos[index];
 }
+

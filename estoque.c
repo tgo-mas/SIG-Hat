@@ -3,10 +3,22 @@
 #include "catalog.h"
 #include "produtos.h"
 
+//// Variáveis referentes ao estoque
+int idProds[10];
+int qtds[10];
+
+//// attEstoque() -> Atualiza as informações do estoque.
+
+void attEstoque(void){
+	*idProds = *getIds();
+	*qtds = *getEstoq();
+}
+
 //// menuEstoque() -> Exibe a tela principal do módulo de estoque
 
 int menuEstoque(void){
 	clrScrn();
+	attEstoque();
 	printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
