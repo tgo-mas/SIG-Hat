@@ -92,6 +92,9 @@ void menu(void){
       opcao = infos();
       if(opcao == 0) menu();
       break;
+    case 0:
+      opcao = 1;
+      break;
     default:
       opcao = 0;
       printf("Escolha uma opção válida! Tente novamente. \n");

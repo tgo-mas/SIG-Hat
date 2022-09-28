@@ -10,8 +10,13 @@ int qtds[10];
 //// attEstoque() -> Atualiza as informações do estoque.
 
 void attEstoque(void){
-	*idProds = *getIds();
-	*qtds = *getEstoq();
+	int *ids, *qtd;
+	ids = getIds();
+	qtd = getEstoq();
+	for(int i = 0; i < 10; i++){
+		idProds[i] = ids[i];
+		qtds[i] = qtd[i];
+	}
 }
 
 //// menuEstoque() -> Exibe a tela principal do módulo de estoque
@@ -106,7 +111,27 @@ int verifEstoque(int id){
 	return -1; // Id não encontrado.
 }
 
+//// entrada() -> Inicia o protocolo para registrar a entrada de algum produto no estoque.
+
 void entrada(void){
-	
+	int id, qtd;
+	char *modeloProduto, *marcaProduto;
+	printf("\n    Informe o ID do item a ser reabastecido: ");
+	scanf("%d", &id);
+	marcaProduto = getMarca(id);
+	modeloProduto = getModelo(id);
+	qtd = verifEstoque(id);
+	if(qtd == -1){
+		printf("\n    O ID informado nao corresponde a nenhum produto.");
+	} else {
+		printf("\n    Informe quantas unidades de %s %s foram reabastecidas: ", modeloProduto, marcaProduto);
+		scanf("%d", &qtd);
+		qtd += verifEstoque(id);
+		setEstoq(id, qtd);
+		printf("    Estoque renovado com sucesso!");
+	}
+	printf("\n    Digite 0 e pressione enter para continuar... ");
+	scanf("%d", &qtd);
+	menuEstoque();
 }
 

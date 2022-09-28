@@ -8,6 +8,7 @@
 
 #endif
 #include <stdio.h>
+#include <stdlib.h>
 #include "produtos.h"
 
 //// Dados dos produtos
@@ -127,7 +128,7 @@ void findProd(void){
 	scanf("%d", &opcao);
 	
 	int id;
-	char modelo;
+	char modelo[15];
 
 	switch(opcao){
 		case 1:
@@ -137,8 +138,8 @@ void findProd(void){
 			break;
 		case 2:
 			printf("   Informe o modelo do produto: ");
-			scanf("%s", &modelo);
-			buscaModelo(&modelo);
+			scanf("%s", modelo);
+			buscaModelo(modelo);
 			break;
 		default:
 			printf("\n    Selecione uma opção válida!\n    Aperte enter para continuar...");
@@ -237,7 +238,6 @@ void setEstoq(int id, int qtd){
 	for(int i = 0; i < 10; i++){
 		if(ids[i] == id){
 			estoq[i] = qtd;
-
 		}
 	}
 }

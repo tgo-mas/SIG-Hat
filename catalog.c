@@ -9,31 +9,32 @@
 //// initVenda() -> Dá início ao processo de realizar uma venda com o sistema.
 
 void initVenda(void){
-	char cpf, nome;
+	char cpf[12], nome[20];
   char nomes[10][20] = {"Bruno", "Roberto"};
 	printf("    Informe o CPF do cliente: ");
-	scanf("%s", &cpf);
-	if(verifCliente(&cpf) == 0){
+	scanf("%s", cpf);
+	if(verifCliente(cpf) == 0){
 		printf("\n    Novo cliente! \n    Nome: ");
-		scanf("%s", &nome);
-		addCliente(&cpf, &nome);
+		scanf("%s", nome);
+		addCliente(cpf, nome);
 	} else {	
-		int indexCliente = verifCliente(&cpf) - 1;
+		int indexCliente = verifCliente(cpf) - 1;
 		printf("    Cliente encontrado! Nome: %s \n", nomes[indexCliente]);
 	}
-  int qtd, idsVenda[10], unids;
+  int qtd, idsVenda[10], unids, unidsEstoque;
   printf("\n    Informe a quantidade de itens a serem comprados (max. 10 itens diferentes): ");
   scanf("%d", &qtd);
   for(int i = 0; i < qtd; i++){
     printf("    Informe o %d Id: ", i + 1);
     scanf("%d", &idsVenda[i]);
+    unidsEstoque = verifEstoque(idsVenda[i]);
     char* marca, * modelo;
     marca = getMarca(idsVenda[i]);
     modelo = getModelo(idsVenda[i]);
     printf("    Quantas unidades do %s %s serao vendidas? ", modelo, marca);
     scanf("%d", &unids);
-    if(verifEstoque(idsVenda[i]) <= unids){
-      setEstoq(idsVenda[i], unids);
+    if(unidsEstoque >= unids){
+      setEstoq(idsVenda[i], unidsEstoque - unids);
       printf("\n     Venda realizada com sucesso!");
     }else{
       printf("\n     Falta de item em estoque!");
