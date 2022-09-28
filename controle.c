@@ -30,6 +30,10 @@ int painelControle(void){
 		case 1:
 			menuCliente();
 			break;
+		case 2:
+			printf("\n    Menu Fornecedor: Trabalho em progresso!\n    Digite 0 e aperte enter para continuar...");
+			scanf("%d", &opcao);
+			painelControle();
 	}
 	return opcao;
 }
