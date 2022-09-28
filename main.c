@@ -27,7 +27,7 @@
 
 //// Assinatura das funções
 int infos(void);
-void menu(void);
+int menu(void);
 
 //// Funções
 
@@ -54,7 +54,7 @@ int infos(void){
   return opcao;
 }
 
-void menu(void){
+int menu(void){
 	int opcao;
   printf("\n");
   printf("#####################################################\n");
@@ -93,19 +93,20 @@ void menu(void){
       if(opcao == 0) menu();
       break;
     case 0:
-      opcao = 1;
-      break;
+      return 1;
     default:
       opcao = 0;
       printf("Escolha uma opção válida! Tente novamente. \n");
       break;
 	}
-  if(opcao == 0) menu();
+  return 0;
 }
 
 int main(int argc, char *argv[]) {
-  
-	menu();
+  int opcao = menu();
+  while(opcao == 0){
+    opcao = menu();
+  }
 	
 	return 0;
 }
