@@ -64,3 +64,51 @@ void menuCatalogo(void){
     printf("\n");
 }
 
+//// cabecListaClientes() -> Exibe o cabeçalho da tela de listar clientes.
+
+void cabecListaClientes(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = L I S T A   D E   C L I E N T E S =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
+
+//// cabecFindClientes() -> Exibe o cabeçalho da tela de pesquisar cliente.
+
+void cabecFindClientes(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = P E S Q U I S A   C L I E N T E S =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
+
+//// telaMenuClientes() -> Exibe a tela de menu do módulo de clientes.
+
+void telaMenuClientes(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##   = C O N T R O L E   D E   C L I E N T E S =   ##\n");
+	printf("##                                                 ##\n");
+	printf("##         1 - Listar clientes cadastrados         ##\n");
+	printf("##              2 - Pesquisar cliente              ##\n");
+	printf("##               3 - Remover cliente               ##\n");
+	printf("##          4 - Gerar relatório de vendas          ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
