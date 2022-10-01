@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "produtos.h"
+#include "interface.h"
 
 //// Dados dos produtos
 int ids[10] = {1, 2, 3};
@@ -79,15 +80,7 @@ void cadastrarProd(void){
 	index = findIndex(ids);
 	printf("%d", index);
 	
-	printf("\n");
-	printf("#####################################################\n");
-	printf("##                                                 ##\n");
-	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
-	printf("##                                                 ##\n");
-	printf("##    = C A D A S T R O   D E   P R O D U T O =    ##\n");
-	printf("##                                                 ##\n");
-	printf("#####################################################\n");
-	printf("\n");
+	telaAddProduto();
 	
 	char modelo, marca;
 
@@ -111,15 +104,7 @@ void cadastrarProd(void){
 void findProd(void){
   	int opcao;
 	
-	printf("\n");
-	printf("#####################################################\n");
-	printf("##                                                 ##\n");
-	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
-	printf("##                                                 ##\n");
-	printf("##      = B U S C A   P O R   P R O D U T O =      ##\n");
-	printf("##                                                 ##\n");
-	printf("#####################################################\n");
-	printf("\n");
+	telaBuscaProduto();
 
 	printf("	1 - Busca por ID");
 	printf("	2 - Busca por modelo");
@@ -167,15 +152,7 @@ void buscaModelo(char modelo[15]){
 void deleteProd(void){
 	
 	int id;
-  	printf("\n");
-	printf("#####################################################\n");
-	printf("##                                                 ##\n");
-	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
-	printf("##                                                 ##\n");
-	printf("##        = R E M O V E R   P R O D U T O =        ##\n");
-	printf("##                                                 ##\n");
-	printf("#####################################################\n");
-	printf("\n");
+  	telaRemovProduto();
 
 	printf("	Remocao por ID: ");
 	scanf("%d", &id);

@@ -112,3 +112,88 @@ void telaMenuClientes(void){
 	printf("#####################################################\n");
 	printf("\n");
 }
+
+//// menuControle() -> Exibe a tela principal do painel de controle de clientes e fornecedores.
+
+void menuControle(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##   = C O N T R O L E   D E   C L I E N T E S =   ##\n");
+	printf("##                                                 ##\n");
+	printf("##         1 - Listar clientes cadastrados         ##\n");
+	printf("##              2 - Pesquisar cliente              ##\n");
+	printf("##               3 - Remover cliente               ##\n");
+	printf("##          4 - Gerar relatório de vendas          ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
+
+//// telaMenuEstoque() -> Exibe a tela do menu de controle de estoque.
+
+void telaMenuEstoque(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##     = C O N T R O L E  D E  E S T O Q U E =     ##\n");
+	printf("##                                                 ##\n");
+	printf("##              1 - Conferir estoque               ##\n");
+  	printf("##             2 - Cadastrar produto               ##\n");
+  	printf("##             3 - Pesquisar produto               ##\n");
+  	printf("##              4 - Excluir produto                ##\n");
+	printf("##             5 - Registrar entradas              ##\n");
+	printf("##                                                 ##\n");
+	printf("##                   0 - Voltar                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
+
+//// telaRemovProduto() -> Exibe o cabeçalho da tela de remover produto.
+
+void telaRemovProduto(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##        = R E M O V E R   P R O D U T O =        ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
+
+//// telaBuscaProduto() -> Exibe o cabeçalho da tela de buscar produto.
+
+void telaBuscaProduto(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##      = B U S C A   P O R   P R O D U T O =      ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
+
+//// telaAddProduto() -> Exibe o cabeçalho da tela de cadastrar produto
+
+void telaAddProduto(void){
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##    = C A D A S T R O   D E   P R O D U T O =    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
