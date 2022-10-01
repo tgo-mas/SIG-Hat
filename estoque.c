@@ -69,7 +69,7 @@ int menuEstoque(void){
 	    	break;
 	    default:
 	      	printf("Escolha uma opção válida! Tente novamente. \n");
-	      	catalog();
+			menuEstoque();
 	      	break;
 	}
 	

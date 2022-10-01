@@ -3,6 +3,7 @@
 #include "cliente.h"
 #include "produtos.h"
 #include "estoque.h"
+#include "interface.h"
 
 //// Funções
 
@@ -49,22 +50,7 @@ void initVenda(void){
 
 int catalog(void){
   int opcao;
-  printf("\n");
-  printf("#####################################################\n");
-  printf("##                                                 ##\n");
-  printf("##        = = = = = S I G - H a t = = = = =        ##\n");
-  printf("##                                                 ##\n");
-  printf("##       = = = = = C A T A L O G O = = = = =       ##\n");
-  printf("##                                                 ##\n");
-  printf("#####################################################\n");
-  listProds();
-  printf("##                                                 ##\n");
-  printf("##                1 - Iniciar venda                ##\n");
-  printf("##                                                 ##\n");
-  printf("##                    0 - Sair                     ##\n");
-  printf("##                                                 ##\n");
-  printf("#####################################################\n");
-  printf("\n");
+  menuCatalogo();
 
   scanf("%d", &opcao);
   switch(opcao){
