@@ -2,6 +2,7 @@
 #include "cliente.h"
 #include "produtos.h"
 #include "interface.h"
+#include "validacoes.h"
 #include <string.h>
 
 //// Varíáveis referentes a Clientes
@@ -84,16 +85,22 @@ void deleteCliente(void){
 //// relatVendas() -> Mostra um relatório das vendas por mês, dia ou ano.
 
 void relatVendas(int type){
+	//// type: 1 - dia; 2 - mes; 3 - ano.
+
 
 }
 
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
 void addCliente(char cpf[12], char nome[20]){
-	int index;
-	index = getIndexCliente();
-	strcpy(cpfs[index],cpf);
-	strcpy(nomes[index],nome);
+	if(validaCPF(cpf) == 1){
+		int index;
+		index = getIndexCliente();
+		strcpy(cpfs[index],cpf);
+		strcpy(nomes[index],nome);
+	}else{
+		printf("O CPF informado é inválido! Tente novamente.");
+	}
 }
 
 //// verifCliente() -> Verifica se o cliente existe. Se existir, retorna o índice + 1, se não, retorna 0.
