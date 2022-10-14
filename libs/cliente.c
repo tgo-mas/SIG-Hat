@@ -79,7 +79,7 @@ void exibCliente(char* cpf){
 
 void deleteCliente(void){
 
-
+	
 }
 
 //// relatVendas() -> Mostra um relatório das vendas por mês, dia ou ano.
