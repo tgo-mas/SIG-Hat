@@ -1,12 +1,12 @@
-#include "produtos.h"
-#include "cliente.h"
-#include "catalog.h"
-#include "estoque.h"
-#include "controle.h"
-#include "interface.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./libs/produtos.h"
+#include "./libs/cliente.h"
+#include "./libs/catalog.h"
+#include "./libs/estoque.h"
+#include "./libs/controle.h"
+#include "./libs/interface.h"
 #ifdef __linux__
 	#include <unistd.h>
 #elif _WIN32
@@ -34,10 +34,10 @@ int menu(void);
 
 int infos(void){
   infosProjeto();
-  int opcao;
-  printf("    Digite 0 e aperte enter para continuar... ");
-  scanf("%d", &opcao);
-  return opcao;
+  getchar();
+  printf("    Aperte enter para continuar... ");
+  getchar();
+  return 0;
 }
 
 int menu(void){

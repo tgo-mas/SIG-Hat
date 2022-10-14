@@ -9,15 +9,16 @@ int painelControle(void){
 	clrScrn();
 	menuControle();
 	int opcao;
-	printf("    Escolha uma opcao: ");
+	printf("    Escolha uma opção: ");
 	scanf("%d", &opcao);
 	switch(opcao){
 		case 1:
 			menuCliente();
 			break;
 		case 2:
-			printf("\n    Menu Fornecedor: Trabalho em progresso!\n    Digite 0 e aperte enter para continuar...");
-			scanf("%d", &opcao);
+			getchar();
+			printf("\n    Menu Fornecedor: Trabalho em progresso!\n    Aperte enter para continuar...");
+			getchar();
 			painelControle();
 	}
 	return opcao;

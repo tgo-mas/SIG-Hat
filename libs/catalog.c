@@ -41,8 +41,9 @@ void initVenda(void){
       printf("\n     Falta de item em estoque!");
     }
   }
-  printf("\n    Digite 0 e aperte enter para continuar...");
-  scanf("%d", &unids);
+  getchar();
+  printf("\n    Aperte enter para continuar...");
+  getchar();
   catalog();
 }
 

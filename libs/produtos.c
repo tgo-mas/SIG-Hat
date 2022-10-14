@@ -131,9 +131,9 @@ void findProd(void){
 			scanf("%d", &id);
 			break;
 	}
-	int no;
-	printf("\n    Digite 0 para continuar...");
-	scanf("%d", &no);
+	getchar();
+	printf("\n    Aperte enter para continuar...");
+	getchar();
 	menuEstoque();
 }
 

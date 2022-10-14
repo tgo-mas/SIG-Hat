@@ -30,7 +30,7 @@ int getIndexCliente(void){
 void listClientes(void){
 	clrScrn();
 	cabecListaClientes();
-	int opcao, index;
+	int index;
 	index = getIndexCliente();	
 	for(int i = 0; i < index; i++){
 		printf("\n    CPF: %s", cpfs[i]);
@@ -39,8 +39,9 @@ void listClientes(void){
 		printf("\n    R$ comprados: %.2f\n", totalCompras[i]);
 		printf("\n#####################################################\n\n");
 	}
-	printf("    Digite 0 e aperte enter para continuar... ");
-	scanf("%d", &opcao);
+	getchar();
+	printf("    Aperte enter para continuar... ");
+	getchar();
 	menuCliente();
 }
 
@@ -60,10 +61,12 @@ void findCliente(void){
 void exibCliente(char* cpf){
 	int index = verifCliente(cpf);
 	if(index == 0){
-		printf("\n    Cliente inexistente! Digite 0 e aperte enter para continuar... ");
-		scanf("%d", &index);
+		getchar();
+		printf("\n    Cliente inexistente! Aperte enter para continuar... ");
+		getchar();
 		menuCliente();
 	}else{
+		getchar();
 		index -= 1;
 		printf("\n    Cliente encontrado! \n");
 		printf("    Nome: %s\n", nomes[index]);
@@ -71,7 +74,8 @@ void exibCliente(char* cpf){
 		printf("    Num. de compras: %d\n", numCompras[index]);
 		printf("    R$ comprados: %.2f\n\n", totalCompras[index]);
 		printf("#####################################################\n");
-		printf("    Digite 0 e aperte enter para continuar... ");
+		printf("    Aperte enter para continuar... ");
+		getchar();
 	}
 }
 
@@ -79,7 +83,7 @@ void exibCliente(char* cpf){
 
 void deleteCliente(void){
 
-	
+
 }
 
 //// relatVendas() -> Mostra um relatório das vendas por mês, dia ou ano.

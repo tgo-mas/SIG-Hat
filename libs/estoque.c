@@ -78,10 +78,11 @@ void exibEstoque(int ids[10]){
 			exibProd(i);
 		}
 	}
-	int opcao;
-	printf("\n    Digite 0 e aperte enter para voltar...");
-	scanf("%d", &opcao);
+	getchar();
+	printf("\n    Aperte enter para voltar...");
+	getchar();
 	menuEstoque();
+
 }
 
 //// verifEstoque() -> Verifica a disponibilidade do item em estoque, retornando a quantidade do mesmo
@@ -115,8 +116,8 @@ void entrada(void){
 		setEstoq(id, qtd);
 		printf("    Estoque renovado com sucesso!");
 	}
-	printf("\n    Digite 0 e pressione enter para continuar... ");
-	scanf("%d", &qtd);
+	printf("\n    Pressione enter para continuar... ");
+	getchar();
 	menuEstoque();
 }
 
