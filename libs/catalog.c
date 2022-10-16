@@ -10,14 +10,16 @@
 //// initVenda() -> Dá início ao processo de realizar uma venda com o sistema.
 
 void initVenda(void){
-	char cpf[12], nome[20];
+	char cpf[12], nome[20], email[30];
   char nomes[10][20] = {"Bruno", "Roberto"};
 	printf("    Informe o CPF do cliente: ");
 	scanf("%s", cpf);
 	if(verifCliente(cpf) == 0){
 		printf("\n    Novo cliente! \n    Nome: ");
 		scanf("%s", nome);
-		addCliente(cpf, nome);
+    printf("\n    Email: ");
+    scanf("%s", email);
+		addCliente(cpf, nome, email);
 	} else {	
 		int indexCliente = verifCliente(cpf) - 1;
 		printf("    Cliente encontrado! Nome: %s \n", nomes[indexCliente]);

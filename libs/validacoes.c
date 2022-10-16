@@ -36,3 +36,30 @@ int validaCPF(char* cpf){
     }
     return 1;
 }      /////     Funções original por @eduardoedson, com aprimorações derivadas do código de @kugland (GitHub)
+
+//// validaEmail(email) -> Retorna 0 para um formato de email inválido e 1 para válido.
+
+int validaEmail(char* email){
+    char ant, atual;   /// ant - anterior; variáveis usadas para verificar repetição de pontos.
+    int i, arroba, contPonto;
+
+    for(i = 0; i < strlen(email); i++){
+        atual = email[i];
+        if(strcmp(&atual, "@") == 0){
+            arroba = 1;
+        }else if(arroba == 1){
+            if(strcmp(&ant, ".") == 0 && strcmp(&atual, ".") == 0){
+                return 0;
+            }else if(atual == '.'){
+                contPonto++;
+            }
+        }
+        ant = atual;
+    }
+    if(arroba == 0 || contPonto == 0){
+        return 0;
+    }
+    return 1;
+}
+
+

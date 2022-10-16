@@ -1,5 +1,6 @@
 #include <stdio.h>
 
-/////    Assinatura das Funções
+/////  Assinatura das Funções
 
 int validaCPF(char* cpf);
+int validaEmail(char* email);
