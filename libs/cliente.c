@@ -141,10 +141,10 @@ int verifCliente(char cpf[12]){
 	return 0;
 }
 
-//// getNomes() -> Retorna um ponteiro para o local onde os nomes dos clientes estão armazenados.
+//// getNomeAt(index) -> Retorna o nome do cliente com no indice passado por parâmetro.
 
-char* getNomes(void){
-	return *nomes;
+char* getNomeAt(int index){
+	return nomes[index];
 }
 
 //// menuCliente() -> Exibe a tela de menu para controle e gerenciamento dos clientes da loja.
