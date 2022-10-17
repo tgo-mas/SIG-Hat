@@ -97,6 +97,25 @@ void relatVendas(int type){
 
 }
 
+//// cadCliente() -> Coleta os dados referentes a um novo cliente.
+
+void cadCliente(char* cpf){
+	int add = 0;
+	do{
+		char nome[20], email[30];
+		printf("\n    Nome: ");
+		scanf("%s", nome);
+		printf("    Email: ");
+		scanf("%s", email);
+		add = addCliente(cpf, nome, email);
+		if(add == 1){
+			printf("\n    Cliente adicionado com sucesso!");
+		}else{
+			printf("\n    CPF ou Email inválidos, tente novamente!");
+		}
+	}while(add == 0);
+}
+
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
 int addCliente(char cpf[12], char nome[20], char email[30]){

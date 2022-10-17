@@ -45,10 +45,10 @@ int validaEmail(char* email){
 
     for(i = 0; i < strlen(email); i++){
         atual = email[i];
-        if(strcmp(&atual, "@") == 0){
+        if(atual == '@'){
             arroba = 1;
         }else if(arroba == 1){
-            if(strcmp(&ant, ".") == 0 && strcmp(&atual, ".") == 0){
+            if(ant == '.' && atual == '.'){
                 return 0;
             }else if(atual == '.'){
                 contPonto++;

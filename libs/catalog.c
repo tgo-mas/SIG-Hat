@@ -15,11 +15,8 @@ void initVenda(void){
 	printf("    Informe o CPF do cliente: ");
 	scanf("%s", cpf);
 	if(verifCliente(cpf) == 0){
-		printf("\n    Novo cliente! \n    Nome: ");
-		scanf("%s", nome);
-    printf("\n    Email: ");
-    scanf("%s", email);
-		addCliente(cpf, nome, email);
+		printf("\n    Novo cliente!");
+    cadCliente(cpf);
 	} else {	
 		int indexCliente = verifCliente(cpf) - 1;
 		printf("    Cliente encontrado! Nome: %s \n", nomes[indexCliente]);
