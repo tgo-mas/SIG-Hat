@@ -103,9 +103,10 @@ void telaMenuClientes(void){
 	printf("##   = C O N T R O L E   D E   C L I E N T E S =   ##\n");
 	printf("##                                                 ##\n");
 	printf("##         1 - Listar clientes cadastrados         ##\n");
-	printf("##              2 - Pesquisar cliente              ##\n");
-	printf("##               3 - Remover cliente               ##\n");
-	printf("##          4 - Gerar relatório de vendas          ##\n");
+	printf("##              2 - Cadastrar cliente              ##\n");
+	printf("##              3 - Pesquisar cliente              ##\n");
+	printf("##               4 - Remover cliente               ##\n");
+	printf("##          5 - Gerar relatório de vendas          ##\n");
 	printf("##                                                 ##\n");
 	printf("##                     0 - Sair                    ##\n");
 	printf("##                                                 ##\n");

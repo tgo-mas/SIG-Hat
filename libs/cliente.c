@@ -7,9 +7,10 @@
 
 //// Varíáveis referentes a Clientes
 
-char cpfs[10][11] = {"10616486460", "12345678910"};
+char cpfs[10][12] = {"10616486460", "12345678910"};
 char nomes[10][20] = {"Bruno", "Roberto"};
 char emails[10][30] = {"bruninho@gmail.com", "robrob@gmail.com"};
+char telefones[10][12] = {"84999999999", "83999658545"};
 float totalCompras[10] = {45.0, 30.0};
 int numCompras[10] = {3, 2};
 
@@ -102,12 +103,14 @@ void relatVendas(int type){
 void cadCliente(char* cpf){
 	int add = 0;
 	do{
-		char nome[20], email[30];
+		char nome[20], email[30], tel[12];
 		printf("\n    Nome: ");
 		scanf("%s", nome);
 		printf("    Email: ");
 		scanf("%s", email);
-		add = addCliente(cpf, nome, email);
+		printf("    Telefone: ");
+		scanf("%s", tel);
+		add = addCliente(cpf, nome, email, tel);
 		if(add == 1){
 			printf("\n    Cliente adicionado com sucesso!");
 		}else{
@@ -118,13 +121,16 @@ void cadCliente(char* cpf){
 
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
-int addCliente(char cpf[12], char nome[20], char email[30]){
-	if(validaCPF(cpf) == 1 && validaEmail(email) == 1){
+int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
+	int telInt[12];
+	convertToInt(tel, telInt);
+	if(validaCPF(cpf) == 1 && validaEmail(email) == 1 && validaTel(telInt) == 1){
 		int index;
 		index = getIndexCliente();
 		strcpy(cpfs[index],cpf);
 		strcpy(nomes[index],nome);
 		strcpy(emails[index],email);
+		strcpy(telefones[index],tel);
 		return 1;
 	}
 	return 0;
@@ -158,13 +164,16 @@ int menuCliente(void){
 			listClientes();
 			break;
 		case 2:
-			findCliente();
+			char cpf[12];
+			printf("\n    Informe o CPF do cliente: ");
+			scanf("%s", cpf);
+			if(validaCPF(cpf) == 1) cadCliente(cpf);
 			break;
 		case 3:
-			deleteCliente();
+			findCliente();
 			break;
 		case 4:
-			relatVendas(0);
+			deleteCliente();
 		case 0: 
 			break;
 		default:

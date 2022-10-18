@@ -62,4 +62,43 @@ int validaEmail(char* email){
     return 1;
 }
 
+////  validaTel(telefone) -> Retorna 1 para um telefone válido e 0 para inválido.
 
+int validaTel(int *tel){
+    if(tel[0] != 1 && tel[0] != 4 && tel[0] != 6 && tel[0] != 8 && tel[0] != 9){
+        return 0;
+    }else{
+        if(tel[1] < 1 && tel[1] > 9){
+            return 0;
+        }
+    }            ///// Verificação dos DDD's existentes
+
+    if(tel[2] == 9){         //// se o número inicia em 9, é um celular.
+        if(tel[3] == 0){
+            return 0;
+        }else{
+            for(int i = 3; i < 7; i++){
+                if(tel[i] < 0 || tel[i] > 9){
+                    return 0;
+                }
+            }
+        }
+    }else if(tel[2] >= 2 && tel[2] <= 8){         //// se não inicia em 9, é um tel. fixo. (número entre 2 e 8)
+        for(int i = 3; i < 6; i++){
+            if(tel[i] < 0 || tel[i] > 9){
+                return 0;
+            }
+        }
+    }
+    
+    return 1;
+
+}
+
+////  convertToInt(str) -> Converte a string passada por parâmetro para um vetor de inteiros, cujo endereço também é passado.
+
+void convertToInt(char* str, int* result){
+    for(int i = 0; i < strlen(str) - 1; i++){
+        result[i] = (int) (str[i] - 48);
+    }
+}
