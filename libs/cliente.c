@@ -111,10 +111,15 @@ void cadCliente(char* cpf){
 		printf("    Telefone: ");
 		scanf("%s", tel);
 		add = addCliente(cpf, nome, email, tel);
+		getchar();
 		if(add == 1){
 			printf("\n    Cliente adicionado com sucesso!");
+			printf("\n    Aperte enter para continuar... ");
+			getchar();
 		}else{
 			printf("\n    CPF ou Email inválidos, tente novamente!");
+			printf("\n    Aperte enter para continuar... ");
+			getchar();
 		}
 	}while(add == 0);
 }
@@ -164,16 +169,26 @@ int menuCliente(void){
 			listClientes();
 			break;
 		case 2:
-			char cpf[12];
+			inv: char cpf[12];
 			printf("\n    Informe o CPF do cliente: ");
 			scanf("%s", cpf);
-			if(validaCPF(cpf) == 1) cadCliente(cpf);
+			if(validaCPF(cpf) == 1) cadCliente(cpf); 
+			else {
+				printf("    Informe um CPF válido! Tente novamente.");
+				goto inv;
+			};
 			break;
 		case 3:
 			findCliente();
 			break;
 		case 4:
 			deleteCliente();
+		case 5:
+		 	printf("    Em desenvolvimento. Aguarde para futuras atualizações...\n");
+			getchar();
+			printf("    Aperte enter para continuar... ");
+			getchar();
+			menuCliente();
 		case 0: 
 			break;
 		default:

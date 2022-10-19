@@ -5,6 +5,7 @@
 //// menuPrincipal() -> Exibe a tela do menu principal do sistema;
 
 void menuPrincipal(void){
+	clrScrn();
     printf("\n");
     printf("#####################################################\n");
     printf("##                                                 ##\n");
@@ -24,7 +25,8 @@ void menuPrincipal(void){
 
 //// infosProjeto() -> Exibe a tela de informações sobre o projeto.
 
-void infosProjeto(void){       
+void infosProjeto(void){  
+	clrScrn();     
     printf("\n");
     printf("#####################################################\n");
     printf("##                                                 ##\n");
@@ -46,6 +48,7 @@ void infosProjeto(void){
 //// menuCatalogo() -> Exibe o menu do módulo de catálogo (vendas).
 
 void menuCatalogo(void){
+	clrScrn();
     printf("\n");
     printf("#####################################################\n");
     printf("##                                                 ##\n");
@@ -67,6 +70,7 @@ void menuCatalogo(void){
 //// cabecListaClientes() -> Exibe o cabeçalho da tela de listar clientes.
 
 void cabecListaClientes(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -81,6 +85,7 @@ void cabecListaClientes(void){
 //// cabecFindClientes() -> Exibe o cabeçalho da tela de pesquisar cliente.
 
 void cabecFindClientes(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -95,6 +100,7 @@ void cabecFindClientes(void){
 //// telaMenuClientes() -> Exibe a tela de menu do módulo de clientes.
 
 void telaMenuClientes(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -117,6 +123,7 @@ void telaMenuClientes(void){
 //// menuControle() -> Exibe a tela principal do painel de controle de clientes e fornecedores.
 
 void menuControle(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -136,6 +143,7 @@ void menuControle(void){
 //// telaMenuEstoque() -> Exibe a tela do menu de controle de estoque.
 
 void telaMenuEstoque(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -158,6 +166,7 @@ void telaMenuEstoque(void){
 //// telaRemovProduto() -> Exibe o cabeçalho da tela de remover produto.
 
 void telaRemovProduto(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -172,6 +181,7 @@ void telaRemovProduto(void){
 //// telaBuscaProduto() -> Exibe o cabeçalho da tela de buscar produto.
 
 void telaBuscaProduto(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
@@ -186,6 +196,7 @@ void telaBuscaProduto(void){
 //// telaAddProduto() -> Exibe o cabeçalho da tela de cadastrar produto
 
 void telaAddProduto(void){
+	clrScrn();
     printf("\n");
 	printf("#####################################################\n");
 	printf("##                                                 ##\n");
