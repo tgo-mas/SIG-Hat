@@ -11,3 +11,4 @@ void telaMenuEstoque(void);
 void telaRemovProduto(void);
 void telaBuscaProduto(void);
 void telaAddProduto(void);
+void telaMenuFornecedor(void);

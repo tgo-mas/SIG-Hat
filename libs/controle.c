@@ -3,6 +3,7 @@
 #include "produtos.h"
 #include "cliente.h"
 #include "interface.h"
+#include "fornecedor.h"
 
 //// painelControle() -> Exibe o menu do módulo de Controle.
 int painelControle(void){
@@ -16,10 +17,14 @@ int painelControle(void){
 			menuCliente();
 			break;
 		case 2:
-			getchar();
-			printf("\n    Menu Fornecedor: Trabalho em progresso!\n    Aperte enter para continuar...");
-			getchar();
-			painelControle();
+			menuFornec();
+		case 0:
+			break;
+		default:
+            getchar();
+            printf("\n    Selecione uma opção válida!");
+            getchar();
+			break;
 	}
 	return opcao;
 }
