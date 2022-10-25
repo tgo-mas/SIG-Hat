@@ -207,3 +207,26 @@ void telaAddProduto(void){
 	printf("#####################################################\n");
 	printf("\n");
 }
+
+//// telaMenuFornecedor() -> Exibe a tela de menu de Fornecedor.
+
+void telaMenuFornecedor(void){
+	clrScrn();
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##            = C O N T R O L E   D E =            ##\n");
+	printf("##           = F O R N E C E D O R E S =           ##\n");
+	printf("##                                                 ##\n");
+	printf("##       1 - Listar fornecedores cadastrados       ##\n");
+	printf("##            2 - Cadastrar fornecedor             ##\n");
+	printf("##            3 - Pesquisar fornecedor             ##\n");
+	printf("##             4 - Remover fornecedor              ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+	printf("\n");
+}
