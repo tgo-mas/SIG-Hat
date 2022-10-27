@@ -9,6 +9,7 @@
 #endif
 #include <stdio.h>
 #include <stdlib.h>
+#include "misc.h"
 #include "produtos.h"
 #include "interface.h"
 
@@ -20,28 +21,6 @@ char marcas[10][15] = {"Nike", "artesanal", "adidas"};
 float precos[10] = {40.00, 15.0, 120.0};
 
 //// Funções
-
-//// clrScrn() -> Limpa a tela do console
-void clrScrn(void){
-	#ifdef __linux__
-		system("clear");	
-	#elif _WIN32
-		system("cls");
-	#else
-	
-	#endif	
-}
-
-//// findIndex(ids) -> Encontra o proximo item vazio na lista de produtos
-int findIndex(int ids[10]){
-	int i;
-	for(i = 0; i < 10; i++){
-		if(ids[i] == 0){
-			return i;
-		}
-	}
-	return 0;
-}
 
 //// listProds() -> Lista todos os produtos, chamando exibProd para cada
 void listProds(void){

@@ -95,10 +95,3 @@ int validaTel(int *tel){
 
 }
 
-////  convertToInt(str) -> Converte a string passada por parâmetro para um vetor de inteiros, cujo endereço também é passado.
-
-void convertToInt(char* str, int* result){
-    for(int i = 0; i < strlen(str) - 1; i++){
-        result[i] = (int) (str[i] - 48);
-    }
-}

@@ -1,7 +1,5 @@
 
 //// Assinatura das Funções
-void clrScrn(void);
-int findIndex(int ids[10]);
 void listProds(void);
 void exibProd(int index);
 void cadastrarProd(void);
