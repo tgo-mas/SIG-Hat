@@ -1,7 +1,6 @@
 
 //// Assinatura das funções
 
-int getIndexCliente(void);
 void listClientes(void);
 void findCliente(void);
 void exibCliente(char* cpf);

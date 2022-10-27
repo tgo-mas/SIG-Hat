@@ -25,7 +25,7 @@ float precos[10] = {40.00, 15.0, 120.0};
 //// listProds() -> Lista todos os produtos, chamando exibProd para cada
 void listProds(void){
 	int index;
-	index = findIndex(ids);
+	index = getIndex(ids);
 	int i;
 	for(i = 0; i < index; i++){
 		exibProd(i);
@@ -45,7 +45,7 @@ void exibProd(int index){
 //// exibirID(id) -> Mesmo que exibProd() mas usa o id do produto em vez do indice
 void exibirID(int id){
 	int index, i;
-	index = findIndex(ids);
+	index = getIndex(ids);
 	for(i = 0; i < index; i++){
 		if(ids[i] == id){
 			exibProd(i);
@@ -56,7 +56,7 @@ void exibirID(int id){
 //// cadastrarProd() -> Cadastra as infos do produto nas listas
 void cadastrarProd(void){
 	int index;
-	index = findIndex(ids);
+	index = getIndex(ids);
 	printf("%d", index);
 	
 	telaAddProduto();
@@ -119,7 +119,7 @@ void findProd(void){
 //// buscaModelo(modelo) -> Busca o produto pelo modelo dele
 void buscaModelo(char modelo[15]){
 	int index, i;
-	index = findIndex(ids);
+	index = getIndex(ids);
 	for(i = 0; i < index; i++){
 		if(strcmp(modelos[i], modelo) == 0){
 			exibProd(i);
@@ -144,7 +144,7 @@ void deleteProd(void){
 //// remove(id) ->  Remove o produto com o id indicado
 void remover(int id){
 	int index, i;
-	index = findIndex(ids);
+	index = getIndex(ids);
 	
 	for(i = 0; i < index; i++){
 		if(ids[i] == id){

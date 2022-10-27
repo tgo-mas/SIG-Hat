@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "misc.h"
 #include "controle.h"
 #include "produtos.h"
 #include "cliente.h"

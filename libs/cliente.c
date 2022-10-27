@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "misc.h"
 #include "cliente.h"
 #include "produtos.h"
 #include "interface.h"
@@ -16,24 +17,13 @@ int numCompras[10] = {3, 2};
 
 //// Funções
 
-//// getIndexCliente() -> Retorna índice do primeiro item vazio na lista de clientes (onde ID == 0).
-
-int getIndexCliente(void){
-	for(int i = 0; i < 10; i++){
-		if(strcmp("", cpfs[i]) == 0){
-			return i;
-		}
-	}
-	return 10;
-}
-
 //// listClientes() -> Lista as informações dos clientes.
 
 void listClientes(void){
 	clrScrn();
 	cabecListaClientes();
 	int index;
-	index = getIndexCliente();	
+	index = getIndex(numCompras);	
 	for(int i = 0; i < index; i++){
 		printf("\n    CPF: %s", cpfs[i]);
 		printf("\n    Nome: %s", nomes[i]);
@@ -131,7 +121,7 @@ int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
 	convertToInt(tel, telInt);
 	if(validaCPF(cpf) == 1 && validaEmail(email) == 1 && validaTel(telInt) == 1){
 		int index;
-		index = getIndexCliente();
+		index = getIndex(numCompras);
 		strcpy(cpfs[index],cpf);
 		strcpy(nomes[index],nome);
 		strcpy(emails[index],email);
