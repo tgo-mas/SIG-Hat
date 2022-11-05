@@ -22,7 +22,7 @@ void listClientes(void){
 	int index;
 	index = getIndex(idsCliente);	
 	for(int i = 0; i < index; i++){
-		printf("    CPF: %d", *clientes[i].cpf);
+		printf("    CPF: %s", clientes[i].cpf);
 		printf("\n    Nome: %s", clientes[i].nome);
 		printf("\n    Email: %s", clientes[i].email);
 		printf("\n    Telefone: %s", clientes[i].tel);
@@ -61,7 +61,7 @@ void exibCliente(char* cpf){
 		index -= 1;
 		printf("\n    Cliente encontrado! \n");
 		printf("    Nome: %s\n", clientes[index].nome);
-		printf("    CPF: %d\n", *clientes[index].cpf);
+		printf("    CPF: %s\n", clientes[index].cpf);
 		printf("    Email: %s\n", clientes[index].email);
 		printf("    Num. de compras: %d\n", clientes[index].numCompras);
 		printf("    R$ comprados: %.2f\n\n", clientes[index].totalComprado);
@@ -227,9 +227,11 @@ void getDadosCli(void){
 	}else{
 		while(!feof(pCli)){
 			fread(cli, sizeof(Cliente), 1, pCli);
-			clientes[index] = *cli;
-			idsCliente[index] = index + 1;
-			index++;
+			if(cli != NULL){
+				clientes[index] = *cli;
+				idsCliente[index] = index + 1;
+				index++;
+			}
 		}
 	}
 	fclose(pCli);
