@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "misc.h"
 #include "cliente.h"
 #include "produtos.h"
@@ -21,9 +22,10 @@ void listClientes(void){
 	int index;
 	index = getIndex(idsCliente);	
 	for(int i = 0; i < index; i++){
-		printf("\n    CPF: %d", *clientes[i].cpf);
+		printf("    CPF: %d", *clientes[i].cpf);
 		printf("\n    Nome: %s", clientes[i].nome);
 		printf("\n    Email: %s", clientes[i].email);
+		printf("\n    Telefone: %s", clientes[i].tel);
 		printf("\n    Numero de compras: %d", clientes[i].numCompras);
 		printf("\n    R$ comprados: %.2f\n", clientes[i].totalComprado);
 		printf("\n#####################################################\n\n");
@@ -113,20 +115,21 @@ void cadCliente(char* cpf){
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
 int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
-	int telInt[12], cpfInt[12];
+	int telInt[12];
 	convertToInt(tel, telInt);
-	convertToInt(cpf, cpfInt);
 	if(validaCPF(cpf) == 1 && validaEmail(email) == 1 && validaTel(telInt) == 1){
 		Cliente cli;
 		int index;
 		index = getIndex(idsCliente);
-		*cli.cpf = *cpfInt;
+		idsCliente[index] = idsCliente[index] == 0 ? 1 : idsCliente[index] + 1;
+		strcpy(cli.cpf, cpf);
 		strcpy(cli.nome,nome);
 		strcpy(cli.email,email);
-		*cli.tel = *telInt;
+		strcpy(cli.tel, tel);
 		cli.totalComprado = 0.0;
 		cli.numCompras = 0;
 		clientes[index] = cli;
+		gravaCliente(&cli);
 		return 1;
 	}
 	return 0;
@@ -153,6 +156,7 @@ char* getNomeAt(int index){
 
 //// menuCliente() -> Exibe a tela de menu para controle e gerenciamento dos clientes da loja.
 int menuCliente(void){
+	getDadosCli();
 	telaMenuClientes();
 	int opcao;
 	printf("     Selecione uma opcao: ");
@@ -195,4 +199,39 @@ int menuCliente(void){
 		menuCliente();
 	}
 	return 0;
+}
+
+//// gravaCliente(&cli) -> Grava as informações de clientes no arquivo clientes.dat
+
+void gravaCliente(Cliente* cli){
+	FILE* pCli;
+	pCli = fopen("./data/clientes.dat", "ab");
+	if(pCli == NULL){
+		printf("	Arquivo não encontrado.");
+	}else{
+		fwrite(cli, sizeof(Cliente), 1, pCli);
+		fclose(pCli);
+	}
+}
+
+//// getDadosCli() -> Retorna a lista de clientes com os dados extraidos do arquivo clientes.dat
+
+void getDadosCli(void){
+	FILE* pCli;
+	Cliente* cli;
+	cli = (Cliente*) malloc(sizeof(Cliente));
+	int index = 0;
+	pCli = fopen("./data/clientes.dat", "rb");
+	if(pCli == NULL){
+		printf("	Arquivo não encontrado.");
+	}else{
+		while(!feof(pCli)){
+			fread(cli, sizeof(Cliente), 1, pCli);
+			clientes[index] = *cli;
+			idsCliente[index] = index + 1;
+			index++;
+		}
+	}
+	fclose(pCli);
+	free(cli);
 }
