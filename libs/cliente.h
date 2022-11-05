@@ -1,4 +1,15 @@
 
+//// Estruturas referentes a Cliente
+
+typedef struct{
+    int cpf[11];
+    char nome[20];
+    char email[30];
+    int tel[11];
+    float totalComprado;
+    int numCompras;
+} Cliente;
+
 //// Assinatura das funções
 
 void listClientes(void);

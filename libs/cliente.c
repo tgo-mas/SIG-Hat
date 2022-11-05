@@ -8,12 +8,8 @@
 
 //// Varíáveis referentes a Clientes
 
-char cpfs[10][12] = {"10616486460", "12345678910"};
-char nomes[10][20] = {"Bruno", "Roberto"};
-char emails[10][30] = {"bruninho@gmail.com", "robrob@gmail.com"};
-char telefones[10][12] = {"84999999999", "83999658545"};
-float totalCompras[10] = {45.0, 30.0};
-int numCompras[10] = {3, 2};
+int idsCliente[10];
+Cliente clientes[10];
 
 //// Funções
 
@@ -23,13 +19,13 @@ void listClientes(void){
 	clrScrn();
 	cabecListaClientes();
 	int index;
-	index = getIndex(numCompras);	
+	index = getIndex(idsCliente);	
 	for(int i = 0; i < index; i++){
-		printf("\n    CPF: %s", cpfs[i]);
-		printf("\n    Nome: %s", nomes[i]);
-		printf("\n    Email: %s", emails[i]);
-		printf("\n    Numero de compras: %d", numCompras[i]);
-		printf("\n    R$ comprados: %.2f\n", totalCompras[i]);
+		printf("\n    CPF: %d", *clientes[i].cpf);
+		printf("\n    Nome: %s", clientes[i].nome);
+		printf("\n    Email: %s", clientes[i].email);
+		printf("\n    Numero de compras: %d", clientes[i].numCompras);
+		printf("\n    R$ comprados: %.2f\n", clientes[i].totalComprado);
 		printf("\n#####################################################\n\n");
 	}
 	getchar();
@@ -62,11 +58,11 @@ void exibCliente(char* cpf){
 		getchar();
 		index -= 1;
 		printf("\n    Cliente encontrado! \n");
-		printf("    Nome: %s\n", nomes[index]);
-		printf("    CPF: %s\n", cpfs[index]);
-		printf("    Email: %s\n", emails[index]);
-		printf("    Num. de compras: %d\n", numCompras[index]);
-		printf("    R$ comprados: %.2f\n\n", totalCompras[index]);
+		printf("    Nome: %s\n", clientes[index].nome);
+		printf("    CPF: %d\n", *clientes[index].cpf);
+		printf("    Email: %s\n", clientes[index].email);
+		printf("    Num. de compras: %d\n", clientes[index].numCompras);
+		printf("    R$ comprados: %.2f\n\n", clientes[index].totalComprado);
 		printf("######################Nome###############################\n");
 		printf("    Aperte enter para continuar... ");
 		getchar();
@@ -117,15 +113,20 @@ void cadCliente(char* cpf){
 //// addCliente() -> Adiciona as informações na lista de clientes.
 
 int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
-	int telInt[12];
+	int telInt[12], cpfInt[12];
 	convertToInt(tel, telInt);
+	convertToInt(cpf, cpfInt);
 	if(validaCPF(cpf) == 1 && validaEmail(email) == 1 && validaTel(telInt) == 1){
+		Cliente cli;
 		int index;
-		index = getIndex(numCompras);
-		strcpy(cpfs[index],cpf);
-		strcpy(nomes[index],nome);
-		strcpy(emails[index],email);
-		strcpy(telefones[index],tel);
+		index = getIndex(idsCliente);
+		*cli.cpf = *cpfInt;
+		strcpy(cli.nome,nome);
+		strcpy(cli.email,email);
+		*cli.tel = *telInt;
+		cli.totalComprado = 0.0;
+		cli.numCompras = 0;
+		clientes[index] = cli;
 		return 1;
 	}
 	return 0;
@@ -134,8 +135,10 @@ int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
 //// verifCliente() -> Verifica se o cliente existe. Se existir, retorna o índice + 1, se não, retorna 0.
 
 int verifCliente(char cpf[12]){
+	int cpfInt[12];
+	convertToInt(cpf, cpfInt);
 	for(int i = 0; i < 11; i++){
-		if(strcmp(cpfs[i], cpf) == 0){
+		if(*clientes[i].cpf == *cpfInt){
 			return i + 1;
 		}
 	}
@@ -145,7 +148,7 @@ int verifCliente(char cpf[12]){
 //// getNomeAt(index) -> Retorna o nome do cliente com no indice passado por parâmetro.
 
 char* getNomeAt(int index){
-	return nomes[index];
+	return clientes[index].nome;
 }
 
 //// menuCliente() -> Exibe a tela de menu para controle e gerenciamento dos clientes da loja.

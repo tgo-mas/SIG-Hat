@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./libs/misc.h"
 #include "./libs/produtos.h"
 #include "./libs/cliente.h"
 #include "./libs/catalog.h"

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "misc.h"
 #ifdef __linux__
 	#include <unistd.h>
 #elif _WIN32
@@ -20,8 +21,8 @@ void clrScrn(void){
 	#endif	
 }
 
-//// findIndex(ids) -> Encontra o proximo item vazio na lista de ids passada. Retorna -1 em caso de erro.
-int findIndex(int* ids){
+//// getIndex(ids) -> Encontra o proximo item vazio na lista de ids passada. Retorna -1 em caso de erro.
+int getIndex(int* ids){
 	int i;
 	for(i = 0; i < 10; i++){
 		if(ids[i] == 0){

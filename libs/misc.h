@@ -1,4 +1,3 @@
-
 ////      Assinatura das Funções
 
 void clrScrn(void);
