@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "fornecedor.h"
 #include "interface.h"
 #include "misc.h"
@@ -48,14 +49,14 @@ void gravaFornec(Fornecedor fornec){
 	if(pFor == NULL){
 		printf("	Arquivo não encontrado.");
 	}else{
-		fwrite(fornec, sizeof(Fornecedor), 1, pFor);
+		fwrite(&fornec, sizeof(Fornecedor), 1, pFor);
 		fclose(pFor);
 	}
 }
 
 ////    getDadosFornec() -> 
 
-void getDadosCli(void){
+void getDadosFornec(void){
 	FILE* pFor;
 	Fornecedor* fornec;
 	fornec = (Fornecedor*) malloc(sizeof(Fornecedor));
@@ -67,7 +68,7 @@ void getDadosCli(void){
 		while(!feof(pFor)){
 			fread(fornec, sizeof(Fornecedor), 1, pFor);
 			if(fornec != NULL){
-				fornecedores[index] = *cli;
+				fornecedores[index] = *fornec;
 				idFornec[index] = index + 1;
 				index++;
 			}

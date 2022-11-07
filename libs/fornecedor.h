@@ -13,3 +13,4 @@ typedef struct{
 void menuFornec(void);
 void addFornec(char* nome, char* cnpj, char* tel, char* email);
 void gravaFornec(Fornecedor fornec);
+void getDadosFornec(void);
