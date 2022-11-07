@@ -45,10 +45,34 @@ void addFornec(char* nome, char* cnpj, char* tel, char* email){
 void gravaFornec(Fornecedor fornec){
 	FILE* pFor;
 	pFor = fopen("./data/fornecedores.dat", "ab");
-	if(pCli == NULL){
+	if(pFor == NULL){
 		printf("	Arquivo não encontrado.");
 	}else{
-		fwrite(cli, sizeof(Cliente), 1, pCli);
-		fclose(pCli);
+		fwrite(fornec, sizeof(Fornecedor), 1, pFor);
+		fclose(pFor);
 	}
+}
+
+////    getDadosFornec() -> 
+
+void getDadosCli(void){
+	FILE* pFor;
+	Fornecedor* fornec;
+	fornec = (Fornecedor*) malloc(sizeof(Fornecedor));
+	int index = 0;
+	pFor = fopen("./data/fornecedores.dat", "rb");
+	if(pFor == NULL){
+		printf("	Arquivo não encontrado.");
+	}else{
+		while(!feof(pFor)){
+			fread(fornec, sizeof(Fornecedor), 1, pFor);
+			if(fornec != NULL){
+				fornecedores[index] = *cli;
+				idFornec[index] = index + 1;
+				index++;
+			}
+		}
+	}
+	fclose(pFor);
+	free(fornec);
 }
