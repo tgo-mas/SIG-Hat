@@ -57,10 +57,15 @@ void exibFornec(Fornecedor* fornec){
     printf("\n    Razão social: %s", fornec->email);
 }
 
+////    listFornec() -> Lista todos os fornecedores registrados no sistema.
+
+void listFornec(void){
+    for(int i = 0; i < getIndex(idFornec); i++){
+        exibFornec(&fornecedores[i]);
+    }
+}
 
 ////    findFornec() -> Procura um fornecedor pelo seu cnpj.
-
-
 
 ////    gravaFornec(fornec) -> Grava as informações do fornecedor em arquivo fornecedores.dat
 
