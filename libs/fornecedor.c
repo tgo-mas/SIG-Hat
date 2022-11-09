@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "validacoes.h"
 #include "fornecedor.h"
 #include "interface.h"
 #include "misc.h"
@@ -26,7 +27,6 @@ void menuFornec(void){
             getchar();
             break;
     }
-
 }
 
 ////    addFornec(nome, cnpj, tel, email) -> Adiciona um fornecedor às listas dos dados.
@@ -34,12 +34,33 @@ void menuFornec(void){
 void addFornec(char* nome, char* cnpj, char* tel, char* email){
     int index;
     index = getIndex(idFornec);
-    strcpy(fornecedores[index].razao, nome);
-    strcpy(fornecedores[index].cnpj, cnpj);
-    strcpy(fornecedores[index].tel, tel);
-    strcpy(fornecedores[index].email, email);
-    gravaFornec(fornecedores[index]);
+    int telInt[12];
+    convertToInt(tel, telInt);
+    if(validaTel(telInt) == 1 && validaEmail(email) == 1){
+        strcpy(fornecedores[index].razao, nome);
+        strcpy(fornecedores[index].cnpj, cnpj);
+        strcpy(fornecedores[index].tel, tel);
+        strcpy(fornecedores[index].email, email);
+        gravaFornec(fornecedores[index]);
+    }else{
+        printf("\n    Erro: Informações inválidas! Tente Novamente.");
+        menuFornec();
+    }
 }
+
+////    exibFornec(&fornec) -> Exibe as informações do Fornecedor passado por parâmetro.
+
+void exibFornec(Fornecedor* fornec){
+    printf("\n    Razão social: %s", fornec->razao);
+    printf("\n    Razão social: %s", fornec->cnpj);
+    printf("\n    Razão social: %s", fornec->tel);
+    printf("\n    Razão social: %s", fornec->email);
+}
+
+
+////    findFornec() -> Procura um fornecedor pelo seu cnpj.
+
+
 
 ////    gravaFornec(fornec) -> Grava as informações do fornecedor em arquivo fornecedores.dat
 
@@ -54,7 +75,7 @@ void gravaFornec(Fornecedor fornec){
 	}
 }
 
-////    getDadosFornec() -> 
+////    getDadosFornec() -> Atualiza a lista de fornecedores com os dados gravados.
 
 void getDadosFornec(void){
 	FILE* pFor;
