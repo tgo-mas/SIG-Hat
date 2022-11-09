@@ -11,6 +11,7 @@ typedef struct{
 ////    Assinatura das Funções 
 
 void menuFornec(void);
+void cadFornec(void);
 void addFornec(char* nome, char* cnpj, char* tel, char* email);
 void exibFornec(Fornecedor* fornec);
 void listFornec(void);

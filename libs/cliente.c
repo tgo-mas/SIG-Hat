@@ -20,7 +20,7 @@ void listClientes(void){
 	clrScrn();
 	cabecListaClientes();
 	int index;
-	index = getIndex(idsCliente);	
+	index = getIndex(idsCliente) - 1;	
 	for(int i = 0; i < index; i++){
 		printf("    CPF: %s", clientes[i].cpf);
 		printf("\n    Nome: %s", clientes[i].nome);
