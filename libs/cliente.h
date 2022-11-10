@@ -2,12 +2,13 @@
 //// Estruturas referentes a Cliente
 
 typedef struct{
-    char cpf[11];
+    char cpf[12];
     char nome[20];
     char email[30];
     char tel[11];
     float totalComprado;
     int numCompras;
+    char status;    //   'a' - ativo; 'r' - removido.
 } Cliente;
 
 //// Assinatura das funções

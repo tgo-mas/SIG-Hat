@@ -6,6 +6,7 @@ typedef struct{
     char cnpj[14];
     char tel[12];
     char email[30];
+    char status;     // 'a' - ativo; 'r' - removido.
 } Fornecedor;
 
 ////    Assinatura das Funções 

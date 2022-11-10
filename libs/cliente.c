@@ -126,6 +126,7 @@ int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
 		strcpy(cli.nome,nome);
 		strcpy(cli.email,email);
 		strcpy(cli.tel, tel);
+		cli.status = 'a';
 		cli.totalComprado = 0.0;
 		cli.numCompras = 0;
 		clientes[index] = cli;
@@ -138,10 +139,8 @@ int addCliente(char cpf[12], char nome[20], char email[30], char tel[12]){
 //// verifCliente() -> Verifica se o cliente existe. Se existir, retorna o índice + 1, se não, retorna 0.
 
 int verifCliente(char cpf[12]){
-	int cpfInt[12];
-	convertToInt(cpf, cpfInt);
 	for(int i = 0; i < 11; i++){
-		if(*clientes[i].cpf == *cpfInt){
+		if(strcmp(cpf, clientes[i].cpf) == 0 && clientes[i].status != 'r'){
 			return i + 1;
 		}
 	}
