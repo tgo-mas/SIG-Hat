@@ -15,6 +15,9 @@ void menuHat(void){
         scanf("%d", &opcao);
         getchar();
         switch(opcao){
+            case 1:
+                listarHats();
+                break;
             case 2: 
                 addHat();
             case 0:
@@ -80,5 +83,36 @@ void gravaHat(Hat* pHat){
     fclose(fHat);
     printf("\n    Modelo de Boné salvo com sucesso!");
     getchar();
+}
+
+//// exibeHat(pHat) -> Exibe as informações do modelo passado por parâmetro.
+
+void exibeHat(Hat* pHat){
+    printf("\n#####################################################\n");
+    validaTec(pHat->tecido);
+    validaBord(pHat->pers);
+    validaMod(pHat->model);
+    validaFecho(pHat->fecho);
+    printf("\n  Preço final: R$ %d,00", pHat->precoUnit);
+    printf("\n\n#####################################################");
+}
+
+//// listarHats() -> Lista as informações dos modelos de bonés cadastrados.
+
+void listarHats(){
+    cabecListaHats();
+    FILE* fHat;
+    fHat = fopen("./data/hats.dat", "rb");
+    if(fHat == NULL){
+        printf("\n    FATAL: Arquivo hats.dat não encontrado.");
+        exit(1);
+    }
+    Hat* pHat = (Hat*) malloc(sizeof(Hat));
+    while(fread(pHat, sizeof(Hat), 1, fHat)){
+        exibeHat(pHat);
+    }
+    getchar();
+    fclose(fHat);
+    free(pHat);
 }
 

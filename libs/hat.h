@@ -14,3 +14,5 @@ typedef struct {
 void addHat(void);
 void menuHat(void);
 void gravaHat(Hat* pHat);
+void exibeHat(Hat* pHat);
+void listarHats();

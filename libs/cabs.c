@@ -16,3 +16,16 @@ void cabecAddHat(void){
     printf("\n");
 }
 
+//// cabecListaHats() -> Exibe o cabeçalho da tela de lista de bonés.
+void cabecListaHats(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##       = L I S T A   D E   M O D E L O S =       ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+    printf("\n");
+}
