@@ -17,6 +17,9 @@ void menuCliente(void){
         getchar();
         switch(opcao){
             case 1:
+                listarClientes();
+                break;
+            case 2:
                 addCliente();
                 break;
             case 0:
@@ -120,3 +123,45 @@ void gravaCliPj(ClientePj* pCli){
     free(pCli);
 }
 
+//// exibeCliPf(pCli) e exibeCliPj(pCli) -> Exibe as informações do cliente passado por parâmetro. O procedimento muda de acordo com o tipo.
+
+void exibeCliPf(ClientePf* pCli){
+    printf("\n#####################################################\n");
+    printf("\n  Nome: %s", pCli->nome);
+    printf("\n  CPF: %s", pCli->cpf);
+    printf("\n  Telefone: %s", pCli->tel);
+    printf("\n  Email: %s", pCli->email);
+    printf("\n\n#####################################################");
+}
+
+void exibeCliPj(ClientePj* pCli){
+    printf("\n#####################################################\n");
+    printf("\n  Nome: %s", pCli->nome);
+    printf("\n  CNPJ: %s", pCli->cnpj);
+    printf("\n  Telefone: %s", pCli->tel);
+    printf("\n  Email: %s", pCli->email);
+    printf("\n\n#####################################################");
+}
+
+//// listarClientes() -> Exibe uma lista de todos os clientes cadastrados, separando-os por pessoa física e jurídica.
+
+void listarClientes(void){
+    printf("\n    Clientes Pessoa Física: ");
+    FILE* fCli;
+    ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
+    fCli = fopen("./data/clientesPf.dat", "rb");
+    while(fread(pCli, sizeof(ClientePf), 1, fCli)){
+        exibeCliPf(pCli);
+    }
+    fclose(fCli);
+    free(pCli);
+    printf("\n    Clientes Pessoa Jurídica: ");
+    ClientePj* pCliPj = (ClientePj*) malloc(sizeof(ClientePj));
+    fCli = fopen("./data/clientesPj.dat", "rb");
+    while(fread(pCliPj, sizeof(ClientePj), 1, fCli)){
+        exibeCliPj(pCliPj);
+    }
+    fclose(fCli);
+    free(pCliPj);
+    getchar();
+}

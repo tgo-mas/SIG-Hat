@@ -166,6 +166,8 @@ int isPForPJ(char* cpfCnpj){
     }
 }
 
+//// validaEmail(email) -> Retorna 1 para um email válido e 0 para inválido.
+
 int validaEmail(char* email){
     char ant, atual;   /// ant - anterior; variáveis usadas para verificar repetição de pontos.
     int i, arroba, contPonto;
@@ -188,6 +190,8 @@ int validaEmail(char* email){
     }
     return 1;
 }
+
+//// validaTel(tel) -> Retorna 1 para um telefone válido e 0 para inválido.
 
 int validaTel(char *telChar){
     int tel[11];

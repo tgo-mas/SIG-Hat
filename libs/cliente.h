@@ -23,3 +23,6 @@ void menuCliente(void);
 void addCliente(void);
 void gravaCliPf(ClientePf* pCli);
 void gravaCliPj(ClientePj* pCli);
+void exibeCliPf(ClientePf* pCli);
+void exibeCliPj(ClientePj* pCli);
+void listarClientes(void);
