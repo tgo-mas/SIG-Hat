@@ -9,6 +9,7 @@ typedef struct {
     int model;
     int fecho;
     int precoUnit;
+    char status;   // c - cadastrado; x - excluido.
 } Hat;
 
 //// Assinatura das funções:
@@ -19,3 +20,5 @@ void gravaHat(Hat* pHat);
 void exibeHat(Hat* pHat);
 void listarHats(void);
 int getProxIdHat(void);
+Hat* buscaHat(void);
+void apagaHat(void);

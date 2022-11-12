@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "hat.h"
 #include "validacoes.h"
 #include "menus.h"
@@ -20,6 +21,12 @@ void menuHat(void){
                 break;
             case 2: 
                 addHat();
+                break;
+            case 3:
+                buscaHat();
+                break;
+            case 4:
+                apagaHat();
             case 0:
                 break;
             default:
@@ -66,6 +73,7 @@ void addHat(void){
     printf("\n\n    O preço unitário do modelo escolhido será R$ %d,00.", precoUnit);
     getchar();
     pHat->precoUnit = precoUnit;
+    pHat->status = 'c'; 
     gravaHat(pHat);
     free(pHat);
 }
@@ -95,7 +103,7 @@ void exibeHat(Hat* pHat){
     validaBord(pHat->pers);
     validaMod(pHat->model);
     validaFecho(pHat->fecho);
-    printf("\n  Preço final: R$ %d,00", pHat->precoUnit);
+    printf("\n  Preço unitário: R$ %d,00", pHat->precoUnit);
     printf("\n\n#####################################################");
 }
 
@@ -111,7 +119,7 @@ void listarHats(){
     }
     Hat* pHat = (Hat*) malloc(sizeof(Hat));
     while(fread(pHat, sizeof(Hat), 1, fHat)){
-        exibeHat(pHat);
+        if(pHat->status == 'c') exibeHat(pHat);
     }
     getchar();
     fclose(fHat);
@@ -140,5 +148,63 @@ int getProxIdHat(void){
     fclose(fHat);
     free(pHat);
     return id;
+}
+
+//// buscaHat() -> Inicia o processo de buscar o modelo escolhido pelo nome.
+
+Hat* buscaHat(void){
+    FILE* fHat;
+    Hat* pHat = (Hat*) malloc(sizeof(Hat));
+    char nome[15];
+    int achou = 0; 
+    printf("\n    Digite o nome do modelo desejado: ");
+    scanf("%14[^\n]", nome);
+    getchar();
+    fHat = fopen("./data/hats.dat", "rb");
+    while(fread(pHat, sizeof(Hat), 1, fHat) && !achou){
+        if(strcmp(pHat->nome, nome) == 0 && pHat->status == 'c'){
+            achou = 1;
+            exibeHat(pHat);
+            printf("\n    A busca trouxe este resultado.");
+            getchar();
+            fclose(fHat);
+            return pHat;
+        }
+    }
+    printf("\n    Modelo de boné não encontrado!");
+    getchar();
+    fclose(fHat);
+    free(pHat);
+    return NULL;
+}
+
+//// apagaHat() -> Inicia o processo de apagar o modelo de boné escolhido (exclusão apenas lógica).
+
+void apagaHat(void){
+    Hat* pHat = buscaHat();
+    FILE* fHat;
+    fHat = fopen("./data/hats.dat", "r+b");
+    if(fHat == NULL){
+        printf("\n    FATAL: Arquivo hats.dat não encontrado!");
+        exit(1);
+    }
+    char ctz;
+    if(pHat != NULL){
+        printf("\n    Tem certeza que deseja excluir este modelo? (s para confirmar) ");
+        scanf("%c", &ctz);
+        getchar();
+        if(ctz == 's' || ctz == 'S'){
+            pHat->status = 'x';
+            fseek(fHat, (-1) * sizeof(Hat), SEEK_CUR);
+            fwrite(pHat, sizeof(Hat), 1, fHat);
+            printf("\n    Modelo excluído com sucesso!");
+            getchar();
+        }else{
+            printf("\n    Operação cancelada!");
+            getchar();
+        }
+    }
+    fclose(fHat);
+    free(pHat);
 }
 
