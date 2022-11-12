@@ -8,6 +8,7 @@
 #include <string.h>
 #include "./libs/hat.h"
 #include "./libs/menus.h"
+#include "./libs/cliente.h"
 
 int main(void){
     int opcao = 0;
@@ -19,6 +20,9 @@ int main(void){
         switch(opcao){
             case 1:
                 menuHat();
+                break;
+            case 2:
+                menuCliente();
                 break;
             case 9:
                 infosProjeto();

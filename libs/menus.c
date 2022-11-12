@@ -13,6 +13,7 @@ void menuPrincipal(void){
     printf("##        = = = = = S I G - H a t = = = = =        ##\n");
     printf("##                                                 ##\n");
     printf("##      1 - Gerenciar modelos personalizados;      ##\n");
+    printf("##             2 - Gerenciar clientes;             ##\n");
     printf("##                                                 ##\n");
     printf("##       9 - Informações sobre o programa          ##\n");
     printf("##                    0 - Sair                     ##\n");
@@ -66,7 +67,28 @@ void telaMenuHat(void){
 	printf("\n");
 }
 
+//// telaMenuCliente() -> Exibe a tela de menu principal do módulo cliente;
+
+void telaMenuCliente(void){
+    clrScrn();
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##   = C O N T R O L E   D E   C L I E N T E S =   ##\n");
+	printf("##                                                 ##\n");
+	printf("##         1 - Listar clientes cadastrados         ##\n");
+	printf("##              2 - Cadastrar cliente              ##\n");
+	printf("##              3 - Pesquisar cliente              ##\n");
+	printf("##               4 - Remover cliente               ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+}
+
 //// clrScrn() -> Limpa a tela do console
 void clrScrn(void){
-	system("clear");
+	system("clear || cls");
 }

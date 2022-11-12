@@ -4,7 +4,7 @@
 #include "validacoes.h"
 #include "hat.h"
 
-//// validaTec(int tecido) -> Verifica se o tecido informado é válido e informa ao usuário, além de retornar 0 em caso de invalidez.
+//// validaTec(tecido) -> Verifica se o tecido informado é válido e informa ao usuário, além de retornar o incremento do preço unitário.
 
 int validaTec(int tecido){
     switch(tecido){
@@ -19,6 +19,8 @@ int validaTec(int tecido){
             return 0;
     }
 }
+
+//// validaBord(bordado) -> Verifica se o bordado informado é válido e informa ao usuário, além de retornar o incremento do preço unitário.
 
 int validaBord(int bordado){
     switch(bordado){
@@ -37,6 +39,8 @@ int validaBord(int bordado){
     }
 }
 
+//// validaMod(modelo) -> Verifica se o tipo de aba informado é válido e informa ao usuário, além de retornar o incremento do preço unitário.
+
 int validaMod(int modelo){
    switch(modelo){
         case 1:
@@ -53,6 +57,8 @@ int validaMod(int modelo){
             return 0;
     }
 }
+
+//// validaFecho(fecho) -> Verifica se o fecho informado é válido e informa ao usuário, além de retornar o incremento do preço unitário.
 
 int validaFecho(int fecho){
    switch(fecho){

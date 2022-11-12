@@ -153,6 +153,7 @@ int getProxIdHat(void){
 //// buscaHat() -> Inicia o processo de buscar o modelo escolhido pelo nome.
 
 Hat* buscaHat(void){
+    cabecBuscaHat();
     FILE* fHat;
     Hat* pHat = (Hat*) malloc(sizeof(Hat));
     char nome[15];
@@ -181,6 +182,7 @@ Hat* buscaHat(void){
 //// apagaHat() -> Inicia o processo de apagar o modelo de boné escolhido (exclusão apenas lógica).
 
 void apagaHat(void){
+    cabecApagaHat();
     Hat* pHat = buscaHat();
     FILE* fHat;
     fHat = fopen("./data/hats.dat", "r+b");
