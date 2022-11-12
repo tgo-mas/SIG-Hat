@@ -40,7 +40,7 @@ int validaBord(int bordado){
 int validaMod(int modelo){
    switch(modelo){
         case 1:
-            printf("\n Modelo escolhido: Aba curva.");
+            printf("\n  Modelo escolhido: Aba curva.");
             return 5;
         case 2:
             printf("\n  Modelo escolhido: Aba reta.");
@@ -57,7 +57,7 @@ int validaMod(int modelo){
 int validaFecho(int fecho){
    switch(fecho){
         case 1:
-            printf("\n Fecho escolhido: Plástico.");
+            printf("\n  Fecho escolhido: Plástico.");
             return 8;
         case 2:
             printf("\n  Fecho escolhido: Velcro.");

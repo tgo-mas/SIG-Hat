@@ -27,5 +27,4 @@ void cabecListaHats(void){
     printf("##       = L I S T A   D E   M O D E L O S =       ##\n");
     printf("##                                                 ##\n");
     printf("#####################################################\n");
-    printf("\n");
 }

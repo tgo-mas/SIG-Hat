@@ -32,42 +32,42 @@ void menuHat(void){
 
 void addHat(void){
     cabecAddHat();
-    char conf;
-    do{    
-        Hat* pHat;
-        pHat = (Hat*) malloc(sizeof(Hat));
-        int precoUnit = 0;
-        do{
-            printf("\n    Escolha o tipo de tecido:\n      1 - Poliéster;\n      2 - Algodão."); // 5 e 7
-            scanf("%d", &pHat->tecido);
-            getchar();
-            precoUnit += validaTec(pHat->tecido);
-        }while(!precoUnit);
-        do{
-            printf("\n    Nossos estilos possuem três categorias de bordado:\n      1 - Simples;\n      2 - Moderado;\n      3 - Complexo.");  // 5, 7 e 9
-            scanf("%d", &pHat->pers);
-            getchar();
-            precoUnit += validaBord(pHat->pers);
-        }while(precoUnit < 10);
-        do{
-            printf("\n    Os bonés possuem diferentes modelagens:\n      1 - Aba curva;\n      2 - Aba reta;\n      3 - Boné polo.");   // 5, 6 e 7
-            scanf("%d", &pHat->model);
-            getchar();
-            precoUnit += validaMod(pHat->model);
-        }while(precoUnit < 15);
-        do{
-            printf("\n    O fecho é a parte de trás que regula o tamanho do boné. Selecione:\n      1 - Plástico;\n      2 - Velcro;\n      3 - Tecido.");   //8, 10, 12.
-            scanf("%d", &pHat->fecho);
-            getchar();
-            precoUnit += validaFecho(pHat->fecho);
-        }while(precoUnit < 23);
-        printf("\n\n    O preço unitário do modelo escolhido será R$ %d,00. Deseja confirmar?", precoUnit);
-        scanf("%c", &conf);
+    Hat* pHat;
+    pHat = (Hat*) malloc(sizeof(Hat));
+    int precoUnit = 0;
+    do{
+        printf("\n    Escolha o tipo de tecido:\n      1 - Poliéster;\n      2 - Algodão."); // 5 e 7
+        scanf("%d", &pHat->tecido);
         getchar();
-        pHat->precoUnit = precoUnit;
-        gravaHat(pHat);
-        free(pHat);
-    }while(!(conf == 's' || conf == 'S'));
+        precoUnit += validaTec(pHat->tecido);
+    }while(!precoUnit);
+    do{
+        printf("\n    Nossos estilos possuem três categorias de bordado:\n      1 - Simples;\n      2 - Moderado;\n      3 - Complexo.");  // 5, 7 e 9
+        scanf("%d", &pHat->pers);
+        getchar();
+        precoUnit += validaBord(pHat->pers);
+    }while(precoUnit < 10);
+    do{
+        printf("\n    Os bonés possuem diferentes modelagens:\n      1 - Aba curva;\n      2 - Aba reta;\n      3 - Boné polo.");   // 5, 6 e 7
+        scanf("%d", &pHat->model);
+        getchar();
+        precoUnit += validaMod(pHat->model);
+    }while(precoUnit < 15);
+    do{
+        printf("\n    O fecho é a parte de trás que regula o tamanho do boné. Selecione:\n      1 - Plástico;\n      2 - Velcro;\n      3 - Tecido.");   //8, 10, 12.
+        scanf("%d", &pHat->fecho);
+        getchar();
+        precoUnit += validaFecho(pHat->fecho);
+    }while(precoUnit < 23);
+    printf("\n    Quase pronto! Escolha um nome para seu modelo: ");
+    scanf("%14[^\n]", pHat->nome);
+    getchar();
+    pHat->idHat = getProxIdHat();
+    printf("\n\n    O preço unitário do modelo escolhido será R$ %d,00.", precoUnit);
+    getchar();
+    pHat->precoUnit = precoUnit;
+    gravaHat(pHat);
+    free(pHat);
 }
 
 //// gravaHat(pHat) -> Grava as informações de pHat em arquivo.
@@ -89,6 +89,8 @@ void gravaHat(Hat* pHat){
 
 void exibeHat(Hat* pHat){
     printf("\n#####################################################\n");
+    printf("\n  Nome do modelo: %s", pHat->nome);
+    printf("\n  Número do modelo: %d", pHat->idHat);
     validaTec(pHat->tecido);
     validaBord(pHat->pers);
     validaMod(pHat->model);
@@ -114,5 +116,29 @@ void listarHats(){
     getchar();
     fclose(fHat);
     free(pHat);
+}
+
+//// getProxIdHat() -> Retorna inteiro correspondente ao id do próximo boné a ser cadastrado, retorna 0 em caso de erro.
+
+int getProxIdHat(void){
+    FILE* fHat;
+    int id = 0;
+    fHat = fopen("./data/hats.dat", "rb");
+    if(fHat == NULL){
+        printf("\n    FATAL: Arquivo hats.dat não encontrado.");
+        exit(1);
+    }
+    Hat* pHat = (Hat*) malloc(sizeof(Hat));
+    while(fread(pHat, sizeof(Hat), 1, fHat) || feof(fHat)){
+        if(pHat == NULL){
+            id = 1;
+        }else if(feof(fHat)){
+            id = pHat->idHat + 1;
+            break;
+        }
+    }
+    fclose(fHat);
+    free(pHat);
+    return id;
 }
 
