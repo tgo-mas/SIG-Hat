@@ -55,3 +55,17 @@ void cabecApagaHat(void){
     printf("##                                                 ##\n");
     printf("#####################################################\n");
 }
+
+//// cabecAddCliente() => Exibe o cabeçalho da tela de cadastrar cliente.
+void cabecAddCliente(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##      = C A D A S T R A R   C L I E N T E =      ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+    printf("\n");
+}
