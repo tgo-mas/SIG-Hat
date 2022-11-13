@@ -22,6 +22,9 @@ void menuCliente(void){
             case 2:
                 addCliente();
                 break;
+            case 3: 
+                buscaCliente();
+                break;
             case 0:
                 break;
             default:
@@ -164,4 +167,85 @@ void listarClientes(void){
     fclose(fCli);
     free(pCliPj);
     getchar();
+}
+
+//// buscaCliente() -> Inicia o processo de buscar um cliente, chama as funções getCliPj e getCliPf.
+
+void buscaCliente(void){
+    int type;
+    char nome[15];
+    initBusca:
+    printf("\n    Qual o tipo de cliente que deseja buscar? (1 - Pessoa física, 2 - Pessoa Jurídica.) ");
+    scanf("%d", &type);
+    getchar();
+    printf("\n    Agora informe o nome do cliente que deseja buscar: ");
+    scanf("%14[^\n]", nome);
+    getchar();
+    switch(type){
+        case 1:
+            ClientePf* cliPf = getCliPf(nome);
+            getchar();
+            if(cliPf != NULL){
+                free(cliPf);
+            }
+            break;
+        case 2:
+            ClientePj* cliPj = getCliPj(nome);
+            getchar();
+            if(cliPj != NULL){
+                free(cliPj);
+            }
+            break;
+        default:
+            printf("\n    Selecione um tipo válido! Tente novamente");
+            goto initBusca;
+    }
+}
+
+//// getCliPf(nome) -> Exibe e retorna o cliente de nome passado por parâmetro, em caso de não existente, informa ao usuário e retorna NULL.
+
+ClientePf* getCliPf(char* nome){
+    cabecBuscaPf();
+    FILE* fCli;
+    ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
+    fCli = fopen("./data/clientesPf.dat", "rb");
+    if(fCli == NULL){
+        printf("\n    FATAL: Arquivo clientesPf.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pCli, sizeof(ClientePf), 1, fCli)){
+        if(strcmp(pCli->nome, nome) == 0){
+            exibeCliPf(pCli);
+            fclose(fCli);
+            return pCli;
+        }
+    }
+    printf("\n    O cliente de nome informado não foi encontrado! Tente novamente.");
+    fclose(fCli);
+    free(pCli);
+    return NULL;
+}
+
+//// getCliPj(nome) -> Exibe e retorna o cliente de nome passado por parâmetro, em caso de não existente, retorna NULL;
+
+ClientePj* getCliPj(char* nome){
+    cabecBuscaPj();
+    FILE* fCli;
+    ClientePj* pCli = (ClientePj*) malloc(sizeof(ClientePj));
+    fCli = fopen("./data/clientesPj.dat", "rb");
+    if(fCli == NULL){
+        printf("\n    FATAL: Arquivo clientesPj.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pCli, sizeof(ClientePj), 1, fCli)){
+        if(strcmp(pCli->nome, nome) == 0){
+            exibeCliPj(pCli);
+            fclose(fCli);
+            return pCli;
+        }
+    }
+    printf("\n    O cliente de nome informado não foi encontrado! Tente novamente.");
+    fclose(fCli);
+    free(pCli);
+    return NULL;
 }

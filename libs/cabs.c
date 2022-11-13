@@ -69,3 +69,31 @@ void cabecAddCliente(void){
     printf("#####################################################\n");
     printf("\n");
 }
+
+//// cabecBuscaPf() => Exibe o cabeçalho da tela de cadastrar cliente.
+void cabecBuscaPf(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##    = P E S Q U I S A   D E   C L I E N T E =    ##\n");
+    printf("##                 (Pessoa Física)                 ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+}
+
+//// cabecBuscaPj() => Exibe o cabeçalho da tela de cadastrar cliente.
+void cabecBuscaPj(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##    = P E S Q U I S A   D E   C L I E N T E =    ##\n");
+    printf("##                (Pessoa Jurídica)                ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+}

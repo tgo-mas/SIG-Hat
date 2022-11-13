@@ -26,3 +26,6 @@ void gravaCliPj(ClientePj* pCli);
 void exibeCliPf(ClientePf* pCli);
 void exibeCliPj(ClientePj* pCli);
 void listarClientes(void);
+void buscaCliente(void);
+ClientePf* getCliPf(char* nome);
+ClientePj* getCliPj(char* nome);
