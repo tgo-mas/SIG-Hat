@@ -25,10 +25,13 @@ void menuCliente(void){
             case 3: 
                 buscaCliente();
                 break;
+            case 4:
+                deleteCliente();
             case 0:
                 break;
             default:
                 printf("\n    Selecione uma opção válida! Tente novamente.");
+                getchar();
                 break;
         }
     }while(opcao != 0);
@@ -98,6 +101,8 @@ void addCliente(void){
         pCliPj->status = 'c'; 
         gravaCliPj(pCliPj);
     }
+    printf("\n    Cliente registrado com sucesso!");
+    getchar();
 }
 
 //// gravaCliPf() e gravaCliPj() -> Gravam as informações do cliente em arquivos específicos para pessoa física ou jurídica.
@@ -154,7 +159,7 @@ void listarClientes(void){
     ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
     fCli = fopen("./data/clientesPf.dat", "rb");
     while(fread(pCli, sizeof(ClientePf), 1, fCli)){
-        exibeCliPf(pCli);
+        if(pCli->status == 'c') exibeCliPf(pCli);
     }
     fclose(fCli);
     free(pCli);
@@ -214,7 +219,7 @@ ClientePf* getCliPf(char* nome){
         exit(1);
     }
     while(fread(pCli, sizeof(ClientePf), 1, fCli)){
-        if(strcmp(pCli->nome, nome) == 0){
+        if(strcmp(pCli->nome, nome) == 0 && pCli->status == 'c'){
             exibeCliPf(pCli);
             fclose(fCli);
             return pCli;
@@ -238,7 +243,7 @@ ClientePj* getCliPj(char* nome){
         exit(1);
     }
     while(fread(pCli, sizeof(ClientePj), 1, fCli)){
-        if(strcmp(pCli->nome, nome) == 0){
+        if(strcmp(pCli->nome, nome) == 0 && pCli->status == 'c'){
             exibeCliPj(pCli);
             fclose(fCli);
             return pCli;
@@ -248,4 +253,87 @@ ClientePj* getCliPj(char* nome){
     fclose(fCli);
     free(pCli);
     return NULL;
+}
+
+//// deleteCliente() -> Altera o status do cliente para 'x'.
+
+void deleteCliente(void){
+    cabecDeleteCliente();
+    int type;
+    char nome[15], resp;
+    printf("\n    Que tipo de cliente deseja excluir? (1 - Pessoa física, 2 - Pessoa jurídica) ");
+    scanf("%d", &type);
+    getchar();
+    printf("\n    Informe o nome do cliente que deseja excluir: ");
+    scanf("%14[^\n]", nome);
+    getchar();
+    FILE* fCli;
+    switch(type){
+        case 1:
+            fCli = fopen("./data/clientesPf.dat", "r+b");
+            if(fCli == NULL){
+                printf("\n    FATAL: Arquivo clientesPf.dat não encontrado!");
+                exit(1);
+            }
+            ClientePf* cliPf = getCliPf(nome);
+            if(cliPf != NULL){
+                printf("\n    O cliente encontrado é este. Deseja realmente excluí-lo? (S para confirmar) ");
+                scanf("%c", &resp);
+                getchar();
+                if(resp == 's' || resp == 'S'){
+                    ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
+                    while(fread(pCli, sizeof(ClientePf), 1, fCli)){
+                        if(strcmp(pCli->nome, cliPf->nome) == 0 && pCli->status == 'c'){
+                            cliPf->status = 'x';
+                            fseek(fCli, (-1) * sizeof(ClientePf), SEEK_CUR);
+                            fwrite(cliPf, sizeof(ClientePf), 1, fCli);
+                            printf("\n    Cliente excluído com sucesso!");
+                            getchar();
+                            fclose(fCli);
+                            free(cliPf);
+                            free(pCli);
+                            break;
+                        }
+                    }
+                }else{
+                    printf("\n    Operação cancelada. ");
+                    getchar();
+                }
+            }
+            break;
+        case 2:
+            fCli = fopen("./data/clientesPj.dat", "r+b");
+            if(fCli == NULL){
+                printf("\n    FATAL: Arquivo clientesPj.dat não encontrado!");
+                exit(1);
+            }
+            ClientePj* cliPj = getCliPj(nome);
+            if(cliPj != NULL){
+                printf("\n    O cliente encontrado é este. Deseja realmente excluí-lo? (S para confirmar) ");
+                scanf("%c", &resp);
+                getchar();
+                if(resp == 's' || resp == 'S'){
+                    ClientePj* pCli = (ClientePj*) malloc(sizeof(ClientePj));
+                    while(fread(pCli, sizeof(ClientePj), 1, fCli)){
+                        if(strcmp(pCli->nome, cliPj->nome) == 0 && pCli->status == 'c'){
+                            cliPj->status = 'x';
+                            fseek(fCli, (-1) * sizeof(ClientePj), SEEK_CUR);
+                            fwrite(cliPj, sizeof(ClientePj), 1, fCli);
+                            printf("\n    Cliente excluído com sucesso!");
+                            getchar();
+                            fclose(fCli);
+                            free(cliPj);
+                            free(pCli);
+                        }
+                    }
+                }else{
+                    printf("\n    Operação cancelada. ");
+                    getchar();
+                }
+            }
+            break;
+        default:
+            printf("\n    Opção inválida! Tente novamente.");
+            getchar();
+    }
 }

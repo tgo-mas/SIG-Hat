@@ -6,3 +6,4 @@ void cabecBuscaHat(void);
 void cabecAddCliente(void);
 void cabecBuscaPf(void);
 void cabecBuscaPj(void);
+void cabecDeleteCliente(void);

@@ -97,3 +97,16 @@ void cabecBuscaPj(void){
     printf("##                                                 ##\n");
     printf("#####################################################\n");
 }
+
+//// cabecDeleteCliente() => Exibe o cabeçalho da tela de cadastrar cliente.
+void cabecDeleteCliente(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##    = E X C L U S Ã O   D E   C L I E N T E =    ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+}
