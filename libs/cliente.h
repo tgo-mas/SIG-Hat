@@ -30,3 +30,4 @@ void buscaCliente(void);
 ClientePf* getCliPf(char* nome);
 ClientePj* getCliPj(char* nome);
 void deleteCliente(void);
+void editarCliente(void);
