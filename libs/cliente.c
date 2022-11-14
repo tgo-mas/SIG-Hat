@@ -458,7 +458,6 @@ ClientePf* getClibyCpf(char* cpf){
     }
     while(fread(pCli, sizeof(ClientePf), 1, fCli)){
         if(strcmp(pCli->cpf, cpf) == 0 && pCli->status == 'c'){
-            exibeCliPf(pCli);
             fclose(fCli);
             return pCli;
         }
@@ -481,7 +480,6 @@ ClientePj* getClibyCnpj(char* cnpj) {
     }
     while(fread(pCli, sizeof(ClientePj), 1, fCli)){
         if(strcmp(pCli->cnpj, cnpj) == 0 && pCli->status == 'c'){
-            exibeCliPj(pCli);
             fclose(fCli);
             return pCli;
         }

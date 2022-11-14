@@ -44,6 +44,7 @@ void addEnc(void){
         switch(pfpj){
             case 1:
                 ClientePf* pCli = getClibyCpf(pEnc->idCliente);
+                exibeCliPf(pCli);
                 printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
                 scanf("%c", &resp);
                 getchar();
@@ -51,6 +52,7 @@ void addEnc(void){
                 break;
             case 2:
                 ClientePj* pCliPj = getClibyCnpj(pEnc->idCliente);
+                exibeCliPj(pCliPj);
                 printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCliPj->nome);
                 scanf("%c", &resp);
                 getchar();
@@ -110,6 +112,8 @@ void addEnc(void){
         getMat(pEnc->mat, pEnc->qtd);
         pEnc->status = 'e';
         gravaEnc(pEnc);
+        exibeEnc(pEnc);
+        getchar();
         free(pEnc);
     }
 }
@@ -163,10 +167,10 @@ void exibeEnc(Encomenda* pEnc){
     printf("\n  Data limite: ");
     printTime(&pEnc->dataLimite);
     printf("\n  Materiais estimados: \n");
-    printf("\n    %d m² do tecido do modelo escolhido;", pEnc->mat[0]);
+    printf("    %d m² do tecido do modelo escolhido;", pEnc->mat[0]);
     printf("\n    %d rolos de linha;", pEnc->mat[1]);
     printf("\n    %d botões e abas;", pEnc->mat[2]);
-    printf("\n    %d m de viés.", pEnc->mat[3]);
+    printf("\n    %d m de viés.\n", pEnc->mat[3]);
     switch(pEnc->status){
         case 'e':
             printf("\n  Status do pedido: Em espera.");

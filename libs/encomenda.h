@@ -22,3 +22,4 @@ void addEnc(void);
 void printTime(Time* time);
 void getMat(int* mat, int qtd);
 void gravaEnc(Encomenda* pEnc);
+void exibeEnc(Encomenda* pEnc);
