@@ -210,3 +210,26 @@ void apagaHat(void){
     free(pHat);
 }
 
+//// getHatbyName(nome) -> Exibe e retorna o modelo que possui nome igual ao passado por parâmetro. NULL para inexistente.
+
+Hat* getHatbyName(char* name){
+    FILE* fHat;
+    Hat* pHat = (Hat*) malloc(sizeof(Hat));
+    fHat = fopen("./data/hats.dat", "rb");
+    if(fHat == NULL){
+        printf("\n    FATAL: Arquivo hats.dat não encontrado! ");
+        exit(1);
+    }
+    while(fread(pHat, sizeof(Hat), 1, fHat)){
+        if(strcmp(pHat->nome, name) == 0 && pHat->status == 'c'){
+            exibeHat(pHat);
+            fclose(fHat);
+            return pHat;
+        }
+    }
+    printf("\n    O modelo de nome informado não foi encontrado!");
+    getchar();
+    fclose(fHat);
+    free(pHat);
+    return NULL;
+}

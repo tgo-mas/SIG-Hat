@@ -4,7 +4,7 @@
 
 typedef struct {
     char idCliente[15]; // Pode ser cpf ou cnpj.
-    int idModelo;
+    char nomeModelo[15];
     int qtd;
     double prcFinal;
     tm* dataReg;

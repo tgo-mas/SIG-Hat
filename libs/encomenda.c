@@ -29,11 +29,33 @@ void menuEncomenda(void){
 
 void addEnc(void){
     Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
-    printf("\n    Primeiro informe o CPF ou CNPJ do cliente que está realizando o pedido: ");
-    scanf("%14[^\n]", pEnc->idCliente);
-    getchar();
-    int pfpj = isPForPJ(pEnc->idCliente);
-    switch(pfpj){
-        
+    do{
+        printf("\n    Primeiro informe o CPF ou CNPJ do cliente que está realizando o pedido: ");
+        scanf("%14[^\n]", pEnc->idCliente);
+        getchar();
+        int pfpj = isPForPJ(pEnc->idCliente);
+        char resp;
+        switch(pfpj){
+            case 1:
+                ClientePf* pCli = getClibyCpf(pEnc->idCliente);
+                printf("\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
+                scanf("%c", &resp);
+                getchar();
+                break;
+            case 2:
+                ClientePj* pCli = getClibyCnpj(pEnc->idCliente);
+                printf("\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
+                scanf("%c", &resp);
+                getchar();
+                break;
+            case 0:
+                printf("\n    O CPF ou CNPJ informado é inválido! Tente novamente. ");
+                getchar();
+        }
+    }while(!pfpj);
+    if(resp == 's' || resp == 'S'){ 
+        printf("\n    Agora informe o nome do modelo do boné a ser fabricado: ");
+        scanf("%14[^\n]", pEnc->nomeModelo);
+        getchar();
     }
 }
