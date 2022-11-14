@@ -1,8 +1,10 @@
 #include <time.h>
 
-//// Definição da estrutura Encomenda:
+//// Definição da estrutura Time:
 
 typedef struct tm Time;
+
+//// Definição da estrutura Encomenda:
 
 typedef struct {
     char idCliente[15]; // Pode ser cpf ou cnpj.
@@ -17,6 +19,6 @@ typedef struct {
 
 void menuEncomenda(void);
 void addEnc(void);
-void getMat(int* mat, int qtd);
 void printTime(Time* time);
+void getMat(int* mat, int qtd);
 void gravaEnc(Encomenda* pEnc);

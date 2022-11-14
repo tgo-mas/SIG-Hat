@@ -141,3 +141,45 @@ void gravaEnc(Encomenda* pEnc){
     fwrite(pEnc, sizeof(Encomenda), 1, fEnc);
     fclose(fEnc);
 }
+
+//// Exibe as informações da encomenda passada por parâmetro na tela.
+
+void exibeEnc(Encomenda* pEnc){
+    int pfpj = isPForPJ(pEnc->idCliente);
+    printf("\n#####################################################\n");
+    switch(pfpj){
+        case 1:
+            printf("\n  Nome do cliente: %s", getClibyCpf(pEnc->idCliente)->nome);
+            break;
+        case 2:
+            printf("\n  Nome do cliente: %s", getClibyCnpj(pEnc->idCliente)->nome);
+            break;
+    }
+    printf("\n  Modelo escolhido: %s", pEnc->nomeModelo);
+    printf("\n  Quantidade: %d", pEnc->qtd);
+    printf("\n  Valor do pedido: R$ %.2f", pEnc->prcFinal);
+    printf("\n  Data de registro: ");
+    printTime(&pEnc->dataReg);
+    printf("\n  Data limite: ");
+    printTime(&pEnc->dataLimite);
+    printf("\n  Materiais estimados: \n");
+    printf("\n    %d m² do tecido do modelo escolhido;", pEnc->mat[0]);
+    printf("\n    %d rolos de linha;", pEnc->mat[1]);
+    printf("\n    %d botões e abas;", pEnc->mat[2]);
+    printf("\n    %d m de viés.", pEnc->mat[3]);
+    switch(pEnc->status){
+        case 'e':
+            printf("\n  Status do pedido: Em espera.");
+            break;
+        case 'p':
+            printf("\n  Status do pedido: Em produção.");
+            break;
+        case 'c':
+            printf("\n  Status do pedido: Entregue.");
+            break;
+        case 'x':
+            printf("\n  Status do pedido: Cancelado.");
+            break;
+    }
+    printf("\n\n#####################################################");
+}
