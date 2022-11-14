@@ -24,3 +24,16 @@ void menuEncomenda(void){
         }
     }while(opcao != 0);
 }
+
+//// addEnc() -> Inicia o processo de cadastro de uma nova encomenda.
+
+void addEnc(void){
+    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    printf("\n    Primeiro informe o CPF ou CNPJ do cliente que está realizando o pedido: ");
+    scanf("%14[^\n]", pEnc->idCliente);
+    getchar();
+    int pfpj = isPForPJ(pEnc->idCliente);
+    switch(pfpj){
+        
+    }
+}

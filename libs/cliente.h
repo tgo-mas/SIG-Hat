@@ -31,3 +31,5 @@ ClientePf* getCliPf(char* nome);
 ClientePj* getCliPj(char* nome);
 void deleteCliente(void);
 void editarCliente(void);
+ClientePf* getClibyCpf(char* cpf);
+ClientePj* getClibyCnpj(char* cnpj);

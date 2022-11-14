@@ -445,3 +445,50 @@ void editarCliente(void){
     printf("\n     Cliente editado com sucesso!");
     getchar();
 }
+
+//// getClibyCpf(cpf) -> Retorna o cliente com CPF igual ao passado por parâmetro. NULL para cliente não encontrado.
+
+ClientePf* getClibyCpf(char* cpf){
+    FILE* fCli;
+    ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
+    fCli = fopen("./data/clientesPf.dat", "rb");
+    if(fCli == NULL){
+        printf("\n    FATAL: Arquivo clientesPf.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pCli, sizeof(ClientePf), 1, fCli)){
+        if(strcmp(pCli->cpf, cpf) == 0 && pCli->status == 'c'){
+            exibeCliPf(pCli);
+            fclose(fCli);
+            return pCli;
+        }
+    }
+    printf("\n    O cliente de CPF informado não foi encontrado! Tente novamente.");
+    fclose(fCli);
+    free(pCli);
+    return NULL;
+}
+
+//// getClibyCnpj(cnpj) -> Retorna o cliente com CNPJ igual ao passado por parâmetro. NULL para cliente não encontrado.
+
+ClientePj* getClibyCnpj(char* cnpj) {
+    FILE* fCli;
+    ClientePj* pCli = (ClientePj*) malloc(sizeof(ClientePj));
+    fCli = fopen("./data/clientesPj.dat", "rb");
+    if(fCli == NULL){
+        printf("\n    FATAL: Arquivo clientesPj.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pCli, sizeof(ClientePj), 1, fCli)){
+        if(strcmp(pCli->cnpj, cnpj) == 0 && pCli->status == 'c'){
+            exibeCliPj(pCli);
+            fclose(fCli);
+            return pCli;
+        }
+    }
+    printf("\n    O cliente de CNPJ informado não foi encontrado! Tente novamente.");
+    fclose(fCli);
+    free(pCli);
+    return NULL;
+}
+
