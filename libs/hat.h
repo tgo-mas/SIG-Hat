@@ -22,3 +22,4 @@ void listarHats(void);
 int getProxIdHat(void);
 Hat* buscaHat(void);
 void apagaHat(void);
+Hat* getHatbyName(char* name);

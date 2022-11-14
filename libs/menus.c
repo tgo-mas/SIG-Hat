@@ -14,6 +14,7 @@ void menuPrincipal(void){
     printf("##                                                 ##\n");
     printf("##      1 - Gerenciar modelos personalizados;      ##\n");
     printf("##             2 - Gerenciar clientes;             ##\n");
+    printf("##            3 - Gerenciar encomendas;            ##\n");
     printf("##                                                 ##\n");
     printf("##       9 - Informações sobre o programa          ##\n");
     printf("##                    0 - Sair                     ##\n");
