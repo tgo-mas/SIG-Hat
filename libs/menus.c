@@ -89,6 +89,26 @@ void telaMenuCliente(void){
 	printf("#####################################################\n");
 }
 
+void telaMenuEncomenda(void){
+    clrScrn();
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##    = C O N T R O L E   D E   P E D I D O S =    ##\n");
+	printf("##                                                 ##\n");
+	printf("##              1 - Listar encomendas              ##\n");
+	printf("##             2 - Cadastrar encomenda             ##\n");
+	printf("##             3 - Pesquisar encomenda             ##\n");
+	printf("##              4 - Editar encomenda               ##\n");
+	printf("##             5 - Cancelar encomenda              ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+}
+
 //// clrScrn() -> Limpa a tela do console
 void clrScrn(void){
 	system("clear || cls");
