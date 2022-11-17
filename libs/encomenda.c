@@ -24,6 +24,9 @@ void menuEncomenda(void){
             case 2:
                 addEnc();
                 break;
+            case 3:
+                buscaEnc();
+                break;
             case 0:
                 break;
             default:
@@ -91,9 +94,9 @@ void addEnc(void){
             getchar();
             goto qtdInv;
         }
-        time_t* timer = (time_t*) malloc(sizeof(time_t));
-        time(timer);
-        Time* now = localtime(timer);
+        time_t timer;
+        timer = time(NULL);
+        Time* now = localtime(&timer);
         Time* dataEnt = (Time*) malloc(sizeof(Time));
         pEnc->dataReg = *now;
         printf("\n    Informe agora a data de entrega da encomenda: ");
@@ -111,7 +114,6 @@ void addEnc(void){
         getchar();
         pEnc->dataLimite = *dataEnt;
         free(dataEnt);
-        free(timer);
         getMat(pEnc->mat, pEnc->qtd);
         pEnc->status = 'e';
         gravaEnc(pEnc);
@@ -191,6 +193,30 @@ void exibeEnc(Encomenda* pEnc){
     printf("\n\n#####################################################");
 }
 
+//// exibEnc(pEnc) -> Exibe a encomenda de forma resumida.
+
+void exibEnc(Encomenda* pEnc){
+    int pfpj = isPForPJ(pEnc->idCliente);
+    printf("\n#####################################################\n");
+    printf("  Nº do pedido: %d", pEnc->idEnc);
+    switch(pfpj){
+        case 1:
+            printf("\n  Nome do cliente: %s", getClibyCpf(pEnc->idCliente)->nome);
+            break;
+        case 2:
+            printf("\n  Nome do cliente: %s", getClibyCnpj(pEnc->idCliente)->nome);
+            break;
+    }
+    printf("\n  Modelo escolhido: %s", pEnc->nomeModelo);
+    printf("\n  Quantidade: %d", pEnc->qtd);
+    printf("\n  Valor do pedido: R$ %.2f", pEnc->prcFinal);
+    printf("\n  Data de registro: ");
+    printTime(&pEnc->dataReg);
+    printf("\n  Data limite: ");
+    printTime(&pEnc->dataLimite);
+    printf("\n#####################################################\n\n");
+}
+
 //// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
 
 void listarEncomendas(void){
@@ -211,3 +237,76 @@ void listarEncomendas(void){
     getchar();
 }
 
+//// buscaEnc() -> Inicia o processo de buscar encomendas, exibindo todas as encomendas ativas do cliente informado.
+
+Encomenda* buscaEnc(void){
+    char nome[15];
+    printf("\n    Primeiro, digite o nome do cliente que fez a encomenda desejada: ");
+    scanf("%14[^\n]", nome);
+    getchar();
+    FILE* fEnc;
+    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    int achou = 0, opcao = 0;
+    fEnc = fopen("./data/encomendas.dat", "rb");
+    if(fEnc == NULL){
+        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+        int pfpj = isPForPJ(pEnc->idCliente);
+        switch(pfpj){
+            case 1:
+                if(strcmp(getClibyCpf(pEnc->idCliente)->nome, nome) == 0 && (pEnc->status == 'c' || pEnc->status == 'e' || pEnc->status == 'p')){
+                    exibEnc(pEnc);
+                    achou++;
+                }
+                break;
+            case 2:
+                if(strcmp(getClibyCnpj(pEnc->idCliente)->nome, nome) == 0 && (pEnc->status == 'c' || pEnc->status == 'e' || pEnc->status == 'p')){
+                    exibEnc(pEnc);
+                    achou++;
+                }
+        }
+    }
+    Encomenda encontradas[achou];
+    rewind(fEnc);
+    for(int i = 0; i < achou; i++){
+        fread(pEnc, sizeof(Encomenda), 1, fEnc);
+        int pfpj = isPForPJ(pEnc->idCliente);
+        switch(pfpj){
+            case 1:
+                if(strcmp(getClibyCpf(pEnc->idCliente)->nome, nome) == 0 && (pEnc->status == 'c' || pEnc->status == 'e' || pEnc->status == 'p')){
+                    pEnc->idEnc = (i + 1);
+                    encontradas[i] = *pEnc;
+                }
+                break;
+            case 2:
+                if(strcmp(getClibyCnpj(pEnc->idCliente)->nome, nome) == 0 && (pEnc->status == 'c' || pEnc->status == 'e' || pEnc->status == 'p')){
+                    pEnc->idEnc = (i + 1);
+                    encontradas[i] = *pEnc;
+                }
+        }
+    }
+    if(!achou){
+        printf("\n    Não foi encontrada nenhuma encomenda para este cliente!");
+    }else{
+        do{
+            printf("\n    Escolha uma encomenda para ampliar (0 para pular): ");
+            scanf("%d", &opcao);
+            getchar();
+            if(opcao != 0){
+                if(opcao <= achou){
+                    exibeEnc(&encontradas[opcao - 1]);
+                }else{
+                    printf("\n    Opção inválida! Tente novamente. ");
+                }
+            }}while(opcao != 0);
+    }
+    fclose(fEnc);
+    if(pEnc != NULL){
+        return pEnc;
+    }else{
+        free(pEnc);
+        return NULL;
+    }
+}

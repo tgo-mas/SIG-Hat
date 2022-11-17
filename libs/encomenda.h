@@ -7,6 +7,7 @@ typedef struct tm Time;
 //// Definição da estrutura Encomenda:
 
 typedef struct {
+    int idEnc;
     char idCliente[15]; // Pode ser cpf ou cnpj.
     char nomeModelo[15];
     int qtd;
@@ -24,3 +25,4 @@ void getMat(int* mat, int qtd);
 void gravaEnc(Encomenda* pEnc);
 void exibeEnc(Encomenda* pEnc);
 void listarEncomendas(void);
+Encomenda* buscaEnc(void);
