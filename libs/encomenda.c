@@ -19,6 +19,9 @@ void menuEncomenda(void){
         getchar();
         switch(opcao){
             case 1:
+                listarEncomendas();
+                break;
+            case 2:
                 addEnc();
                 break;
             case 0:
@@ -146,7 +149,7 @@ void gravaEnc(Encomenda* pEnc){
     fclose(fEnc);
 }
 
-//// Exibe as informações da encomenda passada por parâmetro na tela.
+//// exibeEnc(pEnc) -> Exibe as informações da encomenda passada por parâmetro na tela.
 
 void exibeEnc(Encomenda* pEnc){
     int pfpj = isPForPJ(pEnc->idCliente);
@@ -170,7 +173,7 @@ void exibeEnc(Encomenda* pEnc){
     printf("    %d m² do tecido do modelo escolhido;", pEnc->mat[0]);
     printf("\n    %d rolos de linha;", pEnc->mat[1]);
     printf("\n    %d botões e abas;", pEnc->mat[2]);
-    printf("\n    %d m de viés.\n", pEnc->mat[3]);
+    printf("\n    %d rolos de viés.\n", pEnc->mat[3]);
     switch(pEnc->status){
         case 'e':
             printf("\n  Status do pedido: Em espera.");
@@ -187,3 +190,24 @@ void exibeEnc(Encomenda* pEnc){
     }
     printf("\n\n#####################################################");
 }
+
+//// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
+
+void listarEncomendas(void){
+    FILE* fEnc;
+    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    fEnc = fopen("./data/encomendas.dat", "rb");
+    if(fEnc == NULL){
+        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+        if(pEnc->status == 'e' || pEnc->status == 'p'){
+            exibeEnc(pEnc);
+        }
+    }
+    fclose(fEnc);
+    free(pEnc);
+    getchar();
+}
+
