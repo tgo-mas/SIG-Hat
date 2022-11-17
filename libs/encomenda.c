@@ -27,6 +27,9 @@ void menuEncomenda(void){
             case 3:
                 buscaEnc();
                 break;
+            case 4:
+                editEnc();
+                break;    
             case 0:
                 break;
             default:
@@ -39,7 +42,18 @@ void menuEncomenda(void){
 //// addEnc() -> Inicia o processo de cadastro de uma nova encomenda.
 
 void addEnc(void){
-    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
+    *pEnc = getDadosEnc();
+    gravaEnc(pEnc);
+    exibeEnc(pEnc);
+    free(pEnc);
+    getchar();
+}
+
+//// getDadosEnc() -> Pergunta os dados de uma Encomenda ao usuário e retorna a struct preenchida.
+
+Encomenda getDadosEnc(void){
+    Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
     int pfpj = 0;
     char resp;
     do{
@@ -50,19 +64,27 @@ void addEnc(void){
         switch(pfpj){
             case 1:
                 ClientePf* pCli = getClibyCpf(pEnc->idCliente);
-                exibeCliPf(pCli);
-                printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
-                scanf("%c", &resp);
-                getchar();
-                free(pCli);
+                if(pCli == NULL){
+                    return *pEnc;
+                }else{
+                    exibeCliPf(pCli);
+                    printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
+                    scanf("%c", &resp);
+                    getchar();
+                    free(pCli);
+                }
                 break;
             case 2:
                 ClientePj* pCliPj = getClibyCnpj(pEnc->idCliente);
-                exibeCliPj(pCliPj);
-                printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCliPj->nome);
-                scanf("%c", &resp);
-                getchar();
-                free(pCliPj);
+                if(pCli == NULL){
+                    return *pEnc;    
+                }else{
+                    exibeCliPj(pCliPj);
+                    printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCliPj->nome);
+                    scanf("%c", &resp);
+                    getchar();
+                    free(pCliPj);
+                }
                 break;
             case 0:
                 printf("\n    O CPF ou CNPJ informado é inválido! Tente novamente. ");
@@ -119,11 +141,11 @@ void addEnc(void){
         getMat(pEnc->mat, pEnc->qtd);
         pEnc->status = 'e';
         pEnc->idEnc = getLastEnc();
-        gravaEnc(pEnc);
-        exibeEnc(pEnc);
-        getchar();
-        free(pEnc);
+        return *pEnc;
     }
+    printf("\n    Operação cancelada!");
+    getchar();
+    return *pEnc;
 }
 
 //// getLastEnc() -> Retorna o ID da última encomenda registrada.
@@ -341,10 +363,17 @@ void editEnc(void){
     Encomenda* pBusca = (Encomenda *) malloc(sizeof(Encomenda));
     *pBusca= buscaEnc();
     FILE* fEnc = fopen("./data/encomendas.dat", "r+b");
+    if(fEnc == NULL){
+        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
+        exit(1);
+    }
     while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
-        if(pEnc->idCliente == pBusca->idCliente && pEnc->nomeModelo == pBusca->nomeModelo && pEnc->dataReg.tm_mday == pBusca->dataReg.tm_mday && (pEnc->status == 'e' || pEnc->status == 'p')){
+        if(pEnc->idEnc == pBusca->idEnc && (pEnc->status == 'e' || pEnc->status == 'p')){
             fseek(fEnc, (-1) * sizeof(Encomenda), SEEK_CUR);
-
+            *pEnc = getDadosEnc();
+            fwrite(pEnc, sizeof(Encomenda), 1, fEnc);
+            printf("\n    Encomenda editada com sucesso!");
+            getchar();
         }
     }
 }
