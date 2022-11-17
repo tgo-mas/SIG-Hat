@@ -98,6 +98,8 @@ void addEnc(void){
         timer = time(NULL);
         Time* now = localtime(&timer);
         Time* dataEnt = (Time*) malloc(sizeof(Time));
+        now->tm_mon += 1;
+        now->tm_year += 1900;  
         pEnc->dataReg = *now;
         printf("\n    Informe agora a data de entrega da encomenda: ");
         printf("\n      Dia: ");
@@ -116,11 +118,26 @@ void addEnc(void){
         free(dataEnt);
         getMat(pEnc->mat, pEnc->qtd);
         pEnc->status = 'e';
+        pEnc->idEnc = getLastEnc();
         gravaEnc(pEnc);
         exibeEnc(pEnc);
         getchar();
         free(pEnc);
     }
+}
+
+//// getLastEnc() -> Retorna o ID da última encomenda registrada.
+
+int getLastEnc(void){
+    Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
+    FILE* fEnc = fopen("./data/encomendas.dat", "rb");
+    int last;
+    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+        last = pEnc->idEnc;
+    }
+    fclose(fEnc);
+    free(pEnc);
+    return last;
 }
 
 //// printTime(time) -> Exibe na tela a data da variável time passada por parâmetro.
@@ -214,7 +231,7 @@ void exibEnc(Encomenda* pEnc){
     printTime(&pEnc->dataReg);
     printf("\n  Data limite: ");
     printTime(&pEnc->dataLimite);
-    printf("\n#####################################################\n\n");
+    printf("\n#####################################################\n");
 }
 
 //// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
@@ -239,7 +256,7 @@ void listarEncomendas(void){
 
 //// buscaEnc() -> Inicia o processo de buscar encomendas, exibindo todas as encomendas ativas do cliente informado.
 
-Encomenda* buscaEnc(void){
+Encomenda buscaEnc(void){
     char nome[15];
     printf("\n    Primeiro, digite o nome do cliente que fez a encomenda desejada: ");
     scanf("%14[^\n]", nome);
@@ -276,37 +293,60 @@ Encomenda* buscaEnc(void){
         switch(pfpj){
             case 1:
                 if(strcmp(getClibyCpf(pEnc->idCliente)->nome, nome) == 0 && (pEnc->status == 'c' || pEnc->status == 'e' || pEnc->status == 'p')){
-                    pEnc->idEnc = (i + 1);
                     encontradas[i] = *pEnc;
                 }
                 break;
             case 2:
                 if(strcmp(getClibyCnpj(pEnc->idCliente)->nome, nome) == 0 && (pEnc->status == 'c' || pEnc->status == 'e' || pEnc->status == 'p')){
-                    pEnc->idEnc = (i + 1);
                     encontradas[i] = *pEnc;
                 }
         }
     }
     if(!achou){
         printf("\n    Não foi encontrada nenhuma encomenda para este cliente!");
+        getchar();
     }else{
         do{
+            printf("\n    Foram encontradas estas encomendas para o cliente %s.", nome);
             printf("\n    Escolha uma encomenda para ampliar (0 para pular): ");
             scanf("%d", &opcao);
             getchar();
             if(opcao != 0){
-                if(opcao <= achou){
-                    exibeEnc(&encontradas[opcao - 1]);
-                }else{
-                    printf("\n    Opção inválida! Tente novamente. ");
+                for(int i = 0; i < achou; i++){
+                    if(encontradas[i].idEnc == opcao){
+                        exibeEnc(&encontradas[i]);
+                        getchar();
+                        return encontradas[i];
+                        achou = 0;
+                    }
                 }
-            }}while(opcao != 0);
+                if(achou != 0){
+                    printf("\n    Opção inválida! Tente novamente. ");
+                    getchar();
+                }
+            }else{
+                printf("\n    Operação finalizada! Aperte enter para continuar.. ");
+                getchar();
+            }
+        }while(opcao != 0);
     }
     fclose(fEnc);
-    if(pEnc != NULL){
-        return pEnc;
-    }else{
-        free(pEnc);
-        return NULL;
+    return encontradas[0];
+}
+
+//// editEnc() -> Inicia o processo de editar Encomenda.
+
+void editEnc(void){
+    Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
+    Encomenda* pBusca = (Encomenda *) malloc(sizeof(Encomenda));
+    *pBusca= buscaEnc();
+    FILE* fEnc = fopen("./data/encomendas.dat", "r+b");
+    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+        if(pEnc->idCliente == pBusca->idCliente && pEnc->nomeModelo == pBusca->nomeModelo && pEnc->dataReg.tm_mday == pBusca->dataReg.tm_mday && (pEnc->status == 'e' || pEnc->status == 'p')){
+            fseek(fEnc, (-1) * sizeof(Encomenda), SEEK_CUR);
+
+        }
     }
 }
+
+

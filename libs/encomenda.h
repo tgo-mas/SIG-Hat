@@ -20,9 +20,11 @@ typedef struct {
 
 void menuEncomenda(void);
 void addEnc(void);
+int getLastEnc(void);
 void printTime(Time* time);
 void getMat(int* mat, int qtd);
 void gravaEnc(Encomenda* pEnc);
 void exibeEnc(Encomenda* pEnc);
+void exibEnc(Encomenda* pEnc);
 void listarEncomendas(void);
-Encomenda* buscaEnc(void);
+Encomenda buscaEnc(void);
