@@ -61,34 +61,33 @@ Encomenda getDadosEnc(void){
         scanf("%14[^\n]", pEnc->idCliente);
         getchar();
         pfpj = isPForPJ(pEnc->idCliente);
-        switch(pfpj){
-            case 1:
-                ClientePf* pCli = getClibyCpf(pEnc->idCliente);
-                if(pCli == NULL){
-                    return *pEnc;
-                }else{
-                    exibeCliPf(pCli);
-                    printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
-                    scanf("%c", &resp);
-                    getchar();
-                    free(pCli);
-                }
-                break;
-            case 2:
-                ClientePj* pCliPj = getClibyCnpj(pEnc->idCliente);
-                if(pCli == NULL){
-                    return *pEnc;    
-                }else{
-                    exibeCliPj(pCliPj);
-                    printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCliPj->nome);
-                    scanf("%c", &resp);
-                    getchar();
-                    free(pCliPj);
-                }
-                break;
-            case 0:
-                printf("\n    O CPF ou CNPJ informado é inválido! Tente novamente. ");
+        if(pfpj == 1){
+            ClientePf* pCli;
+            pCli = getClibyCpf(pEnc->idCliente);
+            if(pCli == NULL){
+                return *pEnc;
+            }else{
+                exibeCliPf(pCli);
+                printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
+                scanf("%c", &resp);
                 getchar();
+                free(pCli);
+            }
+        }else if(pfpj == 2){
+            ClientePj* pCliPj;
+            pCliPj = getClibyCnpj(pEnc->idCliente);
+            if(pCliPj == NULL){
+                return *pEnc;    
+            }else{
+                exibeCliPj(pCliPj);
+                printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCliPj->nome);
+                scanf("%c", &resp);
+                getchar();
+                free(pCliPj);
+            }
+        }else{
+            printf("\n    O CPF ou CNPJ informado é inválido! Tente novamente. ");
+            getchar();
         }
     }while(!pfpj);
     if(resp == 's' || resp == 'S'){ 

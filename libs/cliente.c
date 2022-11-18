@@ -189,22 +189,21 @@ void buscaCliente(void){
     printf("\n    Agora informe o nome do cliente que deseja buscar: ");
     scanf("%14[^\n]", nome);
     getchar();
-    switch(type){
-        case 1:
-            ClientePf* cliPf = getCliPf(nome);
-            getchar();
-            if(cliPf != NULL){
-                free(cliPf);
-            }
-            break;
-        case 2:
-            ClientePj* cliPj = getCliPj(nome);
-            getchar();
-            if(cliPj != NULL){
-                free(cliPj);
-            }
-            break;
-        default:
+    if(type == 1){
+        ClientePf* cliPf;
+        cliPf = getCliPf(nome);
+        getchar();
+        if(cliPf != NULL){
+            free(cliPf);
+        }
+    }else if(type == 2){
+        ClientePj* cliPj;
+        cliPj = getCliPj(nome);
+        getchar();
+        if(cliPj != NULL){
+            free(cliPj);
+        }
+    }else{
             printf("\n    Selecione um tipo válido! Tente novamente");
             goto initBusca;
     }
@@ -271,73 +270,70 @@ void deleteCliente(void){
     scanf("%14[^\n]", nome);
     getchar();
     FILE* fCli;
-    switch(type){
-        case 1:
-            fCli = fopen("./data/clientesPf.dat", "r+b");
-            if(fCli == NULL){
-                printf("\n    FATAL: Arquivo clientesPf.dat não encontrado!");
-                exit(1);
-            }
-            ClientePf* cliPf = getCliPf(nome);
-            if(cliPf != NULL){
-                printf("\n    O cliente encontrado é este. Deseja realmente excluí-lo? (S para confirmar) ");
-                scanf("%c", &resp);
-                getchar();
-                if(resp == 's' || resp == 'S'){
-                    ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
-                    while(fread(pCli, sizeof(ClientePf), 1, fCli)){
-                        if(strcmp(pCli->nome, cliPf->nome) == 0 && pCli->status == 'c'){
-                            cliPf->status = 'x';
-                            fseek(fCli, (-1) * sizeof(ClientePf), SEEK_CUR);
-                            fwrite(cliPf, sizeof(ClientePf), 1, fCli);
-                            printf("\n    Cliente excluído com sucesso!");
-                            getchar();
-                            fclose(fCli);
-                            free(cliPf);
-                            free(pCli);
-                            break;
-                        }
-                    }
-                }else{
-                    printf("\n    Operação cancelada. ");
-                    getchar();
-                }
-            }
-            break;
-        case 2:
-            fCli = fopen("./data/clientesPj.dat", "r+b");
-            if(fCli == NULL){
-                printf("\n    FATAL: Arquivo clientesPj.dat não encontrado!");
-                exit(1);
-            }
-            ClientePj* cliPj = getCliPj(nome);
-            if(cliPj != NULL){
-                printf("\n    O cliente encontrado é este. Deseja realmente excluí-lo? (S para confirmar) ");
-                scanf("%c", &resp);
-                getchar();
-                if(resp == 's' || resp == 'S'){
-                    ClientePj* pCli = (ClientePj*) malloc(sizeof(ClientePj));
-                    while(fread(pCli, sizeof(ClientePj), 1, fCli)){
-                        if(strcmp(pCli->nome, cliPj->nome) == 0 && pCli->status == 'c'){
-                            cliPj->status = 'x';
-                            fseek(fCli, (-1) * sizeof(ClientePj), SEEK_CUR);
-                            fwrite(cliPj, sizeof(ClientePj), 1, fCli);
-                            printf("\n    Cliente excluído com sucesso!");
-                            getchar();
-                            fclose(fCli);
-                            free(cliPj);
-                            free(pCli);
-                        }
-                    }
-                }else{
-                    printf("\n    Operação cancelada. ");
-                    getchar();
-                }
-            }
-            break;
-        default:
-            printf("\n    Opção inválida! Tente novamente.");
+    if(type == 1){
+        fCli = fopen("./data/clientesPf.dat", "r+b");
+        if(fCli == NULL){
+            printf("\n    FATAL: Arquivo clientesPf.dat não encontrado!");
+            exit(1);
+        }
+        ClientePf* cliPf = getCliPf(nome);
+        if(cliPf != NULL){
+            printf("\n    O cliente encontrado é este. Deseja realmente excluí-lo? (S para confirmar) ");
+            scanf("%c", &resp);
             getchar();
+            if(resp == 's' || resp == 'S'){
+                ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
+                while(fread(pCli, sizeof(ClientePf), 1, fCli)){
+                    if(strcmp(pCli->nome, cliPf->nome) == 0 && pCli->status == 'c'){
+                        cliPf->status = 'x';
+                        fseek(fCli, (-1) * sizeof(ClientePf), SEEK_CUR);
+                        fwrite(cliPf, sizeof(ClientePf), 1, fCli);
+                        printf("\n    Cliente excluído com sucesso!");
+                        getchar();
+                        fclose(fCli);
+                        free(cliPf);
+                        free(pCli);
+                        break;
+                    }
+                }
+            }else{
+                printf("\n    Operação cancelada. ");
+                getchar();
+            }
+        }
+    }else if(type == 2){
+        fCli = fopen("./data/clientesPj.dat", "r+b");
+        if(fCli == NULL){
+            printf("\n    FATAL: Arquivo clientesPj.dat não encontrado!");
+            exit(1);
+        }
+        ClientePj* cliPj = getCliPj(nome);
+        if(cliPj != NULL){
+            printf("\n    O cliente encontrado é este. Deseja realmente excluí-lo? (S para confirmar) ");
+            scanf("%c", &resp);
+            getchar();
+            if(resp == 's' || resp == 'S'){
+                ClientePj* pCli = (ClientePj*) malloc(sizeof(ClientePj));
+                while(fread(pCli, sizeof(ClientePj), 1, fCli)){
+                    if(strcmp(pCli->nome, cliPj->nome) == 0 && pCli->status == 'c'){
+                        cliPj->status = 'x';
+                        fseek(fCli, (-1) * sizeof(ClientePj), SEEK_CUR);
+                        fwrite(cliPj, sizeof(ClientePj), 1, fCli);
+                        printf("\n    Cliente excluído com sucesso!");
+                        getchar();
+                        fclose(fCli);
+                        free(cliPj);
+                        free(pCli);
+                    }
+                }
+            }else{
+                printf("\n    Operação cancelada. ");
+                getchar();
+            }
+        }
+    }else{
+        printf("\n    Opção inválida! Tente novamente.");
+        getchar();
     }
 }
 
@@ -353,94 +349,95 @@ void editarCliente(void){
     printf("\n    Informe o tipo do cliente que deseja editar: (1 - Pessoa Física, 2 - Pessoa Jurídica) ");
     scanf("%d", &tipo);
     getchar();
-    switch(tipo){
-        case 1:
-            ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
-            ClientePf* newCli = (ClientePf*) malloc(sizeof(ClientePf));
-            pCli = getCliPf(nome);
-            if(pCli != NULL){
-                printf("\n    É este o cliente que deseja editar? (S para confirmar) ");
-                scanf("%c", &resp);
-                getchar();
-                if(resp == 's' || resp == 'S'){
-                    fCli = fopen("./data/clientesPf.dat", "r+b");
-                    while(fread(newCli, sizeof(ClientePf), 1, fCli)){
-                        if(strcmp(pCli->nome,newCli->nome) == 0 && newCli->status == 'c'){
-                            printf("\n    Informe o nome do cliente: "); 
-                            scanf("%14[^\n]", newCli->nome);
+    if(tipo == 1){
+        ClientePf* pCli;
+        pCli = (ClientePf*) malloc(sizeof(ClientePf));
+        ClientePf* newCli;
+        newCli = (ClientePf*) malloc(sizeof(ClientePf));
+        pCli = getCliPf(nome);
+        if(pCli != NULL){
+            printf("\n    É este o cliente que deseja editar? (S para confirmar) ");
+            scanf("%c", &resp);
+            getchar();
+            if(resp == 's' || resp == 'S'){
+                fCli = fopen("./data/clientesPf.dat", "r+b");
+                while(fread(newCli, sizeof(ClientePf), 1, fCli)){
+                    if(strcmp(pCli->nome,newCli->nome) == 0 && newCli->status == 'c'){
+                        printf("\n    Informe o nome do cliente: "); 
+                        scanf("%14[^\n]", newCli->nome);
+                        getchar();
+                        int valTel = 0, valEmail = 0;
+                        do{
+                            printf("\n    Informe o telefone de contato do cliente: ");   
+                            scanf("%11[^\n]", newCli->tel);
+                            valTel = validaTel(newCli->tel);
+                            if(!valTel) printf("\n    O telefone informado é inválido! Tente novamente!");
                             getchar();
-                            int valTel = 0, valEmail = 0;
-                            do{
-                                printf("\n    Informe o telefone de contato do cliente: ");   
-                                scanf("%11[^\n]", newCli->tel);
-                                valTel = validaTel(newCli->tel);
-                                if(!valTel) printf("\n    O telefone informado é inválido! Tente novamente!");
-                                getchar();
-                            }while(!valTel);
-                            do{
-                                printf("\n    Informe o email do cliente: ");  
-                                scanf("%29[^\n]", newCli->email);
-                                valEmail = validaEmail(newCli->email);
-                                if(!valEmail) printf("\n    O Email informado é inválido! Tente novamente!");
-                                getchar();
-                            }while(!valEmail);
-                            fseek(fCli, (-1) * sizeof(ClientePf), SEEK_CUR);
-                            fwrite(newCli, sizeof(ClientePf), 1, fCli);
-                        }
-                    }
-                    fclose(fCli);
-                    free(pCli);
-                    free(newCli);
-                }else{
-                    printf("\n    Operação cancelada! ");
-                    getchar();
-                    return;
-                }
-                break;
-            }
-        case 2:
-            ClientePj* pCliPj = (ClientePj*) malloc(sizeof(ClientePj));
-            ClientePj* newCliPj = (ClientePj*) malloc(sizeof(ClientePj));
-            pCliPj = getCliPj(nome);
-            if(pCliPj != NULL){
-                printf("\n    É este o cliente que deseja editar? (S para confirmar) ");
-                scanf("%c", &resp);
-                getchar();
-                if(resp == 's' || resp == 'S'){
-                    fCli = fopen("./data/clientesPj.dat", "r+b");
-                    while(fread(newCliPj, sizeof(ClientePj), 1, fCli)){
-                        if(strcmp(pCliPj->nome,newCliPj->nome) == 0 && newCliPj->status == 'c'){
-                            printf("\n    Informe o nome do cliente: "); 
-                            scanf("%14[^\n]", newCliPj->nome);
+                        }while(!valTel);
+                        do{
+                            printf("\n    Informe o email do cliente: ");  
+                            scanf("%29[^\n]", newCli->email);
+                            valEmail = validaEmail(newCli->email);
+                            if(!valEmail) printf("\n    O Email informado é inválido! Tente novamente!");
                             getchar();
-                            int valTel = 0, valEmail = 0;
-                            do{
-                                printf("\n    Informe o telefone de contato do cliente: ");   
-                                scanf("%11[^\n]", newCliPj->tel);
-                                valTel = validaTel(newCliPj->tel);
-                                if(!valTel) printf("\n    O telefone informado é inválido! Tente novamente!");
-                                getchar();
-                            }while(!valTel);
-                            do{
-                                printf("\n    Informe o email do cliente: ");  
-                                scanf("%29[^\n]", newCliPj->email);
-                                valEmail = validaEmail(newCliPj->email);
-                                if(!valEmail) printf("\n    O Email informado é inválido! Tente novamente!");
-                                getchar();
-                            }while(!valEmail);
-                            fseek(fCli, (-1) * sizeof(ClientePj), SEEK_CUR);
-                            fwrite(newCliPj, sizeof(ClientePj), 1, fCli);
-                        }
+                        }while(!valEmail);
+                        fseek(fCli, (-1) * sizeof(ClientePf), SEEK_CUR);
+                        fwrite(newCli, sizeof(ClientePf), 1, fCli);
                     }
-                    fclose(fCli);
-                    free(pCliPj);
-                    free(newCliPj);
-                }else{
-                    printf("\n    Operação cancelada! ");
-                    getchar();
-                    return;
                 }
+                fclose(fCli);
+                free(pCli);
+                free(newCli);
+            }else{
+                printf("\n    Operação cancelada! ");
+                getchar();
+                return;
+            }}
+    }else if(tipo == 2){
+        ClientePj* pCliPj;
+        pCliPj = (ClientePj*) malloc(sizeof(ClientePj));
+        ClientePj* newCliPj;
+        newCliPj = (ClientePj*) malloc(sizeof(ClientePj));
+        pCliPj = getCliPj(nome);
+        if(pCliPj != NULL){
+            printf("\n    É este o cliente que deseja editar? (S para confirmar) ");
+            scanf("%c", &resp);
+            getchar();
+            if(resp == 's' || resp == 'S'){
+                fCli = fopen("./data/clientesPj.dat", "r+b");
+                while(fread(newCliPj, sizeof(ClientePj), 1, fCli)){
+                    if(strcmp(pCliPj->nome,newCliPj->nome) == 0 && newCliPj->status == 'c'){
+                        printf("\n    Informe o nome do cliente: "); 
+                        scanf("%14[^\n]", newCliPj->nome);
+                        getchar();
+                        int valTel = 0, valEmail = 0;
+                        do{
+                            printf("\n    Informe o telefone de contato do cliente: ");   
+                            scanf("%11[^\n]", newCliPj->tel);
+                            valTel = validaTel(newCliPj->tel);
+                            if(!valTel) printf("\n    O telefone informado é inválido! Tente novamente!");
+                            getchar();
+                        }while(!valTel);
+                        do{
+                            printf("\n    Informe o email do cliente: ");  
+                            scanf("%29[^\n]", newCliPj->email);
+                            valEmail = validaEmail(newCliPj->email);
+                            if(!valEmail) printf("\n    O Email informado é inválido! Tente novamente!");
+                            getchar();
+                        }while(!valEmail);
+                        fseek(fCli, (-1) * sizeof(ClientePj), SEEK_CUR);
+                        fwrite(newCliPj, sizeof(ClientePj), 1, fCli);
+                    }
+                }
+                fclose(fCli);
+                free(pCliPj);
+                free(newCliPj);
+            }else{
+                printf("\n    Operação cancelada! ");
+                getchar();
+                return;
             }
+        }
     }
     printf("\n     Cliente editado com sucesso!");
     getchar();
