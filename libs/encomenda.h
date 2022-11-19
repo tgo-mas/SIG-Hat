@@ -6,7 +6,9 @@ typedef struct tm Time;
 
 //// Definição da estrutura Encomenda:
 
-typedef struct {
+typedef struct enc Encomenda;
+
+struct enc {
     int idEnc;
     char idCliente[15]; // Pode ser cpf ou cnpj.
     char nomeModelo[15];
@@ -16,7 +18,8 @@ typedef struct {
     Time dataLimite;
     int mat[4];    // Trata-se da estimação dos materiais necessários. [tecido, linha, botoes/abas, viés];
     char status;   // 'e' - espera; 'p' - produção; 'c' - concluida; 'x' - cancelada.
-} Encomenda;
+    // Encomenda* prox;
+};
 
 void menuEncomenda(void);
 void addEnc(void);
@@ -30,3 +33,4 @@ void exibEnc(Encomenda* pEnc);
 void listarEncomendas(void);
 Encomenda buscaEnc(void);
 void editEnc(void);
+void cancelarEnc(void);

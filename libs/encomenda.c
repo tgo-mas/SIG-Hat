@@ -29,7 +29,9 @@ void menuEncomenda(void){
                 break;
             case 4:
                 editEnc();
-                break;    
+                break;   
+            case 5:
+                cancelarEnc(); 
             case 0:
                 break;
             default:
@@ -378,4 +380,29 @@ void editEnc(void){
     }
 }
 
+//// cancelarEnc() -> Inicia o processo de cancelar uma encomenda.
 
+void cancelarEnc(void){
+    Encomenda *pBusca = (Encomenda*) malloc(sizeof(Encomenda));
+    *pBusca = buscaEnc();
+    char resp;
+    printf("\n    Tem certeza que deseja cancelar esta encomenda? (S para confirmar) ");
+    scanf("%c", &resp);
+    getchar();
+    if(resp == 's' || resp == 'S'){
+        pBusca->status = 'x';
+        Encomenda *pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+        FILE* fEnc = fopen("./data/encomendas.dat", "r+b");
+        while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+            if(pEnc->idEnc == pBusca->idEnc && (pEnc->status == 'e' || pEnc->status == 'p')){
+                fseek(fEnc, (-1) * sizeof(Encomenda), SEEK_CUR);
+                fwrite(pBusca, sizeof(Encomenda), 1, fEnc);
+                printf("\n    Encomenda cancelada com sucesso!");
+                getchar();
+            }
+        }
+        fclose(fEnc);
+        free(pEnc);
+    }
+    free(pBusca);
+}
