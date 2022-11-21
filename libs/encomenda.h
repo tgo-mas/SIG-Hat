@@ -18,7 +18,7 @@ struct enc {
     Time dataLimite;
     int mat[4];    // Trata-se da estimação dos materiais necessários. [tecido, linha, botoes/abas, viés];
     char status;   // 'e' - espera; 'p' - produção; 'c' - concluida; 'x' - cancelada.
-    // Encomenda* prox;
+    Encomenda* prox;
 };
 
 void menuEncomenda(void);
@@ -31,6 +31,8 @@ void gravaEnc(Encomenda* pEnc);
 void exibeEnc(Encomenda* pEnc);
 void exibEnc(Encomenda* pEnc);
 void listarEncomendas(void);
+void printLista(Encomenda* lista);
 Encomenda buscaEnc(void);
 void editEnc(void);
 void cancelarEnc(void);
+Encomenda* getListabyId(void);

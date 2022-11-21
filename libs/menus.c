@@ -110,6 +110,27 @@ void telaMenuEncomenda(void){
 	printf("#####################################################\n");
 }
 
+//// menuListaEncomendas() -> Exibe o menu de listagem das encomendas (em diferentes ordens).
+
+void menuListaEncomendas(void){
+	clrScrn();
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##    = L I S T A G E M   D E   P E D I D O S =    ##\n");
+	printf("##                                                 ##\n");
+	printf("##                1 - Listar por ID                ##\n");
+	printf("##          2 - Listar por nome do Cliente         ##\n");
+	printf("##            3 - Listar por data limite           ##\n");
+	printf("##              4 - Listar por valor               ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+}
+
 //// clrScrn() -> Limpa a tela do console
 void clrScrn(void){
 	system("clear || cls");

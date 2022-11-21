@@ -260,21 +260,26 @@ void exibEnc(Encomenda* pEnc){
 //// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
 
 void listarEncomendas(void){
-    FILE* fEnc;
-    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
-    fEnc = fopen("./data/encomendas.dat", "rb");
-    if(fEnc == NULL){
-        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
-        exit(1);
-    }
-    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
-        if(pEnc->status == 'e' || pEnc->status == 'p'){
-            exibeEnc(pEnc);
+    do{
+        menuListaEncomendas();
+        int opcao;
+        printf("\n    Selecione uma opção: ");
+        scanf("%d", &opcao);
+        getchar();
+        Encomenda* lista;
+        switch(opcao){
+            case 1:
+                lista = getListabyID();
+                printLista(lista);
+                break;
+            case 0:
+                break;
+            default:
+                printf("\n    Selecione uma opção válida! Tente novamente.");
+                getchar();
+                break;
         }
-    }
-    fclose(fEnc);
-    free(pEnc);
-    getchar();
+    }while(opcao != 0);
 }
 
 //// buscaEnc() -> Inicia o processo de buscar encomendas, exibindo todas as encomendas ativas do cliente informado.
@@ -404,4 +409,35 @@ void cancelarEnc(void){
         free(pEnc);
     }
     free(pBusca);
+}
+
+//// getListabyID() -> Retorna o endereço para a lista de encomendas ordenada por ID.
+
+Encomenda* getListabyID(void){
+    FILE* fEnc;
+    fEnc = fopen("./data/encomendas.dat", "rb");
+    if(fEnc == NULL){
+        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
+        exit(1);
+    }
+    Encomenda* lista = (Encomenda*) malloc(sizeof(Encomenda));
+    fread(lista, sizeof(Encomenda), 1, fEnc);
+    lista->prox = NULL;
+    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    fread(pEnc, sizeof(Encomenda), 1, fEnc);
+    if(pEnc->status == 'e' || pEnc->status == 'p'){
+        if(lista->prox == NULL){
+            lista->prox = pEnc;
+        }else{
+            do{
+                Encomenda* encAux = (Encomenda*) malloc(sizeof(Encomenda));
+                fread(encAux, sizeof(Encomenda), 1, fEnc);
+                pEnc->prox = encAux;
+                pEnc = encAux;
+            }while(!feof(fEnc));
+        }
+    }
+    fclose(fEnc);
+    getchar();
+    return lista;
 }
