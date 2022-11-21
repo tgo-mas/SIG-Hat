@@ -15,6 +15,7 @@ void menuPrincipal(void){
     printf("##      1 - Gerenciar modelos personalizados;      ##\n");
     printf("##             2 - Gerenciar clientes;             ##\n");
     printf("##            3 - Gerenciar encomendas;            ##\n");
+    printf("##              4 - Gerar relatórios;              ##\n");
     printf("##                                                 ##\n");
     printf("##       9 - Informações sobre o programa          ##\n");
     printf("##                    0 - Sair                     ##\n");
@@ -104,6 +105,25 @@ void telaMenuEncomenda(void){
 	printf("##             3 - Pesquisar encomenda             ##\n");
 	printf("##              4 - Editar encomenda               ##\n");
 	printf("##             5 - Cancelar encomenda              ##\n");
+	printf("##                                                 ##\n");
+	printf("##                     0 - Sair                    ##\n");
+	printf("##                                                 ##\n");
+	printf("#####################################################\n");
+}
+
+//// telaMenuRelat() -> Exibe a tela do menu do módulo de relatórios.
+
+void telaMenuRelat(void){
+    clrScrn();
+    printf("\n");
+	printf("#####################################################\n");
+	printf("##                                                 ##\n");
+	printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+	printf("##                                                 ##\n");
+	printf("##             = R E L A T Ó R I O S =             ##\n");
+	printf("##                                                 ##\n");
+	printf("##      1 - Encomendas feitas no último mês        ##\n");
+	printf("##    2 - Encomendas para entrega no pŕoximo mês   ##\n");
 	printf("##                                                 ##\n");
 	printf("##                     0 - Sair                    ##\n");
 	printf("##                                                 ##\n");

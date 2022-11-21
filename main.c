@@ -10,6 +10,7 @@
 #include "./libs/menus.h"
 #include "./libs/cliente.h"
 #include "./libs/encomenda.h"
+#include "./libs/relatorios.h"
 
 int main(void){
     int opcao = 0;
@@ -27,6 +28,9 @@ int main(void){
                 break;
             case 3:
                 menuEncomenda();
+                break;
+            case 4:
+                menuRelat();
                 break;
             case 9:
                 infosProjeto();
