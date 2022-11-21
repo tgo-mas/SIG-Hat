@@ -127,6 +127,7 @@ void telaMenuRelat(void){
 	printf("##      1 - Encomendas feitas no último mês        ##\n");
 	printf("##    2 - Encomendas para entrega no pŕoximo mês   ##\n");
 	printf("##           3 - Entregas para esta semana         ##\n");
+	printf("##           4 - Relatório de vendas do mês        ##\n");
 	printf("##                                                 ##\n");
 	printf("##                     0 - Sair                    ##\n");
 	printf("##                                                 ##\n");

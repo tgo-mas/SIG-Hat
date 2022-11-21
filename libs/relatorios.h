@@ -5,4 +5,4 @@ void listaMes(void);
 void listaProxMes(void);
 void listaSemana(void);
 int difdias(Data antes, Data depois);
-void vendasMes(void);
+void relatVendasMes(void);

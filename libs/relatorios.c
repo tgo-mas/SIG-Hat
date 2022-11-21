@@ -22,6 +22,10 @@ void menuRelat(void){
                 break;
             case 3:
                 listaSemana();
+                break;
+            case 4:
+                relatVendasMes();
+                break;
             case 0:
                 break;
             default:
@@ -64,6 +68,8 @@ void listaMes(void){
     fclose(fEnc);
 }
 
+//// listaProxMes() -> Exibe uma lista das encomendas que possuem data de entrega para o mês seguinte
+
 void listaProxMes(void){
     FILE* fEnc;
     fEnc = fopen("./data/encomendas.dat", "rb");
@@ -94,6 +100,8 @@ void listaProxMes(void){
     fclose(fEnc);
 }
 
+//// listaSemana() -> Exibe uma lista das encomendas que possuem data de entrega para até 8 dias a frente.
+
 void listaSemana(void){
     FILE* fEnc;
     fEnc = fopen("./data/encomendas.dat", "rb");
@@ -123,6 +131,30 @@ void listaSemana(void){
     free(pEnc);
     fclose(fEnc);
 }
+
+//// relatVendasMes() -> Exibe um relatório das vendas do último mês (encomendas que foram concluídas).
+
+void relatVendasMes(void){
+    FILE* fEnc;
+    fEnc = fopen("./data/encomendas.dat", "rb");
+    if(fEnc == NULL){
+        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
+        exit(1);
+    }
+    printf("\n    Encomendas concluídas há até 30 dias: \n");
+    double total;
+    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+        if(pEnc->status == 'c'){
+            exibEnc(pEnc);
+            total += pEnc->prcFinal;
+        }
+    }
+    printf("\n    Total vendido no último mês: R$ %.2f\n", total);
+    getchar();
+}
+
+//// difdias(antes, depois) -> Retorna a diferença de dias entre as duas datas passadas por parêmetro.
 
 int difdias(Data antes, Data depois){
     int dias = 0;
