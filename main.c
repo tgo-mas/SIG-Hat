@@ -9,7 +9,6 @@
 #include "./libs/hat.h"
 #include "./libs/menus.h"
 #include "./libs/cliente.h"
-#include "./libs/encomenda.h"
 #include "./libs/relatorios.h"
 
 int main(void){

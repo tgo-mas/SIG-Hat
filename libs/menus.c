@@ -104,7 +104,9 @@ void telaMenuEncomenda(void){
 	printf("##             2 - Cadastrar encomenda             ##\n");
 	printf("##             3 - Pesquisar encomenda             ##\n");
 	printf("##              4 - Editar encomenda               ##\n");
-	printf("##             5 - Cancelar encomenda              ##\n");
+	printf("##        5 - Listar encomendas em produção        ##\n");
+	printf("##          6 - Alt. status de encomenda           ##\n");
+	printf("##             7 - Cancelar encomenda              ##\n");
 	printf("##                                                 ##\n");
 	printf("##                     0 - Sair                    ##\n");
 	printf("##                                                 ##\n");
@@ -124,6 +126,7 @@ void telaMenuRelat(void){
 	printf("##                                                 ##\n");
 	printf("##      1 - Encomendas feitas no último mês        ##\n");
 	printf("##    2 - Encomendas para entrega no pŕoximo mês   ##\n");
+	printf("##           3 - Entregas para esta semana         ##\n");
 	printf("##                                                 ##\n");
 	printf("##                     0 - Sair                    ##\n");
 	printf("##                                                 ##\n");

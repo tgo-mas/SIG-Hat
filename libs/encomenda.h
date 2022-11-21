@@ -1,8 +1,14 @@
 #include <time.h>
 
-//// Definição da estrutura Time:
+//// Definição das estruturas Time e Data:
 
 typedef struct tm Time;
+
+typedef struct {
+    int dia;
+    int mes;
+    int ano;
+} Data;
 
 //// Definição da estrutura Encomenda:
 
@@ -14,8 +20,8 @@ struct enc {
     char nomeModelo[15];
     int qtd;
     double prcFinal;
-    Time dataReg;
-    Time dataLimite;
+    Data dataReg;
+    Data dataLimite;
     int mat[4];    // Trata-se da estimação dos materiais necessários. [tecido, linha, botoes/abas, viés];
     char status;   // 'e' - espera; 'p' - produção; 'c' - concluida; 'x' - cancelada.
     // Encomenda* prox;
@@ -31,6 +37,8 @@ void gravaEnc(Encomenda* pEnc);
 void exibeEnc(Encomenda* pEnc);
 void exibEnc(Encomenda* pEnc);
 void listarEncomendas(void);
+void listaProducao(void);
 Encomenda buscaEnc(void);
 void editEnc(void);
 void cancelarEnc(void);
+void altStatus(void);

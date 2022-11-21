@@ -31,6 +31,12 @@ void menuEncomenda(void){
                 editEnc();
                 break;   
             case 5:
+                listaProducao();
+                break;
+            case 6:
+                altStatus();
+                break;
+            case 7:
                 cancelarEnc(); 
             case 0:
                 break;
@@ -120,25 +126,23 @@ Encomenda getDadosEnc(void){
         time_t timer;
         timer = time(NULL);
         Time* now = localtime(&timer);
-        Time* dataEnt = (Time*) malloc(sizeof(Time));
         now->tm_mon += 1;
-        now->tm_year += 1900;  
-        pEnc->dataReg = *now;
+        now->tm_year += 1900;
+        pEnc->dataReg.dia = now->tm_mday;
+        pEnc->dataReg.mes = now->tm_mon;
+        pEnc->dataReg.ano = now->tm_year;        
         printf("\n    Informe agora a data de entrega da encomenda: ");
         printf("\n      Dia: ");
-        scanf("%d", &dataEnt->tm_mday);
+        scanf("%d", &pEnc->dataLimite.dia);
         getchar();
         printf("\n      Mês: ");
-        scanf("%d", &dataEnt->tm_mon);
+        scanf("%d", &pEnc->dataLimite.mes);
         getchar();
         printf("\n      Ano: ");
-        scanf("%d", &dataEnt->tm_year);
+        scanf("%d", &pEnc->dataLimite.ano);
         getchar();
-        printf("\n    Data de entrega: ");
-        printTime(dataEnt);
+        printf("\n  Data limite: %d/%d/%d", pEnc->dataLimite.dia, pEnc->dataLimite.mes, pEnc->dataLimite.ano);
         getchar();
-        pEnc->dataLimite = *dataEnt;
-        free(dataEnt);
         getMat(pEnc->mat, pEnc->qtd);
         pEnc->status = 'e';
         pEnc->idEnc = getLastEnc();
@@ -154,19 +158,13 @@ Encomenda getDadosEnc(void){
 int getLastEnc(void){
     Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
     FILE* fEnc = fopen("./data/encomendas.dat", "rb");
-    int last;
+    int last = 0;
     while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
         last = pEnc->idEnc;
     }
     fclose(fEnc);
     free(pEnc);
-    return last;
-}
-
-//// printTime(time) -> Exibe na tela a data da variável time passada por parâmetro.
-
-void printTime(Time* time){
-    printf("%d/%d/%d", time->tm_mday, time->tm_mon, time->tm_year);
+    return last + 1;
 }
 
 //// getMat(mat, qtd) -> Altera os valores armaz. em mat de acordo com a qtd informada, calculando as estimativas de materiais.
@@ -207,10 +205,8 @@ void exibeEnc(Encomenda* pEnc){
     printf("\n  Modelo escolhido: %s", pEnc->nomeModelo);
     printf("\n  Quantidade: %d", pEnc->qtd);
     printf("\n  Valor do pedido: R$ %.2f", pEnc->prcFinal);
-    printf("\n  Data de registro: ");
-    printTime(&pEnc->dataReg);
-    printf("\n  Data limite: ");
-    printTime(&pEnc->dataLimite);
+    printf("\n  Data de registro: %d/%d/%d", pEnc->dataReg.dia, pEnc->dataReg.mes, pEnc->dataReg.ano);
+    printf("\n  Data limite: %d/%d/%d", pEnc->dataLimite.dia, pEnc->dataLimite.mes, pEnc->dataLimite.ano);
     printf("\n  Materiais estimados: \n");
     printf("    %d m² do tecido do modelo escolhido;", pEnc->mat[0]);
     printf("\n    %d rolos de linha;", pEnc->mat[1]);
@@ -250,10 +246,8 @@ void exibEnc(Encomenda* pEnc){
     printf("\n  Modelo escolhido: %s", pEnc->nomeModelo);
     printf("\n  Quantidade: %d", pEnc->qtd);
     printf("\n  Valor do pedido: R$ %.2f", pEnc->prcFinal);
-    printf("\n  Data de registro: ");
-    printTime(&pEnc->dataReg);
-    printf("\n  Data limite: ");
-    printTime(&pEnc->dataLimite);
+    printf("\n  Data de registro: %d/%d/%d", pEnc->dataReg.dia, pEnc->dataReg.mes, pEnc->dataReg.ano);
+    printf("\n  Data limite: %d/%d/%d", pEnc->dataLimite.dia, pEnc->dataLimite.mes, pEnc->dataLimite.ano);
     printf("\n#####################################################\n");
 }
 
@@ -269,6 +263,26 @@ void listarEncomendas(void){
     }
     while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
         if(pEnc->status == 'e' || pEnc->status == 'p'){
+            exibeEnc(pEnc);
+        }
+    }
+    fclose(fEnc);
+    free(pEnc);
+    getchar();
+}
+
+//// listaProducao() -> Exibe uma lista das encomendas que possuem status = 'p'
+
+void listaProducao(void){
+    FILE* fEnc;
+    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    fEnc = fopen("./data/encomendas.dat", "rb");
+    if(fEnc == NULL){
+        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
+        exit(1);
+    }
+    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+        if(pEnc->status == 'p'){
             exibeEnc(pEnc);
         }
     }
@@ -331,7 +345,7 @@ Encomenda buscaEnc(void){
     }else{
         do{
             printf("\n    Foram encontradas estas encomendas para o cliente %s.", nome);
-            printf("\n    Escolha uma encomenda para ampliar (0 para pular): ");
+            printf("\n    Selecione uma encomenda (Por ID, digite 0 para pular): ");
             scanf("%d", &opcao);
             getchar();
             if(opcao != 0){
@@ -397,6 +411,44 @@ void cancelarEnc(void){
                 fseek(fEnc, (-1) * sizeof(Encomenda), SEEK_CUR);
                 fwrite(pBusca, sizeof(Encomenda), 1, fEnc);
                 printf("\n    Encomenda cancelada com sucesso!");
+                getchar();
+            }
+        }
+        fclose(fEnc);
+        free(pEnc);
+    }
+    free(pBusca);
+}
+
+//// altStatus() -> Inicia o processo de alterar o status de uma encomenda. (O cliente pode alterar para "em produção" ou "concluída")
+
+void altStatus(void){
+    Encomenda *pBusca = (Encomenda*) malloc(sizeof(Encomenda));
+    *pBusca = buscaEnc();
+    char resp, st;
+    printf("\n    Tem certeza que deseja alterar o status desta encomenda? (S para confirmar) ");
+    scanf("%c", &resp);
+    getchar();
+    stats:
+    printf("\n    Informe o status atual da encomenda: \n      p - Em produção\n      c - Concluída\n    ");
+    scanf("%c", &st);
+    getchar();
+    if(resp == 's' || resp == 'S'){
+        Encomenda *pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+        FILE* fEnc = fopen("./data/encomendas.dat", "r+b");
+        if(st == 'p' || st == 'P'){
+            pBusca->status = 'p';
+        }else if(st == 'C' || st == 'c'){
+            pBusca->status = 'c';
+        }else{
+            printf("\n    Escolha uma opção válida! Tente novamente. ");
+            goto stats;
+        }
+        while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+            if(pEnc->idEnc == pBusca->idEnc && (pEnc->status == 'e' || pEnc->status == 'p')){
+                fseek(fEnc, (-1) * sizeof(Encomenda), SEEK_CUR);
+                fwrite(pBusca, sizeof(Encomenda), 1, fEnc);
+                printf("\n    Status atualizado com sucesso!");
                 getchar();
             }
         }
