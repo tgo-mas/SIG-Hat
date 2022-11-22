@@ -297,6 +297,7 @@ void listaProducao(void){
 //// buscaEnc() -> Inicia o processo de buscar encomendas, exibindo todas as encomendas ativas do cliente informado.
 
 Encomenda buscaEnc(void){
+    cabBuscaEnc();
     char nome[15];
     printf("\n    Primeiro, digite o nome do cliente que fez a encomenda desejada: ");
     scanf("%14[^\n]", nome);

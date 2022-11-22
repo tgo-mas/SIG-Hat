@@ -11,3 +11,4 @@ void cabecBuscaPj(void);
 void cabecDeleteCliente(void);
 void cabCadEnc(void);
 void cabListaEnc(void);
+void cabBuscaEnc(void);

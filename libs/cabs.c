@@ -156,7 +156,7 @@ void cabCadEnc(void){
     printf("#####################################################\n");
 }
 
-//// cabListaEnc() -> Exibe o cabeçalho da lista de clientes Pessoa Jurídica.
+//// cabListaEnc() -> Exibe o cabeçalho da lista de Encomendas.
 void cabListaEnc(void){
     clrScrn();
     printf("\n");
@@ -165,6 +165,20 @@ void cabListaEnc(void){
     printf("##        = = = = = S I G - H a t = = = = =        ##\n");
     printf("##                                                 ##\n");
     printf("##       = L I S T A   D E   P E D I D O S =       ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+    printf("\n");
+}
+
+//// cabBuscaEnc() -> Exibe o cabeçalho da busca de Encomendas.
+void cabBuscaEnc(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##       = B U S C A   D E   P E D I D O S =       ##\n");
     printf("##                                                 ##\n");
     printf("#####################################################\n");
     printf("\n");
