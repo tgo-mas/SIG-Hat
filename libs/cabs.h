@@ -12,3 +12,5 @@ void cabecDeleteCliente(void);
 void cabCadEnc(void);
 void cabListaEnc(void);
 void cabBuscaEnc(void);
+void cabEditaEnc(void);
+void cabCancEnc(void);

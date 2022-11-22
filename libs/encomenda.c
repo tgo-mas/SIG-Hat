@@ -277,6 +277,7 @@ void listarEncomendas(void){
 //// listaProducao() -> Exibe uma lista das encomendas que possuem status = 'p'
 
 void listaProducao(void){
+    cabListaEnc();
     FILE* fEnc;
     Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
     fEnc = fopen("./data/encomendas.dat", "rb");
@@ -326,9 +327,10 @@ Encomenda buscaEnc(void){
                 }
         }
     }
-    Encomenda encontradas[achou];
+    int index = getLastEnc();
+    Encomenda encontradas[index];
     rewind(fEnc);
-    for(int i = 0; i < achou; i++){
+    for(int i = 0; i < index; i++){
         fread(pEnc, sizeof(Encomenda), 1, fEnc);
         int pfpj = isPForPJ(pEnc->idCliente);
         switch(pfpj){
@@ -353,18 +355,15 @@ Encomenda buscaEnc(void){
             scanf("%d", &opcao);
             getchar();
             if(opcao != 0){
-                for(int i = 0; i < achou; i++){
+                for(int i = 0; i < index; i++){
                     if(encontradas[i].idEnc == opcao){
                         exibeEnc(&encontradas[i]);
                         getchar();
                         return encontradas[i];
-                        achou = 0;
                     }
                 }
-                if(achou != 0){
-                    printf("\n    Opção inválida! Tente novamente. ");
-                    getchar();
-                }
+                printf("\n    Opção inválida! Tente novamente. ");
+                getchar();
             }else{
                 printf("\n    Operação finalizada! Aperte enter para continuar.. ");
                 getchar();
@@ -378,6 +377,7 @@ Encomenda buscaEnc(void){
 //// editEnc() -> Inicia o processo de editar Encomenda.
 
 void editEnc(void){
+    cabEditaEnc();
     Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
     Encomenda* pBusca = (Encomenda *) malloc(sizeof(Encomenda));
     *pBusca= buscaEnc();

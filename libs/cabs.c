@@ -183,3 +183,29 @@ void cabBuscaEnc(void){
     printf("#####################################################\n");
     printf("\n");
 }
+
+//// cabEditaEnc() => Exibe o cabeçalho da tela de editar encomenda.
+void cabEditaEnc(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##       = E D I T A R   E N C O M E N D A =       ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+}
+
+//// cabEditaEnc() => Exibe o cabeçalho da tela de editar encomenda.
+void cabCancEnc(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##     = C A N C E L A R   E N C O M E N D A =     ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+}
