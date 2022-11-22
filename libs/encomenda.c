@@ -6,6 +6,7 @@
 #include "cliente.h"
 #include "hat.h"
 #include "menus.h"
+#include "cabs.h"
 #include "validacoes.h"
 
 //// menuEncomenda() -> Exibe o menu do módulo de encomendas e pede uma opção ao usuário.
@@ -50,6 +51,7 @@ void menuEncomenda(void){
 //// addEnc() -> Inicia o processo de cadastro de uma nova encomenda.
 
 void addEnc(void){
+    cabCadEnc();
     Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
     *pEnc = getDadosEnc();
     gravaEnc(pEnc);

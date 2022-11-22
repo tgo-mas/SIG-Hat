@@ -70,6 +70,36 @@ void cabecAddCliente(void){
     printf("\n");
 }
 
+//// cabListaPf() -> Exibe o cabeçalho da lista de clientes Pessoa Fisica.
+void cabListaPf(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##      = L I S T A   D E   C L I E N T E S =      ##\n");
+    printf("##            P e s s o a   F í s i c a            ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+    printf("\n");
+}
+
+//// cabListaPj() -> Exibe o cabeçalho da lista de clientes Pessoa Jurídica.
+void cabListaPj(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##      = L I S T A   D E   C L I E N T E S =      ##\n");
+    printf("##          P e s s o a   J u r í d i c a          ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+    printf("\n");
+}
+
 //// cabecBuscaPf() => Exibe o cabeçalho da tela de cadastrar cliente.
 void cabecBuscaPf(void){
     clrScrn();
@@ -110,3 +140,19 @@ void cabecDeleteCliente(void){
     printf("##                                                 ##\n");
     printf("#####################################################\n");
 }
+
+//// cabCadEnc() -> Exibe o cabeçalho de cadastro de encomenda.
+void cabCadEnc(void){
+    clrScrn();
+    printf("\n");
+    printf("#####################################################\n");
+    printf("##                                                 ##\n");
+    printf("##        = = = = = S I G - H a t = = = = =        ##\n");
+    printf("##                                                 ##\n");
+    printf("##               = C A D A S T R O =               ##\n");
+    printf("##                       d e                       ##\n");
+    printf("##              = E N C O M E N D A =              ##\n");
+    printf("##                                                 ##\n");
+    printf("#####################################################\n");
+}
+

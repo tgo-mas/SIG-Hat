@@ -67,10 +67,10 @@ int validaFecho(int fecho){
             return 5;
         case 2:
             printf("\n  Fecho escolhido: Velcro.");
-            return 7;
+            return 6;
         case 3:
             printf("\n  Fecho escolhido: Tecido.");
-            return 9;
+            return 7;
         default:
             printf("\n  Erro: O fecho selecionado não consta nas opções!");
             return 0;

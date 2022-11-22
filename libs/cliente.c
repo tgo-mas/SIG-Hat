@@ -157,7 +157,7 @@ void exibeCliPj(ClientePj* pCli){
 //// listarClientes() -> Exibe uma lista de todos os clientes cadastrados, separando-os por pessoa física e jurídica.
 
 void listarClientes(void){
-    printf("\n    Clientes Pessoa Física: ");
+    cabListaPf();
     FILE* fCli;
     ClientePf* pCli = (ClientePf*) malloc(sizeof(ClientePf));
     fCli = fopen("./data/clientesPf.dat", "rb");
@@ -166,7 +166,8 @@ void listarClientes(void){
     }
     fclose(fCli);
     free(pCli);
-    printf("\n    Clientes Pessoa Jurídica: ");
+    getchar();
+    cabListaPj();
     ClientePj* pCliPj = (ClientePj*) malloc(sizeof(ClientePj));
     fCli = fopen("./data/clientesPj.dat", "rb");
     while(fread(pCliPj, sizeof(ClientePj), 1, fCli)){
