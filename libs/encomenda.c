@@ -256,6 +256,7 @@ void exibEnc(Encomenda* pEnc){
 //// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
 
 void listarEncomendas(void){
+    cabListaEnc();
     FILE* fEnc;
     Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
     fEnc = fopen("./data/encomendas.dat", "rb");

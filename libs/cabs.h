@@ -10,3 +10,4 @@ void cabecBuscaPf(void);
 void cabecBuscaPj(void);
 void cabecDeleteCliente(void);
 void cabCadEnc(void);
+void cabListaEnc(void);
