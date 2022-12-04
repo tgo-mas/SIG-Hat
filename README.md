@@ -2,7 +2,7 @@
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" width="40px" height="40px"/>
 
-Sistema de gerenciamento de catálogo, estoque, fornecimento e vendas de chapéus e bonés. Criado como objeto de avaliação para a disciplina de Programação do curso de Bacharelado em Sistemas da Informação pela UFRN.
+Sistema de gerenciamento de clientes, modelos e encomendas de bonelaria. Criado como objeto de avaliação para a disciplina de Programação do curso de Bacharelado em Sistemas da Informação pela UFRN.
 
 ### Informações gerais
 
