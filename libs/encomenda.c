@@ -253,24 +253,52 @@ void exibEnc(Encomenda* pEnc){
     printf("\n#####################################################\n");
 }
 
-//// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
+//// getList(filter) -> Retorna uma lista na ordem escolhida pelo item filter (1 - ABC do cliente, 2 - Data mais proxima, 3 - por quantidade)
 
-void listarEncomendas(void){
-    cabListaEnc();
-    FILE* fEnc;
-    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
-    fEnc = fopen("./data/encomendas.dat", "rb");
+Encomenda* getList(){
+    Encomenda* pEnc, *noEnc, *lista, *ultimo;
+    FILE* fEnc = fopen("./data/encomendas.dat", "rb");
     if(fEnc == NULL){
         printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
         exit(1);
     }
+    lista = NULL;
+    pEnc = (Encomenda*) malloc(sizeof(Encomenda));
     while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
-        if(pEnc->status == 'e' || pEnc->status == 'p'){
-            exibeEnc(pEnc);
+        noEnc = (Encomenda*) malloc(sizeof(Encomenda));
+        noEnc->idEnc = pEnc->idEnc;
+        strcpy(noEnc->idCliente, pEnc->idCliente);
+        strcpy(noEnc->nomeModelo, pEnc->nomeModelo);
+        noEnc->qtd = pEnc->qtd;
+        noEnc->prcFinal = pEnc->prcFinal;
+        noEnc->dataReg = pEnc->dataReg;
+        noEnc->dataLimite = pEnc->dataLimite;
+        for(int i = 0; i < 4; i++)
+            noEnc->mat[i] = pEnc->mat[i];
+        noEnc->status = pEnc->status;
+        noEnc->prox = NULL;
+        if(lista == NULL){
+            lista = noEnc;
+        }else{
+            ultimo->prox = noEnc;
         }
+        ultimo = noEnc;
     }
     fclose(fEnc);
     free(pEnc);
+    return lista;
+}
+
+//// listarEncomendas() -> Exibe todas as encomendas, exceto as canceladas.
+
+void listarEncomendas(void){
+    cabListaEnc();
+    Encomenda* pEnc = getList();
+    while(pEnc != NULL){
+        if(pEnc->status == 'e' || pEnc->status == 'p')
+            exibeEnc(pEnc);
+        pEnc = pEnc->prox;
+    }
     getchar();
 }
 
