@@ -53,7 +53,8 @@ void menuEncomenda(void){
 void addEnc(void){
     cabCadEnc();
     Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
-    *pEnc = getDadosEnc();
+    pEnc = getDadosEnc();
+    if(pEnc == NULL) menuEncomenda();
     gravaEnc(pEnc);
     exibeEnc(pEnc);
     free(pEnc);
@@ -62,7 +63,7 @@ void addEnc(void){
 
 //// getDadosEnc() -> Pergunta os dados de uma Encomenda ao usuário e retorna a struct preenchida.
 
-Encomenda getDadosEnc(void){
+Encomenda* getDadosEnc(void){
     Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
     int pfpj = 0;
     char resp;
@@ -75,7 +76,7 @@ Encomenda getDadosEnc(void){
             ClientePf* pCli;
             pCli = getClibyCpf(pEnc->idCliente);
             if(pCli == NULL){
-                return *pEnc;
+                return NULL;
             }else{
                 exibeCliPf(pCli);
                 printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCli->nome);
@@ -87,7 +88,7 @@ Encomenda getDadosEnc(void){
             ClientePj* pCliPj;
             pCliPj = getClibyCnpj(pEnc->idCliente);
             if(pCliPj == NULL){
-                return *pEnc;    
+                return NULL;    
             }else{
                 exibeCliPj(pCliPj);
                 printf("\n\n    O pedido está sendo realizado pelo cliente %s, confirmar? (S para confirmar) ", pCliPj->nome);
@@ -147,17 +148,21 @@ Encomenda getDadosEnc(void){
         getchar();
         getMat(pEnc->mat, pEnc->qtd);
         pEnc->status = 'e';
-        pEnc->idEnc = getLastEnc();
-        return *pEnc;
+        pEnc->idEnc = getLastIdEnc();
+        return pEnc;
+    }else{
+        printf("\n    Operação cancelada!");
+        getchar();
+        return NULL;
     }
     printf("\n    Operação cancelada!");
     getchar();
-    return *pEnc;
+    return NULL;
 }
 
 //// getLastEnc() -> Retorna o ID da última encomenda registrada.
 
-int getLastEnc(void){
+int getLastIdEnc(void){
     Encomenda* pEnc = (Encomenda *) malloc(sizeof(Encomenda));
     FILE* fEnc = fopen("./data/encomendas.dat", "rb");
     int last = 0;
@@ -299,6 +304,7 @@ void listarEncomendas(void){
             exibeEnc(pEnc);
         pEnc = pEnc->prox;
     }
+    free(pEnc);
     getchar();
 }
 
@@ -306,19 +312,13 @@ void listarEncomendas(void){
 
 void listaProducao(void){
     cabListaEnc();
-    FILE* fEnc;
-    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
-    fEnc = fopen("./data/encomendas.dat", "rb");
-    if(fEnc == NULL){
-        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
-        exit(1);
-    }
-    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+    Encomenda* pEnc = getList();
+    while(pEnc != NULL){
         if(pEnc->status == 'p'){
             exibeEnc(pEnc);
         }
+        pEnc = pEnc->prox;
     }
-    fclose(fEnc);
     free(pEnc);
     getchar();
 }
@@ -331,15 +331,9 @@ Encomenda buscaEnc(void){
     printf("\n    Primeiro, digite o nome do cliente que fez a encomenda desejada: ");
     scanf("%14[^\n]", nome);
     getchar();
-    FILE* fEnc;
-    Encomenda* pEnc = (Encomenda*) malloc(sizeof(Encomenda));
+    Encomenda* pEnc = getList();
     int achou = 0, opcao = 0;
-    fEnc = fopen("./data/encomendas.dat", "rb");
-    if(fEnc == NULL){
-        printf("\n    FATAL: Arquivo encomendas.dat não encontrado!");
-        exit(1);
-    }
-    while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
+    while(pEnc != NULL){
         int pfpj = isPForPJ(pEnc->idCliente);
         switch(pfpj){
             case 1:
@@ -354,12 +348,12 @@ Encomenda buscaEnc(void){
                     achou++;
                 }
         }
+        pEnc = pEnc->prox;
     }
-    int index = getLastEnc();
+    int index = getLastIdEnc();
     Encomenda encontradas[index];
-    rewind(fEnc);
+    pEnc = getList();
     for(int i = 0; i < index; i++){
-        fread(pEnc, sizeof(Encomenda), 1, fEnc);
         int pfpj = isPForPJ(pEnc->idCliente);
         switch(pfpj){
             case 1:
@@ -372,6 +366,7 @@ Encomenda buscaEnc(void){
                     encontradas[i] = *pEnc;
                 }
         }
+        pEnc = pEnc->prox;
     }
     if(!achou){
         printf("\n    Não foi encontrada nenhuma encomenda para este cliente!");
@@ -398,7 +393,6 @@ Encomenda buscaEnc(void){
             }
         }while(opcao != 0);
     }
-    fclose(fEnc);
     return encontradas[0];
 }
 
@@ -417,7 +411,7 @@ void editEnc(void){
     while(fread(pEnc, sizeof(Encomenda), 1, fEnc)){
         if(pEnc->idEnc == pBusca->idEnc && (pEnc->status == 'e' || pEnc->status == 'p')){
             fseek(fEnc, (-1) * sizeof(Encomenda), SEEK_CUR);
-            *pEnc = getDadosEnc();
+            pEnc = getDadosEnc();
             fwrite(pEnc, sizeof(Encomenda), 1, fEnc);
             printf("\n    Encomenda editada com sucesso!");
             getchar();

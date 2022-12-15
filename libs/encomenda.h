@@ -29,8 +29,8 @@ struct enc {
 
 void menuEncomenda(void);
 void addEnc(void);
-Encomenda getDadosEnc(void);
-int getLastEnc(void);
+Encomenda* getDadosEnc(void);
+int getLastIdEnc(void);
 void printTime(Time* time);
 void getMat(int* mat, int qtd);
 void gravaEnc(Encomenda* pEnc);
